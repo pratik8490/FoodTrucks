@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using Foundation;
 using UIKit;
+using Xamarin;
 
 namespace FoodTrucks.iOS
 {
@@ -21,7 +22,7 @@ namespace FoodTrucks.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            global::Xamarin.FormsMaps.Init();
+            FormsMaps.Init();
 
             LoadApplication(new App());  // method is new in 1.3
 

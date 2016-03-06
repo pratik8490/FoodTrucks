@@ -8,18 +8,20 @@ using Android.Widget;
 using Android.OS;
 
 using Xamarin.Forms.Platform.Android;
+using Xamarin;
+using Xamarin.Forms;
 
 namespace FoodTrucks.Droid
 {
     [Activity(Label = "FoodTrucks", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
+    public class MainActivity : FormsApplicationActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
-            global::Xamarin.Forms.Forms.Init(this, bundle);
-            global::Xamarin.FormsMaps.Init(this, bundle);
+            Forms.Init(this, bundle);
+            FormsMaps.Init(this, bundle);
 
             LoadApplication(new App());
         }
