@@ -125,11 +125,12 @@
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Drawable\Icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Properties\AndroidManifest.xml" />
     <AndroidResource Include="Resources\Drawable\CurrentLocation.png" />
+    <AndroidResource Include="Resources\Drawable\filter.png" />
+    <AndroidResource Include="Resources\Drawable\mainpagemiddle.png" />
+    <AndroidResource Include="Resources\Drawable\appIcon.png" />
+    <AndroidResource Include="Resources\Drawable\slideout.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FoodTrucks\FoodTrucks.csproj">

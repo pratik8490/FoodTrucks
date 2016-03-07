@@ -16,7 +16,7 @@ namespace FoodTrucks
         public App()
         {
             // The root page of your application 
-            MainPage = new MapPage();
+            MainPage = new MainPage();
         }
         #endregion
 

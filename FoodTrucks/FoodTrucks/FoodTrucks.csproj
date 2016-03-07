@@ -39,6 +39,9 @@
     <Compile Include="App.cs" />
     <Compile Include="CustomControls\CustomMap.cs" />
     <Compile Include="CustomControls\CustomPin.cs" />
+    <Compile Include="Helper\Constants.cs" />
+    <Compile Include="Helper\LayoutHelper.cs" />
+    <Compile Include="Pages\MainPage.cs" />
     <Compile Include="Pages\MapPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
