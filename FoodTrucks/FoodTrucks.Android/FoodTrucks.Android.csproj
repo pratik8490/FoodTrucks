@@ -26,7 +26,7 @@
     <JavaMaximumHeapSize />
     <JavaOptions />
     <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
-    <NuGetPackageImportStamp>18477758</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>30cf942a</NuGetPackageImportStamp>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
@@ -60,6 +60,16 @@
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <AndroidLinkSkip />
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <BundleAssemblies>False</BundleAssemblies>
+    <AndroidCreatePackagePerAbi>True</AndroidCreatePackagePerAbi>
+    <AndroidSupportedAbis>armeabi,armeabi-v7a,x86</AndroidSupportedAbis>
+    <AndroidStoreUncompressedFileExtensions />
+    <MandroidI18n />
+    <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
+    <JavaOptions />
+    <MonoDroidExtraArgs />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FormsViewGroup, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -111,9 +121,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Xamarin.Forms.1.4.2.6359\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.Mobile">
+      <HintPath>..\..\packages\xamstore-xamarin.mobile.0.7.1\build\monoandroid\Xamarin.Mobile.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomRenderer\GetCurrentLocationsRenderer.cs" />
+    <Compile Include="CustomRenderer\ExtendedEntryRenderer.cs" />
+    <Compile Include="DependencyService\CurrentLocation.cs" />
     <Compile Include="CustomRenderer\MapViewRenderer.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -131,6 +145,8 @@
     <AndroidResource Include="Resources\Drawable\mainpagemiddle.png" />
     <AndroidResource Include="Resources\Drawable\appIcon.png" />
     <AndroidResource Include="Resources\Drawable\slideout.png" />
+    <AndroidResource Include="Resources\Drawable\aerrow.png" />
+    <AndroidResource Include="Resources\Drawable\foodtruck.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FoodTrucks\FoodTrucks.csproj">

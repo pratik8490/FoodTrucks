@@ -51,7 +51,7 @@ namespace FoodTrucks.Pages
 
                 btnGetStart.Clicked += (sender, e) =>
                     {
-                        Navigation.PushModalAsync(new MapPage());
+                        Navigation.PushModalAsync(App.SignUpPage());
                     };
 
                 StackLayout slBtnGetStart = new StackLayout

@@ -37,12 +37,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="BasePage.cs" />
     <Compile Include="CustomControls\CustomMap.cs" />
     <Compile Include="CustomControls\CustomPin.cs" />
+    <Compile Include="CustomControls\ExtendedEntry.cs" />
     <Compile Include="Helper\Constants.cs" />
+    <Compile Include="Helper\DistanceCalculator.cs" />
     <Compile Include="Helper\LayoutHelper.cs" />
+    <Compile Include="Helper\LoadingIndicator.cs" />
+    <Compile Include="Helper\Seperator.cs" />
+    <Compile Include="Interface\ICurrentLocation.cs" />
+    <Compile Include="Models\Position.cs" />
     <Compile Include="Pages\MainPage.cs" />
     <Compile Include="Pages\MapPage.cs" />
+    <Compile Include="Pages\SignUpPage.cs" />
+    <Compile Include="Cell\TruckCell.cs" />
+    <Compile Include="Pages\TrucksList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +79,12 @@
     <Reference Include="Xamarin.Forms.Xaml">
       <HintPath>..\..\packages\Xamarin.Forms.2.1.0.6524\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\FoodTrucks.Provider\FoodTrucks.Provider.csproj">
+      <Project>{a3bf76b3-0035-4d47-9ced-3191f50b0634}</Project>
+      <Name>FoodTrucks.Provider</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.1.0.6524\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.1.0.6524\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

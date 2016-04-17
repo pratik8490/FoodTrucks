@@ -1,5 +1,9 @@
 ﻿using FoodTrucks.CustomControls;
 using FoodTrucks.Helper;
+using FoodTrucks.Interface;
+using FoodTrucks.Provider;
+using FoodTrucks.Provider.Interface;
+using FoodTrucks.Provider.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,204 +16,249 @@ using Xamarin.Forms.Maps;
 
 namespace FoodTrucks.Pages
 {
-    public class MapPage : ContentPage
+    public class MapPage : BasePage
     {
+        private List<TruckInfoModel> _TruckInfoList = new List<TruckInfoModel>();
+        private ITruckInfo _TruckInfoProvider = new TruckInfoProvider();
+        private IFoodType _FoodTypeProvider = new FoodTypeProvider();
+        private IReview _ReviewProvider = new ReviewProvider();
         public MapPage()
         {
+            IsLoading = true;
+            Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        FoodTrucks.Models.Position location = await DependencyService.Get<ICurrentLocation>().SetCurrentLocation();
 
-            Image imgSliderOutMenu = new Image
+                        if (string.IsNullOrEmpty(location.Message))
+                        {
+                            //Application.Current.Properties["Latitude"] = location.Latitude;
+                            //Application.Current.Properties["Longitude"] = location.Longitude;
+
+                            _TruckInfoList = await _TruckInfoProvider.GetTruckList();
+
+                            MapPageLayout(location.Latitude, location.Longitude);
+                        }
+                        else
+                        {
+                            await DisplayAlert(string.Empty, location.Message, "OK");
+                        }
+                    });
+        }
+
+        public void MapPageLayout(double lattitude, double longitude)
+        {
+            try
             {
-                Source = ImageSource.FromFile(Constants.ImagePath.SlideOut)
-            };
+                Image imgSliderOutMenu = new Image
+                {
+                    Source = ImageSource.FromFile(Constants.ImagePath.SlideOut)
+                };
 
-            StackLayout slSlideOutMenu = new StackLayout
-            {
-                Children = { imgSliderOutMenu },
-                HorizontalOptions = LayoutOptions.StartAndExpand
-            };
+                StackLayout slSlideOutMenu = new StackLayout
+                {
+                    Children = { imgSliderOutMenu },
+                    HorizontalOptions = LayoutOptions.StartAndExpand
+                };
 
-            Label lblMaps = new Label
-            {
-                Text = "Maps",
-                FontSize = 14,
-                FontAttributes = Xamarin.Forms.FontAttributes.Bold,
-                TextColor = Color.Black
-            };
+                Label lblMaps = new Label
+                {
+                    Text = "Maps",
+                    FontSize = 14,
+                    FontAttributes = Xamarin.Forms.FontAttributes.Bold,
+                    TextColor = Color.Black
+                };
 
-            StackLayout slMapsText = new StackLayout
-            {
-                Children = { lblMaps },
-                HorizontalOptions = LayoutOptions.CenterAndExpand
-            };
+                StackLayout slMapsText = new StackLayout
+                {
+                    Children = { lblMaps },
+                    HorizontalOptions = LayoutOptions.CenterAndExpand,
+                    VerticalOptions = LayoutOptions.CenterAndExpand
+                };
 
-            Image imgFilter = new Image
-            {
-                Source = ImageSource.FromFile(Constants.ImagePath.FilterIcon)
-            };
+                Image imgFilter = new Image
+                {
+                    Source = ImageSource.FromFile(Constants.ImagePath.FilterIcon)
+                };
 
-            StackLayout slImgFilter = new StackLayout
-            {
-                Children = { imgFilter },
-                HorizontalOptions = LayoutOptions.EndAndExpand
-            };
+                StackLayout slImgFilter = new StackLayout
+                {
+                    Children = { imgFilter },
+                    HorizontalOptions = LayoutOptions.EndAndExpand
+                };
 
-            StackLayout slHeader = new StackLayout
-            {
-                Children = { slSlideOutMenu, slMapsText, slImgFilter },
-                Orientation = StackOrientation.Horizontal
-            };
+                StackLayout slHeader = new StackLayout
+                {
+                    Children = { slSlideOutMenu, slMapsText, slImgFilter },
+                    Orientation = StackOrientation.Horizontal
+                };
 
-            Map map = new Map
-            {
-                IsShowingUser = true,
-                HeightRequest = 300,
-                VerticalOptions = LayoutOptions.FillAndExpand
-            };
+                Map map = new Map
+                {
+                    IsShowingUser = true,
+                    HeightRequest = 300,
+                    VerticalOptions = LayoutOptions.FillAndExpand
+                };
 
-            map.MoveToRegion(MapSpan.FromCenterAndRadius(
-                new Position(Convert.ToDouble("23.0396"), Convert.ToDouble("72.566")), Distance.FromMiles(3))); // Santa Cruz golf course
+                map.MoveToRegion(MapSpan.FromCenterAndRadius(
+                    new Position(lattitude, longitude), Distance.FromMiles(3))); // Santa Cruz golf course
 
-            var position = new Position(Convert.ToDouble("23.0396"), Convert.ToDouble("72.566")); // Latitude, Longitude
-            var pin = new Pin
-            {
-                Type = PinType.Place,
-                Position = position,
-                Label = "Seema Hall",
-                Address = "Seema hall Satelite Ahmedabad, Gujarat, India" + " " + "India"
-            };
-            map.Pins.Add(pin);
 
-            map.Pins.Add(new Pin
-            {
-                Type = PinType.Place,
-                Position = new Position(Convert.ToDouble("23.0281"), Convert.ToDouble("72.5578")),
-                Label = "Location 2",
-                Address = "Test 2"
-            });
+                //CustomMap map = new CustomMap(MapSpan.FromCenterAndRadius(position, Distance.FromMiles(5)))
+                //{
+                //    IsShowingUser = true,
+                //    HeightRequest = 200,
+                //    VerticalOptions = LayoutOptions.FillAndExpand
+                //};
 
-            map.Pins.Add(new Pin
-            {
-                Type = PinType.Place,
-                Position = new Position(Convert.ToDouble("23.0341"), Convert.ToDouble("72.5223")),
-                Label = "Location 3",
-                Address = "Test 3"
-            });
+                ////Show current location for Win Phone
+                //if (Device.OS == TargetPlatform.WinPhone)
+                //{
+                //map.CustomPins.Add(new CustomPin
+                //{
+                //    Position = position,
+                //    Label = "Current Location",
+                //    PinIcon = "CurrentLocation.png",
+                //    Address = "Seema hall Satelite Ahmedabad, Gujarat, India" + " " + "India"
+                //});
 
-            //CustomMap map = new CustomMap(MapSpan.FromCenterAndRadius(position, Distance.FromMiles(5)))
-            //{
-            //    IsShowingUser = true,
-            //    HeightRequest = 200,
-            //    VerticalOptions = LayoutOptions.FillAndExpand
-            //};
+                Label lblTruckTitle = new Label
+                {
+                    TextColor = Color.Black,
+                };
 
-            ////Show current location for Win Phone
-            //if (Device.OS == TargetPlatform.WinPhone)
-            //{
-            //map.CustomPins.Add(new CustomPin
-            //{
-            //    Position = position,
-            //    Label = "Current Location",
-            //    PinIcon = "CurrentLocation.png",
-            //    Address = "Seema hall Satelite Ahmedabad, Gujarat, India" + " " + "India"
-            //});
+                Label lblTruckDetail = new Label
+                {
+                    //Text = "Fast Food & Drinks" + "\n" + "GPS coordinates, 15 KM away" + "\n" + "In front of",
+                    TextColor = Color.FromHex("#ccc0c0"),
+                };
 
-            //map.CustomPins.Add(new CustomPin
-            //{
-            //    Position = new Position(Convert.ToDouble("23.0281"), Convert.ToDouble("72.5578")),
-            //    Label = "Location 2",
-            //    Address = "Test 2"
-            //});
+                StackLayout slTruckDetail = new StackLayout
+                {
+                    Children = { lblTruckTitle, lblTruckDetail },
+                    Orientation = StackOrientation.Vertical
+                };
 
-            //map.CustomPins.Add(new CustomPin
-            //{
-            //    Position = new Position(Convert.ToDouble("23.0341"), Convert.ToDouble("72.5223")),
-            //    Label = "Location 3",
-            //    Address = "Test 3"
-            //});
-            //}
+                Label lblReviews = new Label
+                {
+                    Text = "Reviews:",
+                    TextColor = Color.Black,
+                };
 
-            Label lblTruckTitle = new Label
-            {
-                Text = "Burger Quickening",
-                TextColor = Color.Black,
-            };
+                Label lblReviewsName = new Label
+                {
+                    //Text = "Jhon Doe" + "\n" + "Very Good!!",
+                    TextColor = Color.FromHex("#ccc0c0"),
+                };
 
-            Label lblTruckDetail = new Label
-            {
-                Text = "Fast Food & Drinks" + "\n" + "GPS coordinates, 15 KM away" + "\n" + "In front of",
-                TextColor = Color.FromHex("#ccc0c0"),
-            };
+                Label lblReviewDesc = new Label
+                {
+                    TextColor = Color.FromHex("#ccc0c0")
+                };
 
-            StackLayout slTruckDetail = new StackLayout
-            {
-                Children = { lblTruckTitle, lblTruckDetail },
-                Orientation = StackOrientation.Vertical
-            };
+                StackLayout slReviewDetails = new StackLayout
+                {
+                    Children = { lblReviews, lblReviewsName, lblReviewDesc },
+                    Orientation = StackOrientation.Vertical
+                };
 
-            Label lblReviews = new Label
-            {
-                Text = "Reviews:",
-                TextColor = Color.Black,
-            };
+                StackLayout slTruck = new StackLayout
+                {
+                    Children = { slTruckDetail, slReviewDetails },
+                    Orientation = StackOrientation.Vertical,
+                    Spacing = 10,
+                    IsVisible = false
+                };
 
-            Label lblReviewsName = new Label
-            {
-                Text = "Jhon Doe" + "\n" + "Very Good!!",
-                TextColor = Color.FromHex("#ccc0c0"),
-            };
+                Button btnSeeMore = new Button
+                {
+                    Text = "SEE MORE",
+                    TextColor = Color.White,
+                    BackgroundColor = Color.FromHex("e7b909"),
+                    WidthRequest = 150
+                };
 
-            StackLayout slReviewDetails = new StackLayout
-            {
-                Children = { lblReviews, lblReviewsName },
-                Orientation = StackOrientation.Vertical
-            };
+                StackLayout slSeeMore = new StackLayout
+                {
+                    Children = { btnSeeMore },
+                    HorizontalOptions = LayoutOptions.StartAndExpand
+                };
 
-            StackLayout slTruck = new StackLayout
-            {
-                Children = { slTruckDetail, slReviewDetails },
-                Orientation = StackOrientation.Vertical,
-                Spacing = 10
-            };
+                Button btnNavigateTo = new Button
+                {
+                    Text = "NAVIGATE TO",
+                    TextColor = Color.White,
+                    BackgroundColor = Color.FromHex("e61a1c"),
+                    WidthRequest = 150
+                };
 
-            Button btnSeeMore = new Button
-            {
-                Text = "SEE MORE",
-                TextColor = Color.White,
-                BackgroundColor = Color.Yellow,
-                WidthRequest = 150
-            };
+                btnNavigateTo.Clicked += (sender, e) =>
+                    {
+                        Navigation.PushAsync(App.TruckListPage());
+                    };
 
-            StackLayout slSeeMore = new StackLayout
-            {
-                Children = { btnSeeMore },
-                HorizontalOptions = LayoutOptions.StartAndExpand
-            };
+                StackLayout slNavigateTo = new StackLayout
+                {
+                    Children = { btnNavigateTo },
+                    HorizontalOptions = LayoutOptions.EndAndExpand
+                };
 
-            Button btnNavigateTo = new Button
-            {
-                Text = "NAVIGATE TO",
-                TextColor = Color.White,
-                BackgroundColor = Color.FromHex("f23e3e"),
-                WidthRequest = 150
-            };
+                StackLayout slButton = new StackLayout
+                {
+                    Children = { btnSeeMore, btnNavigateTo },
+                    Orientation = StackOrientation.Horizontal,
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    Padding = new Thickness(3)
+                };
 
-            StackLayout slNavigateTo = new StackLayout
-            {
-                Children = { btnNavigateTo },
-                HorizontalOptions = LayoutOptions.EndAndExpand
-            };
+                LoadingIndicator loader = new LoadingIndicator();
 
-            StackLayout slButton = new StackLayout
-            {
-                Children = { btnSeeMore, btnNavigateTo },
-                Orientation = StackOrientation.Horizontal,
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                Padding = new Thickness(3)
-            };
+                foreach (TruckInfoModel item in _TruckInfoList)
+                {
+                    Pin pin = new Pin();
+                    pin.Type = PinType.Place;
+                    pin.Label = item.TruckName;
+                    pin.Position = new Position(Convert.ToDouble(item.Lattitude), Convert.ToDouble(item.Longitude));
 
-            StackLayout slMapPage = new StackLayout
-            {
-                Children = { 
+                    pin.Clicked += async (sender, e) =>
+                    {
+                        lblReviewsName.Text = string.Empty;
+                        lblReviewDesc.Text = string.Empty;
+                        loader.IsShowLoading = true;
+
+                        lblTruckTitle.Text = item.TruckName;
+
+                        //GEt call for food type details
+                        FoodTypeModel foodTypeModel = await _FoodTypeProvider.GetFoodTypeByID(Convert.ToInt32(item.FoodTypeId));
+
+                        //Calculate Distance
+                        DistanceCalculator distanceCal = new DistanceCalculator();
+                        double totalKm = distanceCal.distance(Convert.ToDouble(lattitude), Convert.ToDouble(longitude), Convert.ToDouble(item.Lattitude), Convert.ToDouble(item.Longitude), Convert.ToChar("K"));
+
+                        lblTruckDetail.Text = foodTypeModel.Type + "\n" + "GPS coordinates, " + totalKm.ToString("0.00") + " KM away" + "\n" + "In front of";
+
+                        //Get call for review details
+                        ReviewDetailModel reviewDetail = await _ReviewProvider.GetByTruckId(item.Id);
+
+                        if ((!string.IsNullOrEmpty(reviewDetail.FirstName) || !string.IsNullOrEmpty(reviewDetail.LastName)) && !string.IsNullOrEmpty(reviewDetail.Description))
+                        {
+                            lblReviewsName.Text = reviewDetail.FirstName + " " + reviewDetail.LastName;
+                            lblReviewDesc.Text = reviewDetail.Description;
+                        }
+                        else
+                        {
+                            lblReviewsName.Text = "There is no review for this truck.";
+                        }
+                        loader.IsShowLoading = false;
+                        slTruck.IsVisible = true;
+                        //});
+                    };
+
+                    map.Pins.Add(pin);
+                }
+
+                StackLayout slMapPage = new StackLayout
+                {
+                    Children = { 
                         new StackLayout{
                             Padding = new Thickness(20, Device.OnPlatform(40,20,0), 20, 0),
 						    Children = { slHeader },
@@ -217,23 +266,23 @@ namespace FoodTrucks.Pages
                         },new StackLayout { Children = { map}, VerticalOptions = LayoutOptions.StartAndExpand},
                         new StackLayout{
                             Padding = new Thickness(20, 0, 20, 20),
-						    Children = {slTruck, slButton },
+						    Children = {loader,slTruck,slButton },
                             VerticalOptions = LayoutOptions.EndAndExpand
                             },
                     },
-                Orientation = StackOrientation.Vertical,
-                BackgroundColor = LayoutHelper.PageBackgroundColor
-            };
+                    Orientation = StackOrientation.Vertical,
+                    BackgroundColor = LayoutHelper.PageBackgroundColor
+                };
 
-            Content = new ScrollView
+                Content = new ScrollView
+                {
+                    Content = slMapPage,
+                };
+            }
+            catch (Exception ex)
             {
-                Content = slMapPage,
-            };
-        }
 
-        void LoadContet()
-        {
-
+            }
         }
     }
 }

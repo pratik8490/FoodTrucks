@@ -1,4 +1,5 @@
-﻿using FoodTrucks.Pages;
+﻿using FoodTrucks.Helper;
+using FoodTrucks.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +22,33 @@ namespace FoodTrucks
         #endregion
 
         static NavigationPage navPage;
+
+        public static Page SignUpPage()
+        {
+            navPage = new NavigationPage(new SignUpPage());
+            navPage.BarBackgroundColor = LayoutHelper.BarBackGroundColor;
+            navPage.BarTextColor = LayoutHelper.BarBackTextColor;
+            return navPage;
+        }
+
+        public static Page HomePage()
+        {
+            return new MainPage();
+        }
+
+        public static Page MapPage()
+        {
+            return new MapPage();
+        }
+
         public static Color BarTextColor()
         {
             return Color.White;
         }
-
+        public static Page TruckListPage()
+        {
+            return new TrucksList();
+        }
         protected override void OnStart()
         {
             // Handle when your app starts 
