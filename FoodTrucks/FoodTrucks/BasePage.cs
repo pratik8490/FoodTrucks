@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FoodTrucks.Helper;
+using Plugin.DeviceInfo;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,7 +33,10 @@ namespace FoodTrucks
                 BackgroundColor = Color.White,
             };
         }
-
+        public string GetDeviceID()
+        {
+            return CrossDeviceInfo.Current.Id;
+        }
         #region Override Method
         /// <summary>
         /// On appearing method.
@@ -41,13 +46,28 @@ namespace FoodTrucks
             LoadingIndicator.IsRunning = IsLoading;
             LoadingIndicator.IsVisible = IsLoading;
 
+            BindToolbar();
+        }
+        protected override void OnDisappearing()
+        {
+            LoadingIndicator.IsRunning = false;
+            LoadingIndicator.IsVisible = false;
+
+            this.ToolbarItems.Clear();
         }
 
         public void BindToolbar()
         {
+
             List<ToolbarItem> lstToolbarItem = new List<ToolbarItem>();
 
-
+            lstToolbarItem.Add(new ToolbarItem
+            {
+                Text = "Filter",
+                Icon = Constants.ImagePath.FilterIcon,
+                Order = ToolbarItemOrder.Primary,
+                Command = new Command(Filter)
+            });
 
             lstToolbarItem.Add(new ToolbarItem
             {
@@ -62,16 +82,14 @@ namespace FoodTrucks
             }
         }
 
+        public void Filter()
+        {
+
+        }
+
         private async void Logout()
         {
             Navigation.PushModalAsync(App.HomePage());
-        }
-
-        protected override void OnDisappearing()
-        {
-            LoadingIndicator.IsRunning = false;
-            LoadingIndicator.IsVisible = false;
-
         }
 
         #endregion
@@ -88,3 +106,4 @@ namespace FoodTrucks
         }
     }
 }
+

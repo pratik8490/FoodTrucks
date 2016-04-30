@@ -1,4 +1,5 @@
-﻿using FoodTrucks.CustomControls;
+﻿using FoodTrucks.Context;
+using FoodTrucks.CustomControls;
 using FoodTrucks.Helper;
 using FoodTrucks.Interface;
 using FoodTrucks.Provider;
@@ -24,28 +25,29 @@ namespace FoodTrucks.Pages
         private IReview _ReviewProvider = new ReviewProvider();
         public MapPage()
         {
+            Title = "Maps";
             IsLoading = true;
             Device.BeginInvokeOnMainThread(async () =>
                     {
-                        FoodTrucks.Models.Position location = await DependencyService.Get<ICurrentLocation>().SetCurrentLocation();
 
-                        if (string.IsNullOrEmpty(location.Message))
-                        {
-                            //Application.Current.Properties["Latitude"] = location.Latitude;
-                            //Application.Current.Properties["Longitude"] = location.Longitude;
 
-                            _TruckInfoList = await _TruckInfoProvider.GetTruckList();
+                        //if (string.IsNullOrEmpty(location.Message))
+                        //{
+                        //Application.Current.Properties["Latitude"] = location.Latitude;
+                        //Application.Current.Properties["Longitude"] = location.Longitude;
 
-                            MapPageLayout(location.Latitude, location.Longitude);
-                        }
-                        else
-                        {
-                            await DisplayAlert(string.Empty, location.Message, "OK");
-                        }
+                        _TruckInfoList = await _TruckInfoProvider.GetTruckList();
+
+                        MapPageLayout();
+                        //}
+                        //else
+                        //{
+                        //    await DisplayAlert(string.Empty, location.Message, "OK");
+                        //}
                     });
         }
 
-        public void MapPageLayout(double lattitude, double longitude)
+        public void MapPageLayout()
         {
             try
             {
@@ -57,7 +59,7 @@ namespace FoodTrucks.Pages
                 StackLayout slSlideOutMenu = new StackLayout
                 {
                     Children = { imgSliderOutMenu },
-                    HorizontalOptions = LayoutOptions.StartAndExpand
+                    HorizontalOptions = LayoutOptions.StartAndExpand,
                 };
 
                 Label lblMaps = new Label
@@ -100,7 +102,7 @@ namespace FoodTrucks.Pages
                 };
 
                 map.MoveToRegion(MapSpan.FromCenterAndRadius(
-                    new Position(lattitude, longitude), Distance.FromMiles(3))); // Santa Cruz golf course
+                    new Position(FoodTruckContext.Position.Latitude, FoodTruckContext.Position.Longitude), Distance.FromMiles(3))); // Santa Cruz golf course
 
 
                 //CustomMap map = new CustomMap(MapSpan.FromCenterAndRadius(position, Distance.FromMiles(5)))
@@ -232,7 +234,7 @@ namespace FoodTrucks.Pages
 
                         //Calculate Distance
                         DistanceCalculator distanceCal = new DistanceCalculator();
-                        double totalKm = distanceCal.distance(Convert.ToDouble(lattitude), Convert.ToDouble(longitude), Convert.ToDouble(item.Lattitude), Convert.ToDouble(item.Longitude), Convert.ToChar("K"));
+                        double totalKm = distanceCal.distance(Convert.ToDouble(FoodTruckContext.Position.Latitude), Convert.ToDouble(FoodTruckContext.Position.Longitude), Convert.ToDouble(item.Lattitude), Convert.ToDouble(item.Longitude), Convert.ToChar("K"));
 
                         lblTruckDetail.Text = foodTypeModel.Type + "\n" + "GPS coordinates, " + totalKm.ToString("0.00") + " KM away" + "\n" + "In front of";
 
@@ -258,25 +260,22 @@ namespace FoodTrucks.Pages
 
                 StackLayout slMapPage = new StackLayout
                 {
-                    Children = { 
-                        new StackLayout{
-                            Padding = new Thickness(20, Device.OnPlatform(40,20,0), 20, 0),
-						    Children = { slHeader },
-                            VerticalOptions = LayoutOptions.Start
-                        },new StackLayout { Children = { map}, VerticalOptions = LayoutOptions.StartAndExpand},
+                    Children = {
+                        new StackLayout { Children = { map }, VerticalOptions = LayoutOptions.StartAndExpand, Padding = new Thickness(0, 10, 0, 0)},
                         new StackLayout{
                             Padding = new Thickness(20, 0, 20, 20),
 						    Children = {loader,slTruck,slButton },
                             VerticalOptions = LayoutOptions.EndAndExpand
                             },
                     },
+
                     Orientation = StackOrientation.Vertical,
                     BackgroundColor = LayoutHelper.PageBackgroundColor
                 };
 
                 Content = new ScrollView
                 {
-                    Content = slMapPage,
+                    Content = slMapPage
                 };
             }
             catch (Exception ex)

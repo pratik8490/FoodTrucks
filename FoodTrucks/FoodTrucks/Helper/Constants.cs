@@ -12,6 +12,12 @@ namespace FoodTrucks.Helper
         public static Thickness IOSPadding = new Thickness(0, Device.OnPlatform(40, 0, 0), 0, 0);
         public static int Padding = 43;
 
+        public class RegxValidation
+        {
+            public const string EmailValidationPattern = @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z";
+            public const string PhoneNumberRegx = @"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$";
+        }
+
         /// <summary>
         /// Image path constant.
         /// </summary>

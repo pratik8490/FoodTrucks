@@ -59,5 +59,41 @@ namespace FoodTrucks.Provider
 
             return res.Task;
         }
+
+        public Task<bool> CheckDeviceLoggedIn(string deviceID)
+        {
+            var LoggedIn = new TaskCompletionSource<bool>();
+
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                try
+                {
+
+                    HttpClient client = new HttpClient();
+                    client.BaseAddress = new Uri(_SiteUrl);
+
+                    var requestUri = "api/User?deviceID=" + deviceID;
+
+                    var response = await client.GetAsync(requestUri);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var content = await response.Content.ReadAsStringAsync();
+                        LoggedIn.TrySetResult(JsonConvert.DeserializeObject<bool>(content));
+                    }
+                    else
+                    {
+                        LoggedIn.SetResult(false);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    LoggedIn.SetResult(false);
+                }
+            });
+
+            return LoggedIn.Task;
+        }
     }
 }

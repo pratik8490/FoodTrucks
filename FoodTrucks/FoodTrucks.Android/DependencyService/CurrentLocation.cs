@@ -71,8 +71,14 @@ namespace FoodTrucks.Droid.CustomRenderer
                     }
                     else
                     {
-                        obj.Message = "Please enable location service on your device.";
-                        response.SetResult(obj);
+                        //obj.Message = "Please enable location service on your device.";
+                        //response.SetResult(obj);
+                        //var intent = new Intent(Android.Provider.Settings.ActionLocationSourceSettings);
+                        //StartActivity(intent);
+
+                        Intent gpsSettingIntent = new Intent(Android.Provider.Settings.ActionLocationSourceSettings);
+                        Forms.Context.StartActivity(gpsSettingIntent);
+
                     }
 
                 });

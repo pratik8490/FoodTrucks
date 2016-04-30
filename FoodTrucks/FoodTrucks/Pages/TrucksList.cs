@@ -17,6 +17,7 @@ namespace FoodTrucks
         public TrucksList()
         {
             IsLoading = true;
+            Title = "Truck List";
             Device.BeginInvokeOnMainThread(async () =>
             {
                 _TruckInfoList = await _TruckInfoProvider.GetTruckList();
@@ -71,14 +72,13 @@ namespace FoodTrucks
             trucksListView.ItemsSource = _TruckInfoList;
             trucksListView.ItemTemplate = new DataTemplate(() => new TruckCell());
 
-            //			myEscrowListView.ItemSelected += (sender, e) =>
-            //			{
-            //				if (e.SelectedItem == null) return;
-            //				EscrowModel escrowModel = (EscrowModel)e.SelectedItem;
-            //
-            //				((ListView)sender).SelectedItem = null;
-            //				Navigation.PushAsync(App.EditEscrowPage(escrowModel.EscrowId));
-            //			};
+            trucksListView.ItemTapped += (sender, e) =>
+                        {
+                            // don't do anything if we just de-selected the row
+                            if (e.Item == null) return;
+                            // do something with e.SelectedItem
+                            ((ListView)sender).SelectedItem = null; // de-select the row after ripple effect
+                        };
 
             Seperator spHeader = new Seperator();
 
@@ -86,21 +86,22 @@ namespace FoodTrucks
             {
 
                 Children = { 
-                        new StackLayout{
-                            Padding = new Thickness(20, Device.OnPlatform(40,20,0), 20, 0),
-						    Children = { slHeader },
-                            VerticalOptions = LayoutOptions.Start
-                        },
-                        new StackLayout {
-                            Padding = new Thickness(0),
-                            Children = {spHeader.LineSeperatorView},
-                            //VerticalOptions = LayoutOptions.StartAndExpand
-                        },
+                        //new StackLayout{
+                        //    Padding = new Thickness(20, Device.OnPlatform(40,20,0), 20, 0),
+                        //    Children = { slHeader },
+                        //    VerticalOptions = LayoutOptions.Start
+                        //},
+                        //new StackLayout {
+                        //    Padding = new Thickness(0),
+                        //    Children = {spHeader.LineSeperatorView},
+                        //    //VerticalOptions = LayoutOptions.StartAndExpand
+                        //},
                         new StackLayout {
                             Padding = new Thickness(20, 0, 20, 0),
                             Children = { trucksListView},
                         }
                     },
+                Padding = new Thickness(20, Device.OnPlatform(40, 20, 0), 20, 20),
                 Orientation = StackOrientation.Vertical,
                 BackgroundColor = LayoutHelper.PageBackgroundColor
             };

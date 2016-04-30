@@ -3,10 +3,12 @@ using FoodTrucks.Helper;
 using FoodTrucks.Provider;
 using FoodTrucks.Provider.Interface;
 using FoodTrucks.Provider.Models;
+using Plugin.DeviceInfo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -18,6 +20,7 @@ namespace FoodTrucks.Pages
         private LoadingIndicator _Loader = new LoadingIndicator();
         public SignUpPage()
         {
+            Title = "Sign up";
 
             Label lblSignUp = new Label
             {
@@ -171,30 +174,55 @@ namespace FoodTrucks.Pages
 
             btnSignUp.Clicked += (sender, e) =>
             {
-                btnSignUp.IsVisible = false;
-                _Loader.IsShowLoading = true;
-                //Navigation.PushAsync(App.MapPage());
                 Device.BeginInvokeOnMainThread(async () =>
+                {
+                    try
                     {
-                        UserModel objUserModel = new UserModel();
-                        objUserModel.Email = txtEmail.Text;
-                        objUserModel.Pin = Convert.ToInt32(txtPin.Text);
-                        objUserModel.FirstName = string.Empty;
-                        objUserModel.LastName = string.Empty;
-                        objUserModel.IsNotified = Convert.ToByte(swcNotifications.IsToggled);
+                        btnSignUp.IsVisible = false;
+                        _Loader.IsShowLoading = true;
 
-                        int UserId = await _UserProvider.SignUpUser(objUserModel);
-
-                        if (UserId != 0)
+                        if (string.IsNullOrEmpty(txtEmail.Text))
                         {
-                            Navigation.PushAsync(App.MapPage());
+                            DisplayAlert("Error", "Please enter email address.", "OK");
+                            return;
+                        }
+                        if (string.IsNullOrEmpty(txtPin.Text))
+                        {
+                            DisplayAlert("Error", "Please enter pin", "OK");
+                            return;
+                        }
+
+                        if (Regex.IsMatch(txtEmail.Text.ToString(), Constants.RegxValidation.EmailValidationPattern, RegexOptions.IgnoreCase))
+                        {
+                            UserModel objUserModel = new UserModel();
+                            objUserModel.DeviceID = GetDeviceID();
+                            objUserModel.Email = txtEmail.Text;
+                            objUserModel.Pin = Convert.ToInt32(txtPin.Text);
+                            objUserModel.FirstName = string.Empty;
+                            objUserModel.LastName = string.Empty;
+                            objUserModel.IsNotified = Convert.ToByte(swcNotifications.IsToggled);
+
+                            int UserId = await _UserProvider.SignUpUser(objUserModel);
+
+                            if (UserId != 0)
+                            {
+                                Navigation.PushAsync(App.MapPage());
+                            }
+                            else
+                            {
+                                DisplayAlert("Error", "Please enter correct username and password", "OK");
+                            }
                         }
                         else
                         {
-                            DisplayAlert("Error", "Please enter correct username and password", "OK");
+                            DisplayAlert("Error", "Please enter correct format email address", "OK");
                         }
-                    });
+                    }
+                    catch (Exception ex)
+                    {
 
+                    }
+                });
                 btnSignUp.IsVisible = true;
                 _Loader.IsShowLoading = false;
             };
@@ -209,10 +237,6 @@ namespace FoodTrucks.Pages
                 Children = { 
                         new StackLayout{
                             Children = {
-                                new StackLayout {
-                                    Children = { slHeader,spTitle.LineSeperatorView },
-                                    VerticalOptions = LayoutOptions.StartAndExpand,
-                                },
                                 new StackLayout {
                                     Padding = new Thickness(20, Device.OnPlatform(40,20,0), 20, 0),
                                     Children = { slEntry},
@@ -235,6 +259,7 @@ namespace FoodTrucks.Pages
                                     VerticalOptions = LayoutOptions.EndAndExpand,
                                 },
                             },
+                            Padding = new Thickness(20, Device.OnPlatform(40, 20, 0), 20, 20),
                             VerticalOptions = LayoutOptions.FillAndExpand,
                         },
                     },

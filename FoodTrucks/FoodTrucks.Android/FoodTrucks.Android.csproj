@@ -81,6 +81,14 @@
     </Reference>
     <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />
+    <Reference Include="Plugin.DeviceInfo">
+      <HintPath>..\..\packages\Xam.Plugin.DeviceInfo.2.0.2\lib\MonoAndroid10\Plugin.DeviceInfo.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Plugin.DeviceInfo.Abstractions">
+      <HintPath>..\..\packages\Xam.Plugin.DeviceInfo.2.0.2\lib\MonoAndroid10\Plugin.DeviceInfo.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -129,6 +137,7 @@
     <Compile Include="CustomRenderer\ExtendedEntryRenderer.cs" />
     <Compile Include="DependencyService\CurrentLocation.cs" />
     <Compile Include="CustomRenderer\MapViewRenderer.cs" />
+    <Compile Include="DependencyService\NetworkOperation.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -141,12 +150,12 @@
   <ItemGroup>
     <Content Include="Properties\AndroidManifest.xml" />
     <AndroidResource Include="Resources\Drawable\CurrentLocation.png" />
-    <AndroidResource Include="Resources\Drawable\filter.png" />
     <AndroidResource Include="Resources\Drawable\mainpagemiddle.png" />
     <AndroidResource Include="Resources\Drawable\appIcon.png" />
     <AndroidResource Include="Resources\Drawable\slideout.png" />
     <AndroidResource Include="Resources\Drawable\aerrow.png" />
     <AndroidResource Include="Resources\Drawable\foodtruck.png" />
+    <AndroidResource Include="Resources\Drawable\filter.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FoodTrucks\FoodTrucks.csproj">

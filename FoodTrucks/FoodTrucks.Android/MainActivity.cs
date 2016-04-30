@@ -23,9 +23,10 @@ namespace FoodTrucks.Droid
             Forms.Init(this, bundle);
             FormsMaps.Init(this, bundle);
 
-            Xamarin.Forms.Forms.SetTitleBarVisibility(Xamarin.Forms.AndroidTitleBarVisibility.Never);
-
+            //Xamarin.Forms.Forms.SetTitleBarVisibility(Xamarin.Forms.AndroidTitleBarVisibility.Never);
+            this.ActionBar.SetIcon(Android.Resource.Color.Transparent);
             LoadApplication(new App());
+            
         }
     }
 }
