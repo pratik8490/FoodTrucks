@@ -26,7 +26,7 @@ namespace FoodTrucks.Helper
             public const string MainPageMiddle = "mainpagemiddle.png";
             public const string FilterIcon = "filter.png";
             public const string SlideOut = "slideout.png";
-            public static string DropDownArrow = "dropdown_arrow.png";
+            public static string DropDownArrow = "down_arrow.png";
             public static string DownArrow = "down_arrow.png";
             public static string RightArrow = "aerrow.png";
         }

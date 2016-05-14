@@ -72,6 +72,18 @@
     <MonoDroidExtraArgs />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Acr.UserDialogs">
+      <HintPath>..\..\packages\Acr.UserDialogs.3.3.3\lib\MonoAndroid10\Acr.UserDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Acr.XamForms.UserDialogs">
+      <HintPath>..\..\packages\Acr.XamForms.UserDialogs.3.0.4\lib\MonoAndroid10\Acr.XamForms.UserDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Acr.XamForms.UserDialogs.Droid">
+      <HintPath>..\..\packages\Acr.XamForms.UserDialogs.3.0.4\lib\MonoAndroid10\Acr.XamForms.UserDialogs.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="AndHUD">
+      <HintPath>..\..\packages\Acr.UserDialogs.3.3.3\lib\MonoAndroid10\AndHUD.dll</HintPath>
+    </Reference>
     <Reference Include="FormsViewGroup, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Xamarin.Forms.1.4.2.6359\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
@@ -156,6 +168,7 @@
     <AndroidResource Include="Resources\Drawable\aerrow.png" />
     <AndroidResource Include="Resources\Drawable\foodtruck.png" />
     <AndroidResource Include="Resources\Drawable\filter.png" />
+    <AndroidResource Include="Resources\Drawable\down_arrow.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FoodTrucks\FoodTrucks.csproj">

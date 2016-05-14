@@ -46,10 +46,13 @@
     <Compile Include="Helper\DistanceCalculator.cs" />
     <Compile Include="Helper\LayoutHelper.cs" />
     <Compile Include="Helper\LoadingIndicator.cs" />
+    <Compile Include="Helper\Messages.cs" />
     <Compile Include="Helper\Seperator.cs" />
     <Compile Include="Interface\ICurrentLocation.cs" />
     <Compile Include="Interface\INetworkOperation.cs" />
     <Compile Include="Models\Position.cs" />
+    <Compile Include="Pages\AddTruckInfo.cs" />
+    <Compile Include="Pages\LoginPage.cs" />
     <Compile Include="Pages\MainPage.cs" />
     <Compile Include="Pages\MapPage.cs" />
     <Compile Include="Pages\SignUpPage.cs" />
@@ -61,6 +64,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Acr.UserDialogs">
+      <HintPath>..\..\packages\Acr.UserDialogs.3.3.3\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+Xamarin.iOS10\Acr.UserDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Acr.XamForms.UserDialogs">
+      <HintPath>..\..\packages\Acr.XamForms.UserDialogs.3.0.4\lib\portable-win+net45+MonoAndroid10+Xamarin.iOS10+wp8\Acr.XamForms.UserDialogs.dll</HintPath>
+    </Reference>
     <Reference Include="Plugin.DeviceInfo">
       <HintPath>..\..\packages\Xam.Plugin.DeviceInfo.2.0.2\lib\MonoAndroid10\Plugin.DeviceInfo.dll</HintPath>
     </Reference>

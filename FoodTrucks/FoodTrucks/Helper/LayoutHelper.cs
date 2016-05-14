@@ -14,7 +14,9 @@ namespace FoodTrucks.Helper
         /// <summary>
         /// General color for layout.
         /// </summary>
+        public static Color LoginPageBackgroundColor = Color.FromHex("#E4E4E4");
         public static Color PageBackgroundColor = Color.White;
+        public static Color LinkColor = Color.FromHex("#3366AA");
         public static Color LightBlackColor = Color.FromHex("#333");
         public static Color BlueButtonColor = Color.FromHex("#428BCA");
         public static Color RedButtonColor = Color.FromHex("#B52D11");

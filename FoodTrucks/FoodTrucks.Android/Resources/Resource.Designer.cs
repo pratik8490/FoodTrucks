@@ -26,6 +26,121 @@ namespace FoodTrucks.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::Acr.UserDialogs.Resource.Attribute.ahBarColor = global::FoodTrucks.Droid.Resource.Attribute.ahBarColor;
+			global::Acr.UserDialogs.Resource.Attribute.ahBarLength = global::FoodTrucks.Droid.Resource.Attribute.ahBarLength;
+			global::Acr.UserDialogs.Resource.Attribute.ahBarWidth = global::FoodTrucks.Droid.Resource.Attribute.ahBarWidth;
+			global::Acr.UserDialogs.Resource.Attribute.ahCircleColor = global::FoodTrucks.Droid.Resource.Attribute.ahCircleColor;
+			global::Acr.UserDialogs.Resource.Attribute.ahDelayMillis = global::FoodTrucks.Droid.Resource.Attribute.ahDelayMillis;
+			global::Acr.UserDialogs.Resource.Attribute.ahRadius = global::FoodTrucks.Droid.Resource.Attribute.ahRadius;
+			global::Acr.UserDialogs.Resource.Attribute.ahRimColor = global::FoodTrucks.Droid.Resource.Attribute.ahRimColor;
+			global::Acr.UserDialogs.Resource.Attribute.ahRimWidth = global::FoodTrucks.Droid.Resource.Attribute.ahRimWidth;
+			global::Acr.UserDialogs.Resource.Attribute.ahSpinSpeed = global::FoodTrucks.Droid.Resource.Attribute.ahSpinSpeed;
+			global::Acr.UserDialogs.Resource.Attribute.ahText = global::FoodTrucks.Droid.Resource.Attribute.ahText;
+			global::Acr.UserDialogs.Resource.Attribute.ahTextColor = global::FoodTrucks.Droid.Resource.Attribute.ahTextColor;
+			global::Acr.UserDialogs.Resource.Attribute.ahTextSize = global::FoodTrucks.Droid.Resource.Attribute.ahTextSize;
+			global::Acr.UserDialogs.Resource.Drawable.ic_errorstatus = global::FoodTrucks.Droid.Resource.Drawable.ic_errorstatus;
+			global::Acr.UserDialogs.Resource.Drawable.ic_successstatus = global::FoodTrucks.Droid.Resource.Drawable.ic_successstatus;
+			global::Acr.UserDialogs.Resource.Drawable.roundedbg = global::FoodTrucks.Droid.Resource.Drawable.roundedbg;
+			global::Acr.UserDialogs.Resource.Drawable.roundedbgdark = global::FoodTrucks.Droid.Resource.Drawable.roundedbgdark;
+			global::Acr.UserDialogs.Resource.Id.loadingImage = global::FoodTrucks.Droid.Resource.Id.loadingImage;
+			global::Acr.UserDialogs.Resource.Id.loadingProgressBar = global::FoodTrucks.Droid.Resource.Id.loadingProgressBar;
+			global::Acr.UserDialogs.Resource.Id.loadingProgressWheel = global::FoodTrucks.Droid.Resource.Id.loadingProgressWheel;
+			global::Acr.UserDialogs.Resource.Id.textViewStatus = global::FoodTrucks.Droid.Resource.Id.textViewStatus;
+			global::Acr.UserDialogs.Resource.Layout.loading = global::FoodTrucks.Droid.Resource.Layout.loading;
+			global::Acr.UserDialogs.Resource.Layout.loadingimage = global::FoodTrucks.Droid.Resource.Layout.loadingimage;
+			global::Acr.UserDialogs.Resource.Layout.loadingprogress = global::FoodTrucks.Droid.Resource.Layout.loadingprogress;
+			global::Acr.UserDialogs.Resource.String.ApplicationName = global::FoodTrucks.Droid.Resource.String.ApplicationName;
+			global::Acr.UserDialogs.Resource.String.Hello = global::FoodTrucks.Droid.Resource.String.Hello;
+			global::Acr.UserDialogs.Resource.String.library_name = global::FoodTrucks.Droid.Resource.String.library_name;
+			global::Acr.UserDialogs.Resource.Styleable.ProgressWheel = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel;
+			global::Acr.UserDialogs.Resource.Styleable.ProgressWheel_ahBarColor = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahBarColor;
+			global::Acr.UserDialogs.Resource.Styleable.ProgressWheel_ahBarLength = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahBarLength;
+			global::Acr.UserDialogs.Resource.Styleable.ProgressWheel_ahBarWidth = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahBarWidth;
+			global::Acr.UserDialogs.Resource.Styleable.ProgressWheel_ahCircleColor = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahCircleColor;
+			global::Acr.UserDialogs.Resource.Styleable.ProgressWheel_ahDelayMillis = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahDelayMillis;
+			global::Acr.UserDialogs.Resource.Styleable.ProgressWheel_ahRadius = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahRadius;
+			global::Acr.UserDialogs.Resource.Styleable.ProgressWheel_ahRimColor = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahRimColor;
+			global::Acr.UserDialogs.Resource.Styleable.ProgressWheel_ahRimWidth = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahRimWidth;
+			global::Acr.UserDialogs.Resource.Styleable.ProgressWheel_ahSpinSpeed = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahSpinSpeed;
+			global::Acr.UserDialogs.Resource.Styleable.ProgressWheel_ahText = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahText;
+			global::Acr.UserDialogs.Resource.Styleable.ProgressWheel_ahTextColor = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahTextColor;
+			global::Acr.UserDialogs.Resource.Styleable.ProgressWheel_ahTextSize = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahTextSize;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Attribute.ahBarColor = global::FoodTrucks.Droid.Resource.Attribute.ahBarColor;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Attribute.ahBarLength = global::FoodTrucks.Droid.Resource.Attribute.ahBarLength;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Attribute.ahBarWidth = global::FoodTrucks.Droid.Resource.Attribute.ahBarWidth;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Attribute.ahCircleColor = global::FoodTrucks.Droid.Resource.Attribute.ahCircleColor;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Attribute.ahDelayMillis = global::FoodTrucks.Droid.Resource.Attribute.ahDelayMillis;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Attribute.ahRadius = global::FoodTrucks.Droid.Resource.Attribute.ahRadius;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Attribute.ahRimColor = global::FoodTrucks.Droid.Resource.Attribute.ahRimColor;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Attribute.ahRimWidth = global::FoodTrucks.Droid.Resource.Attribute.ahRimWidth;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Attribute.ahSpinSpeed = global::FoodTrucks.Droid.Resource.Attribute.ahSpinSpeed;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Attribute.ahText = global::FoodTrucks.Droid.Resource.Attribute.ahText;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Attribute.ahTextColor = global::FoodTrucks.Droid.Resource.Attribute.ahTextColor;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Attribute.ahTextSize = global::FoodTrucks.Droid.Resource.Attribute.ahTextSize;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Drawable.ic_errorstatus = global::FoodTrucks.Droid.Resource.Drawable.ic_errorstatus;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Drawable.ic_successstatus = global::FoodTrucks.Droid.Resource.Drawable.ic_successstatus;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Drawable.roundedbg = global::FoodTrucks.Droid.Resource.Drawable.roundedbg;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Drawable.roundedbgdark = global::FoodTrucks.Droid.Resource.Drawable.roundedbgdark;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Id.loadingImage = global::FoodTrucks.Droid.Resource.Id.loadingImage;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Id.loadingProgressBar = global::FoodTrucks.Droid.Resource.Id.loadingProgressBar;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Id.loadingProgressWheel = global::FoodTrucks.Droid.Resource.Id.loadingProgressWheel;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Id.textViewStatus = global::FoodTrucks.Droid.Resource.Id.textViewStatus;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Layout.loading = global::FoodTrucks.Droid.Resource.Layout.loading;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Layout.loadingimage = global::FoodTrucks.Droid.Resource.Layout.loadingimage;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Layout.loadingprogress = global::FoodTrucks.Droid.Resource.Layout.loadingprogress;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.String.ApplicationName = global::FoodTrucks.Droid.Resource.String.ApplicationName;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.String.Hello = global::FoodTrucks.Droid.Resource.String.Hello;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.String.library_name = global::FoodTrucks.Droid.Resource.String.library_name;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Styleable.ProgressWheel = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Styleable.ProgressWheel_ahBarColor = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahBarColor;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Styleable.ProgressWheel_ahBarLength = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahBarLength;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Styleable.ProgressWheel_ahBarWidth = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahBarWidth;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Styleable.ProgressWheel_ahCircleColor = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahCircleColor;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Styleable.ProgressWheel_ahDelayMillis = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahDelayMillis;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Styleable.ProgressWheel_ahRadius = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahRadius;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Styleable.ProgressWheel_ahRimColor = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahRimColor;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Styleable.ProgressWheel_ahRimWidth = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahRimWidth;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Styleable.ProgressWheel_ahSpinSpeed = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahSpinSpeed;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Styleable.ProgressWheel_ahText = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahText;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Styleable.ProgressWheel_ahTextColor = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahTextColor;
+			global::Acr.XamForms.UserDialogs.Droid.Resource.Styleable.ProgressWheel_ahTextSize = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahTextSize;
+			global::AndroidHUD.Resource.Attribute.ahBarColor = global::FoodTrucks.Droid.Resource.Attribute.ahBarColor;
+			global::AndroidHUD.Resource.Attribute.ahBarLength = global::FoodTrucks.Droid.Resource.Attribute.ahBarLength;
+			global::AndroidHUD.Resource.Attribute.ahBarWidth = global::FoodTrucks.Droid.Resource.Attribute.ahBarWidth;
+			global::AndroidHUD.Resource.Attribute.ahCircleColor = global::FoodTrucks.Droid.Resource.Attribute.ahCircleColor;
+			global::AndroidHUD.Resource.Attribute.ahDelayMillis = global::FoodTrucks.Droid.Resource.Attribute.ahDelayMillis;
+			global::AndroidHUD.Resource.Attribute.ahRadius = global::FoodTrucks.Droid.Resource.Attribute.ahRadius;
+			global::AndroidHUD.Resource.Attribute.ahRimColor = global::FoodTrucks.Droid.Resource.Attribute.ahRimColor;
+			global::AndroidHUD.Resource.Attribute.ahRimWidth = global::FoodTrucks.Droid.Resource.Attribute.ahRimWidth;
+			global::AndroidHUD.Resource.Attribute.ahSpinSpeed = global::FoodTrucks.Droid.Resource.Attribute.ahSpinSpeed;
+			global::AndroidHUD.Resource.Attribute.ahText = global::FoodTrucks.Droid.Resource.Attribute.ahText;
+			global::AndroidHUD.Resource.Attribute.ahTextColor = global::FoodTrucks.Droid.Resource.Attribute.ahTextColor;
+			global::AndroidHUD.Resource.Attribute.ahTextSize = global::FoodTrucks.Droid.Resource.Attribute.ahTextSize;
+			global::AndroidHUD.Resource.Drawable.ic_errorstatus = global::FoodTrucks.Droid.Resource.Drawable.ic_errorstatus;
+			global::AndroidHUD.Resource.Drawable.ic_successstatus = global::FoodTrucks.Droid.Resource.Drawable.ic_successstatus;
+			global::AndroidHUD.Resource.Drawable.roundedbg = global::FoodTrucks.Droid.Resource.Drawable.roundedbg;
+			global::AndroidHUD.Resource.Drawable.roundedbgdark = global::FoodTrucks.Droid.Resource.Drawable.roundedbgdark;
+			global::AndroidHUD.Resource.Id.loadingImage = global::FoodTrucks.Droid.Resource.Id.loadingImage;
+			global::AndroidHUD.Resource.Id.loadingProgressBar = global::FoodTrucks.Droid.Resource.Id.loadingProgressBar;
+			global::AndroidHUD.Resource.Id.loadingProgressWheel = global::FoodTrucks.Droid.Resource.Id.loadingProgressWheel;
+			global::AndroidHUD.Resource.Id.textViewStatus = global::FoodTrucks.Droid.Resource.Id.textViewStatus;
+			global::AndroidHUD.Resource.Layout.loading = global::FoodTrucks.Droid.Resource.Layout.loading;
+			global::AndroidHUD.Resource.Layout.loadingimage = global::FoodTrucks.Droid.Resource.Layout.loadingimage;
+			global::AndroidHUD.Resource.Layout.loadingprogress = global::FoodTrucks.Droid.Resource.Layout.loadingprogress;
+			global::AndroidHUD.Resource.String.library_name = global::FoodTrucks.Droid.Resource.String.library_name;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahBarColor = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahBarColor;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahBarLength = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahBarLength;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahBarWidth = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahBarWidth;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahCircleColor = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahCircleColor;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahDelayMillis = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahDelayMillis;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahRadius = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahRadius;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahRimColor = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahRimColor;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahRimWidth = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahRimWidth;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahSpinSpeed = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahSpinSpeed;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahText = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahText;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextColor = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahTextColor;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextSize = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahTextSize;
 			global::Xamarin.Forms.Platform.Resource.String.ApplicationName = global::FoodTrucks.Droid.Resource.String.ApplicationName;
 			global::Xamarin.Forms.Platform.Resource.String.Hello = global::FoodTrucks.Droid.Resource.String.Hello;
 		}
@@ -174,6 +289,42 @@ namespace FoodTrucks.Droid
 			
 			// aapt resource value: 0x7f0100b0
 			public const int adUnitId = 2130772144;
+			
+			// aapt resource value: 0x7f0100d6
+			public const int ahBarColor = 2130772182;
+			
+			// aapt resource value: 0x7f0100de
+			public const int ahBarLength = 2130772190;
+			
+			// aapt resource value: 0x7f0100dd
+			public const int ahBarWidth = 2130772189;
+			
+			// aapt resource value: 0x7f0100db
+			public const int ahCircleColor = 2130772187;
+			
+			// aapt resource value: 0x7f0100da
+			public const int ahDelayMillis = 2130772186;
+			
+			// aapt resource value: 0x7f0100dc
+			public const int ahRadius = 2130772188;
+			
+			// aapt resource value: 0x7f0100d7
+			public const int ahRimColor = 2130772183;
+			
+			// aapt resource value: 0x7f0100d8
+			public const int ahRimWidth = 2130772184;
+			
+			// aapt resource value: 0x7f0100d9
+			public const int ahSpinSpeed = 2130772185;
+			
+			// aapt resource value: 0x7f0100d3
+			public const int ahText = 2130772179;
+			
+			// aapt resource value: 0x7f0100d4
+			public const int ahTextColor = 2130772180;
+			
+			// aapt resource value: 0x7f0100d5
+			public const int ahTextSize = 2130772181;
 			
 			// aapt resource value: 0x7f0100c4
 			public const int appTheme = 2130772164;
@@ -1392,85 +1543,100 @@ namespace FoodTrucks.Droid
 			public const int CurrentLocation = 2130837583;
 			
 			// aapt resource value: 0x7f020050
-			public const int filter = 2130837584;
+			public const int down_arrow = 2130837584;
 			
 			// aapt resource value: 0x7f020051
-			public const int foodtruck = 2130837585;
+			public const int filter = 2130837585;
 			
 			// aapt resource value: 0x7f020052
-			public const int ic_plusone_medium_off_client = 2130837586;
+			public const int foodtruck = 2130837586;
 			
 			// aapt resource value: 0x7f020053
-			public const int ic_plusone_small_off_client = 2130837587;
+			public const int ic_errorstatus = 2130837587;
 			
 			// aapt resource value: 0x7f020054
-			public const int ic_plusone_standard_off_client = 2130837588;
+			public const int ic_plusone_medium_off_client = 2130837588;
 			
 			// aapt resource value: 0x7f020055
-			public const int ic_plusone_tall_off_client = 2130837589;
+			public const int ic_plusone_small_off_client = 2130837589;
 			
 			// aapt resource value: 0x7f020056
-			public const int mainpagemiddle = 2130837590;
+			public const int ic_plusone_standard_off_client = 2130837590;
 			
 			// aapt resource value: 0x7f020057
-			public const int mr_ic_audio_vol = 2130837591;
+			public const int ic_plusone_tall_off_client = 2130837591;
 			
 			// aapt resource value: 0x7f020058
-			public const int mr_ic_media_route_connecting_holo_dark = 2130837592;
+			public const int ic_successstatus = 2130837592;
 			
 			// aapt resource value: 0x7f020059
-			public const int mr_ic_media_route_connecting_holo_light = 2130837593;
+			public const int mainpagemiddle = 2130837593;
 			
 			// aapt resource value: 0x7f02005a
-			public const int mr_ic_media_route_disabled_holo_dark = 2130837594;
+			public const int mr_ic_audio_vol = 2130837594;
 			
 			// aapt resource value: 0x7f02005b
-			public const int mr_ic_media_route_disabled_holo_light = 2130837595;
+			public const int mr_ic_media_route_connecting_holo_dark = 2130837595;
 			
 			// aapt resource value: 0x7f02005c
-			public const int mr_ic_media_route_holo_dark = 2130837596;
+			public const int mr_ic_media_route_connecting_holo_light = 2130837596;
 			
 			// aapt resource value: 0x7f02005d
-			public const int mr_ic_media_route_holo_light = 2130837597;
+			public const int mr_ic_media_route_disabled_holo_dark = 2130837597;
 			
 			// aapt resource value: 0x7f02005e
-			public const int mr_ic_media_route_off_holo_dark = 2130837598;
+			public const int mr_ic_media_route_disabled_holo_light = 2130837598;
 			
 			// aapt resource value: 0x7f02005f
-			public const int mr_ic_media_route_off_holo_light = 2130837599;
+			public const int mr_ic_media_route_holo_dark = 2130837599;
 			
 			// aapt resource value: 0x7f020060
-			public const int mr_ic_media_route_on_0_holo_dark = 2130837600;
+			public const int mr_ic_media_route_holo_light = 2130837600;
 			
 			// aapt resource value: 0x7f020061
-			public const int mr_ic_media_route_on_0_holo_light = 2130837601;
+			public const int mr_ic_media_route_off_holo_dark = 2130837601;
 			
 			// aapt resource value: 0x7f020062
-			public const int mr_ic_media_route_on_1_holo_dark = 2130837602;
+			public const int mr_ic_media_route_off_holo_light = 2130837602;
 			
 			// aapt resource value: 0x7f020063
-			public const int mr_ic_media_route_on_1_holo_light = 2130837603;
+			public const int mr_ic_media_route_on_0_holo_dark = 2130837603;
 			
 			// aapt resource value: 0x7f020064
-			public const int mr_ic_media_route_on_2_holo_dark = 2130837604;
+			public const int mr_ic_media_route_on_0_holo_light = 2130837604;
 			
 			// aapt resource value: 0x7f020065
-			public const int mr_ic_media_route_on_2_holo_light = 2130837605;
+			public const int mr_ic_media_route_on_1_holo_dark = 2130837605;
 			
 			// aapt resource value: 0x7f020066
-			public const int mr_ic_media_route_on_holo_dark = 2130837606;
+			public const int mr_ic_media_route_on_1_holo_light = 2130837606;
 			
 			// aapt resource value: 0x7f020067
-			public const int mr_ic_media_route_on_holo_light = 2130837607;
+			public const int mr_ic_media_route_on_2_holo_dark = 2130837607;
 			
 			// aapt resource value: 0x7f020068
-			public const int powered_by_google_dark = 2130837608;
+			public const int mr_ic_media_route_on_2_holo_light = 2130837608;
 			
 			// aapt resource value: 0x7f020069
-			public const int powered_by_google_light = 2130837609;
+			public const int mr_ic_media_route_on_holo_dark = 2130837609;
 			
 			// aapt resource value: 0x7f02006a
-			public const int slideout = 2130837610;
+			public const int mr_ic_media_route_on_holo_light = 2130837610;
+			
+			// aapt resource value: 0x7f02006b
+			public const int powered_by_google_dark = 2130837611;
+			
+			// aapt resource value: 0x7f02006c
+			public const int powered_by_google_light = 2130837612;
+			
+			// aapt resource value: 0x7f02006d
+			public const int roundedbg = 2130837613;
+			
+			// aapt resource value: 0x7f02006e
+			public const int roundedbgdark = 2130837614;
+			
+			// aapt resource value: 0x7f02006f
+			public const int slideout = 2130837615;
 			
 			static Drawable()
 			{
@@ -1623,23 +1789,32 @@ namespace FoodTrucks.Droid
 			// aapt resource value: 0x7f0a0039
 			public const int list_item = 2131361849;
 			
+			// aapt resource value: 0x7f0a0055
+			public const int loadingImage = 2131361877;
+			
+			// aapt resource value: 0x7f0a0053
+			public const int loadingProgressBar = 2131361875;
+			
+			// aapt resource value: 0x7f0a0056
+			public const int loadingProgressWheel = 2131361878;
+			
 			// aapt resource value: 0x7f0a002a
 			public const int match_parent = 2131361834;
 			
-			// aapt resource value: 0x7f0a0056
-			public const int media_route_control_frame = 2131361878;
+			// aapt resource value: 0x7f0a005a
+			public const int media_route_control_frame = 2131361882;
+			
+			// aapt resource value: 0x7f0a005b
+			public const int media_route_disconnect_button = 2131361883;
 			
 			// aapt resource value: 0x7f0a0057
-			public const int media_route_disconnect_button = 2131361879;
+			public const int media_route_list = 2131361879;
 			
-			// aapt resource value: 0x7f0a0053
-			public const int media_route_list = 2131361875;
+			// aapt resource value: 0x7f0a0058
+			public const int media_route_volume_layout = 2131361880;
 			
-			// aapt resource value: 0x7f0a0054
-			public const int media_route_volume_layout = 2131361876;
-			
-			// aapt resource value: 0x7f0a0055
-			public const int media_route_volume_slider = 2131361877;
+			// aapt resource value: 0x7f0a0059
+			public const int media_route_volume_slider = 2131361881;
 			
 			// aapt resource value: 0x7f0a000b
 			public const int middle = 2131361803;
@@ -1733,6 +1908,9 @@ namespace FoodTrucks.Droid
 			
 			// aapt resource value: 0x7f0a0021
 			public const int terrain = 2131361825;
+			
+			// aapt resource value: 0x7f0a0054
+			public const int textViewStatus = 2131361876;
 			
 			// aapt resource value: 0x7f0a003b
 			public const int title = 2131361851;
@@ -1851,16 +2029,25 @@ namespace FoodTrucks.Droid
 			public const int abc_simple_dropdown_hint = 2130903062;
 			
 			// aapt resource value: 0x7f030017
-			public const int mr_media_route_chooser_dialog = 2130903063;
+			public const int loading = 2130903063;
 			
 			// aapt resource value: 0x7f030018
-			public const int mr_media_route_controller_dialog = 2130903064;
+			public const int loadingimage = 2130903064;
 			
 			// aapt resource value: 0x7f030019
-			public const int mr_media_route_list_item = 2130903065;
+			public const int loadingprogress = 2130903065;
 			
 			// aapt resource value: 0x7f03001a
-			public const int support_simple_spinner_dropdown_item = 2130903066;
+			public const int mr_media_route_chooser_dialog = 2130903066;
+			
+			// aapt resource value: 0x7f03001b
+			public const int mr_media_route_controller_dialog = 2130903067;
+			
+			// aapt resource value: 0x7f03001c
+			public const int mr_media_route_list_item = 2130903068;
+			
+			// aapt resource value: 0x7f03001d
+			public const int support_simple_spinner_dropdown_item = 2130903069;
 			
 			static Layout()
 			{
@@ -2040,6 +2227,9 @@ namespace FoodTrucks.Droid
 			
 			// aapt resource value: 0x7f060019
 			public const int decline = 2131099673;
+			
+			// aapt resource value: 0x7f06003b
+			public const int library_name = 2131099707;
 			
 			// aapt resource value: 0x7f060000
 			public const int mr_media_route_button_content_description = 2131099648;
@@ -3345,6 +3535,56 @@ namespace FoodTrucks.Droid
 			
 			// aapt resource value: 0
 			public const int PopupWindowBackgroundState_state_above_anchor = 0;
+			
+			public static int[] ProgressWheel = new int[] {
+					2130772179,
+					2130772180,
+					2130772181,
+					2130772182,
+					2130772183,
+					2130772184,
+					2130772185,
+					2130772186,
+					2130772187,
+					2130772188,
+					2130772189,
+					2130772190};
+			
+			// aapt resource value: 3
+			public const int ProgressWheel_ahBarColor = 3;
+			
+			// aapt resource value: 11
+			public const int ProgressWheel_ahBarLength = 11;
+			
+			// aapt resource value: 10
+			public const int ProgressWheel_ahBarWidth = 10;
+			
+			// aapt resource value: 8
+			public const int ProgressWheel_ahCircleColor = 8;
+			
+			// aapt resource value: 7
+			public const int ProgressWheel_ahDelayMillis = 7;
+			
+			// aapt resource value: 9
+			public const int ProgressWheel_ahRadius = 9;
+			
+			// aapt resource value: 4
+			public const int ProgressWheel_ahRimColor = 4;
+			
+			// aapt resource value: 5
+			public const int ProgressWheel_ahRimWidth = 5;
+			
+			// aapt resource value: 6
+			public const int ProgressWheel_ahSpinSpeed = 6;
+			
+			// aapt resource value: 0
+			public const int ProgressWheel_ahText = 0;
+			
+			// aapt resource value: 1
+			public const int ProgressWheel_ahTextColor = 1;
+			
+			// aapt resource value: 2
+			public const int ProgressWheel_ahTextSize = 2;
 			
 			public static int[] SearchView = new int[] {
 					16842970,

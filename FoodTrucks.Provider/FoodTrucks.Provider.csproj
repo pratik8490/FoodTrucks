@@ -36,10 +36,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BarProvider.cs" />
     <Compile Include="FoodTypeProvider.cs" />
+    <Compile Include="Interface\IBar.cs" />
     <Compile Include="Interface\IFoodType.cs" />
     <Compile Include="Interface\IReview.cs" />
+    <Compile Include="Interface\ITruckInfo.cs" />
     <Compile Include="Interface\IUser.cs" />
+    <Compile Include="Models\BarModel.cs" />
     <Compile Include="Models\FoodTypeModel.cs" />
     <Compile Include="Models\ReviewDetailModel.cs" />
     <Compile Include="Models\TruckInfoModel.cs" />

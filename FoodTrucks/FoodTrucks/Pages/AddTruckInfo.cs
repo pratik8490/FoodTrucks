@@ -1,0 +1,325 @@
+﻿using Acr.UserDialogs;
+using FoodTruck;
+using FoodTrucks.Helper;
+using FoodTrucks.Provider;
+using FoodTrucks.Provider.Interface;
+using FoodTrucks.Provider.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Forms;
+
+namespace FoodTrucks.Pages
+{
+    public class AddTruckInfo : BasePage
+    {
+        private List<FoodTypeModel> _FoodTypeList = new List<FoodTypeModel>();
+        private List<BarModel> _BarList = new List<BarModel>();
+        private ITruckInfo _TruckInfoProvider = new TruckInfoProvider();
+        private IFoodType _FoodTypeProvider = new FoodTypeProvider();
+        private IBar _BarProvider = new BarProvider();
+        private int _SelectedFoodTypeID = 0, _SelectedBarID = 0;
+        private bool _SelectedActivate = false, _SelectedLocation = false;
+
+        #region Constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AddTruck Info Page"/> class.
+        /// </summary>
+        public AddTruckInfo()
+        {
+            Title = "Add TruckInfo";
+            IsLoading = true;
+            Device.BeginInvokeOnMainThread(async () =>
+               {
+                   try
+                   {
+                       //Call for food type and Bar
+                       _FoodTypeList = await _FoodTypeProvider.GetFoodType();
+                       _BarList = await _BarProvider.GetBar();
+
+                       AddTruckInfoLayout();
+                   }
+                   catch (Exception ex)
+                   {
+
+                   }
+               });
+        }
+        #endregion
+
+        #region AddTruckInfoLayout
+        /// <summary>
+        /// Add Truck Info Layout.
+        /// </summary>
+        public void AddTruckInfoLayout()
+        {
+            try
+            {
+                ExtendedEntry txtTruckName = new ExtendedEntry();
+                txtTruckName.Placeholder = "Truck Name";
+                txtTruckName.TextColor = Color.Black;
+
+                StackLayout slTruckName = new StackLayout
+                {
+                    Children = { txtTruckName },
+                    HorizontalOptions = LayoutOptions.FillAndExpand
+                };
+
+                ExtendedEntry txtDescrition = new ExtendedEntry();
+                txtDescrition.TextColor = Color.Black;
+                txtDescrition.Placeholder = "Description";
+
+                StackLayout slDescription = new StackLayout
+                {
+                    Children = { txtDescrition },
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    Padding = new Thickness(0, 10, 0, 10)
+                };
+
+                #region FoodType Dropdown
+
+                Image imgFoodTypeDropDown = new Image { Source = Constants.ImagePath.DropDownArrow, HorizontalOptions = LayoutOptions.EndAndExpand };
+                Label lblFoodType = new Label { TextColor = Color.Black, Text = "Food Type" };
+                Picker pcrFoodType = new Picker { IsVisible = false, Title = "Food Type" };
+
+                foreach (FoodTypeModel item in _FoodTypeList)
+                {
+                    pcrFoodType.Items.Add(item.Type);
+                }
+
+                StackLayout slFoodTypeDisplay = new StackLayout { Children = { lblFoodType, pcrFoodType, imgFoodTypeDropDown }, Orientation = StackOrientation.Horizontal, Padding = new Thickness(Device.OnPlatform(0, 5, 0), Device.OnPlatform(0, 5, 0), Device.OnPlatform(0, 10, 0), Device.OnPlatform(0, 5, 0)) };
+
+                Frame frmFoodType = new Frame
+                {
+                    Content = slFoodTypeDisplay,
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    OutlineColor = Color.Black,
+                    Padding = new Thickness(10)
+                };
+
+                var foodTypeTap = new TapGestureRecognizer();
+
+                foodTypeTap.NumberOfTapsRequired = 1; // single-tap
+                foodTypeTap.Tapped += (s, e) =>
+                {
+                    pcrFoodType.Focus();
+                };
+                frmFoodType.GestureRecognizers.Add(foodTypeTap);
+                slFoodTypeDisplay.GestureRecognizers.Add(foodTypeTap);
+
+                StackLayout slFoodTypeFrameLayout = new StackLayout
+                {
+                    Children = { frmFoodType }
+                };
+
+                StackLayout slFoodTypeLayout = new StackLayout
+                {
+                    Children = { slFoodTypeFrameLayout },
+                    Orientation = StackOrientation.Vertical,
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    Padding = new Thickness(0, 10, 0, 10)
+                };
+
+                pcrFoodType.SelectedIndexChanged += (sender, e) =>
+                {
+                    string foodType = lblFoodType.Text = pcrFoodType.Items[pcrFoodType.SelectedIndex];
+                    _SelectedFoodTypeID = _FoodTypeList.Where(x => x.Type == foodType).FirstOrDefault().Id;
+                };
+
+                #endregion
+
+                #region Bar DropDown
+
+                Image imgBarDropDown = new Image { Source = Constants.ImagePath.DropDownArrow, HorizontalOptions = LayoutOptions.EndAndExpand };
+                Label lblBar = new Label { TextColor = Color.Black, Text = "Bar" };
+                Picker pcrBar = new Picker { IsVisible = false, Title = "Bar" };
+
+                foreach (BarModel item in _BarList)
+                {
+                    pcrBar.Items.Add(item.Name);
+                }
+
+                StackLayout slBarDisplay = new StackLayout { Children = { lblBar, pcrBar, imgBarDropDown }, Orientation = StackOrientation.Horizontal, Padding = new Thickness(Device.OnPlatform(0, 5, 0), Device.OnPlatform(0, 5, 0), Device.OnPlatform(0, 10, 0), Device.OnPlatform(0, 5, 0)) };
+
+                Frame frmBar = new Frame
+                {
+                    Content = slBarDisplay,
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    OutlineColor = Color.Black,
+                    Padding = new Thickness(10)
+                };
+
+                var barTap = new TapGestureRecognizer();
+
+                barTap.NumberOfTapsRequired = 1; // single-tap
+                barTap.Tapped += (s, e) =>
+                {
+                    pcrBar.Focus();
+                };
+                frmBar.GestureRecognizers.Add(barTap);
+                slBarDisplay.GestureRecognizers.Add(barTap);
+
+                StackLayout slBarFrameLayout = new StackLayout
+                {
+                    Children = { frmBar }
+                };
+
+                StackLayout slBarLayout = new StackLayout
+                {
+                    Children = { slBarFrameLayout },
+                    Orientation = StackOrientation.Vertical,
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    Padding = new Thickness(0, 10, 0, 10)
+                };
+
+                pcrBar.SelectedIndexChanged += (sender, e) =>
+                    {
+                        string bar = lblBar.Text = pcrBar.Items[pcrBar.SelectedIndex];
+                        _SelectedBarID = _BarList.Where(x => x.Name == bar).FirstOrDefault().Id;
+                    };
+
+                #endregion
+
+                ExtendedEntry txtWebsite = new ExtendedEntry
+                {
+                    TextColor = Color.Black,
+                    Placeholder = "Website"
+                };
+
+                StackLayout slWebsite = new StackLayout
+                {
+                    Children = { txtWebsite },
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    Padding = new Thickness(0, 10, 0, 10)
+                };
+
+                ExtendedEntry txtMenu = new ExtendedEntry
+                {
+                    TextColor = Color.Black,
+                    Placeholder = "Menu"
+                };
+
+                StackLayout slMenu = new StackLayout
+                {
+                    Children = { txtMenu },
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    Padding = new Thickness(0, 10, 0, 10)
+                };
+
+                Label lblLocation = new Label
+                {
+                    Text = "Location",
+                    TextColor = Color.Black
+                };
+
+                Switch swcLocation = new Switch();
+
+                swcLocation.Toggled += (sender, e) =>
+                    {
+                        _SelectedLocation = e.Value;
+                    };
+
+                StackLayout slLocation = new StackLayout
+                {
+                    Children = { lblLocation, swcLocation },
+                    Orientation = StackOrientation.Horizontal,
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    Padding = new Thickness(0, 10, 0, 10)
+                };
+
+
+                Label lblActivate = new Label
+                {
+                    Text = "Activate",
+                    TextColor = Color.Black
+                };
+
+                Switch swcActivate = new Switch();
+                swcActivate.Toggled += (sender, e) =>
+                {
+                    _SelectedActivate = e.Value;
+                };
+
+                StackLayout slActivate = new StackLayout
+                {
+                    Children = { lblActivate, swcActivate },
+                    Orientation = StackOrientation.Horizontal,
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    Padding = new Thickness(0, 10, 0, 10)
+                };
+
+
+                Button btnSubmit = new Button
+                {
+                    Text = "SUBMIT",
+                    TextColor = Color.White,
+                    BackgroundColor = Color.FromHex("f23e3e")
+                };
+
+                btnSubmit.Clicked += (sender, e) =>
+                   {
+                       Device.BeginInvokeOnMainThread(async () =>
+                       {
+                           btnSubmit.IsVisible = false;
+                           UserDialogs.Instance.ShowLoading();
+
+                           try
+                           {
+                               TruckInfoModel truckInfo = new TruckInfoModel();
+
+                               truckInfo.BarId = _SelectedBarID;
+                               truckInfo.FoodTypeId = _SelectedFoodTypeID;
+                               truckInfo.IsActive = Convert.ToByte(_SelectedActivate);
+                               truckInfo.Menu = txtMenu.Text;
+                               truckInfo.TruckName = txtTruckName.Text;
+                               truckInfo.Link = txtWebsite.Text;
+                               truckInfo.Description = txtDescrition.Text;
+
+                               //service call for save information
+                               int newID = await _TruckInfoProvider.Add(truckInfo);
+
+                               if (newID != 0)
+                                   UserDialogs.Instance.ShowSuccess("Successfully saved truckinfo.", 2);
+                               else
+                                   UserDialogs.Instance.ShowSuccess("Some error ocurred.", 2);
+
+                               UserDialogs.Instance.HideLoading();
+                           }
+                           catch (Exception ex)
+                           {
+                               btnSubmit.IsVisible = true;
+                               UserDialogs.Instance.ShowError(ex.Message.ToString(), 1);
+                           }
+                       });
+                   };
+
+                StackLayout slBtnSubmit = new StackLayout
+                {
+                    Children = { btnSubmit },
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    VerticalOptions = LayoutOptions.EndAndExpand
+                };
+
+                StackLayout slFinalLayout = new StackLayout
+                {
+                    Children = { slTruckName, slDescription, slWebsite, slMenu, slFoodTypeLayout, slBarLayout, slActivate, slLocation, slBtnSubmit },
+                    Orientation = StackOrientation.Vertical,
+                    Padding = new Thickness(10, Device.OnPlatform(40, 10, 0), 10, 10),
+                    BackgroundColor = LayoutHelper.PageBackgroundColor
+                };
+
+                Content = new ScrollView
+                {
+                    Content = slFinalLayout,
+                };
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        #endregion
+    }
+}

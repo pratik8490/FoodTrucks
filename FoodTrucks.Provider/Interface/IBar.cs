@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace FoodTrucks.Provider.Interface
 {
-    public interface IUser
+    public interface IBar
     {
-        Task<int> SignUpUser(UserModel userModel);
-        Task<bool> CheckDeviceLoggedIn(string deviceID);
-        Task<bool> LogInUser(string email, int pin);
+        Task<List<BarModel>> GetBar();
     }
 }

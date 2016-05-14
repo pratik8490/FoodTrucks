@@ -10,6 +10,7 @@ using Android.OS;
 using Xamarin.Forms.Platform.Android;
 using Xamarin;
 using Xamarin.Forms;
+using Acr.UserDialogs;
 
 namespace FoodTrucks.Droid
 {
@@ -22,7 +23,7 @@ namespace FoodTrucks.Droid
 
             Forms.Init(this, bundle);
             FormsMaps.Init(this, bundle);
-
+            UserDialogs.Init(() => (Activity)Forms.Context);
             //Xamarin.Forms.Forms.SetTitleBarVisibility(Xamarin.Forms.AndroidTitleBarVisibility.Never);
             this.ActionBar.SetIcon(Android.Resource.Color.Transparent);
             LoadApplication(new App());

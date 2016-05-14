@@ -89,7 +89,7 @@ namespace FoodTrucks
 
         private async void Logout()
         {
-            Navigation.PushModalAsync(App.HomePage());
+            Navigation.PushModalAsync(App.HomePage(true));
         }
 
         #endregion

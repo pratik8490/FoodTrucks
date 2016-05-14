@@ -9,6 +9,7 @@ namespace FoodTrucks.Provider.Interface
 {
     public interface IFoodType
     {
+        Task<List<FoodTypeModel>> GetFoodType();
         Task<FoodTypeModel> GetFoodTypeByID(int id);
     }
 }

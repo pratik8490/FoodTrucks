@@ -18,19 +18,36 @@ namespace FoodTrucks
         {
             // The root page of your application 
             //MainPage = new MainPage();
-            MainPage = Main();
+            MainPage = LoginPage();
         }
         #endregion
 
         static NavigationPage navPage;
 
-        public static Page Main()
+        public static Page HomePage(bool IsFromLogout = false)
         {
-            navPage = new NavigationPage(new MainPage());
-            navPage.BarBackgroundColor = LayoutHelper.BarBackGroundColor;
-            navPage.BarTextColor = LayoutHelper.BarBackTextColor;
+            if (!IsFromLogout)
+            {
+                navPage = new NavigationPage(new AddTruckInfo());
+                navPage.BarBackgroundColor = LayoutHelper.BarBackGroundColor;
+                navPage.BarTextColor = LayoutHelper.BarBackTextColor;
 
-            return navPage;
+                return navPage;
+            }
+            else
+            {
+                return new MainPage();
+            }
+        }
+
+        public static Page LoginPage()
+        {
+            return new LoginPage();
+        }
+
+        public static Page AddTuckPage()
+        {
+            return new AddTruckInfo();
         }
 
         public static Page SignUpPage()
@@ -38,25 +55,21 @@ namespace FoodTrucks
             return new SignUpPage();
         }
 
-        public static Page HomePage()
-        {
-            return new MainPage();
-        }
-
         public static Page MapPage()
         {
             return new MapPage();
         }
 
+        public static Page TruckListPage()
+        {
+            return new TrucksList();
+        }
 
         public static Color BarTextColor()
         {
             return Color.White;
         }
-        public static Page TruckListPage()
-        {
-            return new TrucksList();
-        }
+
         protected override void OnStart()
         {
             // Handle when your app starts 

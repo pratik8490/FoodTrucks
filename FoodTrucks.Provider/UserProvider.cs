@@ -60,6 +60,43 @@ namespace FoodTrucks.Provider
             return res.Task;
         }
 
+        public Task<bool> LogInUser(string email, int pin)
+        {
+            var res = new TaskCompletionSource<bool>();
+
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                try
+                {
+
+                    HttpClient client = new HttpClient();
+                    client.BaseAddress = new Uri(_SiteUrl);
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    var requestUri = "api/User?email=" + email + "&pin=" + pin;
+
+                    HttpResponseMessage response = await client.PostAsync(requestUri, null).ConfigureAwait(false);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var readContent = await response.Content.ReadAsStringAsync();
+                        res.SetResult(JsonConvert.DeserializeObject<bool>(readContent));
+                    }
+                    else
+                    {
+                        res.SetResult(false);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    res.SetResult(false);
+                }
+            });
+
+            return res.Task;
+        }
+
         public Task<bool> CheckDeviceLoggedIn(string deviceID)
         {
             var LoggedIn = new TaskCompletionSource<bool>();
