@@ -30,6 +30,7 @@ namespace FoodTrucks.Pages
         {
             try
             {
+                NavigationPage.SetHasNavigationBar(this, false);
                 LoginLayout();
             }
             catch (Exception ex)
@@ -147,7 +148,7 @@ namespace FoodTrucks.Pages
 
                                 UserDialogs.Instance.ShowSuccess("Success");
                                 //redirect to page
-                                Navigation.PushModalAsync(App.AddTuckPage());
+                                Navigation.PushModalAsync(App.MapPage());
                             }
                             loader.Hide();
                         }

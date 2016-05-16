@@ -16,5 +16,6 @@ namespace FoodTrucks.Provider.Models
         public string Email { get; set; }
         public int? Pin { get; set; }
         public byte? IsNotified { get; set; }
+        public byte? IsUser { get; set; }
     }
 }

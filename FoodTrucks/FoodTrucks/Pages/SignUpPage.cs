@@ -18,6 +18,7 @@ namespace FoodTrucks.Pages
     {
         private IUser _UserProvider = new UserProvider();
         private LoadingIndicator _Loader = new LoadingIndicator();
+
         public SignUpPage()
         {
             Title = "Sign up";
@@ -103,6 +104,21 @@ namespace FoodTrucks.Pages
                 HorizontalOptions = LayoutOptions.EndAndExpand
             };
 
+            Label lblProvider = new Label { Text = "Is Provider?", TextColor = Color.Black };
+
+            Switch swcProvider = new Switch { };
+
+            swcProvider.Toggled += (s, e) =>
+                {
+
+                };
+
+            StackLayout slProvider = new StackLayout
+            {
+                Children = { lblProvider, swcProvider },
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                Orientation = StackOrientation.Horizontal
+            };
 
             StackLayout slGrid1 = new StackLayout
             {
@@ -201,12 +217,20 @@ namespace FoodTrucks.Pages
                             objUserModel.FirstName = string.Empty;
                             objUserModel.LastName = string.Empty;
                             objUserModel.IsNotified = Convert.ToByte(swcNotifications.IsToggled);
+                            objUserModel.IsUser = Convert.ToByte(swcProvider.IsToggled);
 
                             int UserId = await _UserProvider.SignUpUser(objUserModel);
 
                             if (UserId != 0)
                             {
-                                Navigation.PushAsync(App.MapPage());
+                                if (Convert.ToBoolean(objUserModel.IsUser))
+                                {
+                                    Navigation.PushAsync(App.AddTuckPage());
+                                }
+                                else
+                                {
+                                    Navigation.PushAsync(App.MapPage());
+                                }
                             }
                             else
                             {

@@ -1,9 +1,12 @@
 ﻿using Acr.UserDialogs;
 using FoodTruck;
+using FoodTrucks.Context;
 using FoodTrucks.Helper;
 using FoodTrucks.Provider;
 using FoodTrucks.Provider.Interface;
 using FoodTrucks.Provider.Models;
+using Media.Plugin;
+using Media.Plugin.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -195,26 +198,82 @@ namespace FoodTrucks.Pages
                     Padding = new Thickness(0, 10, 0, 10)
                 };
 
-                ExtendedEntry txtMenu = new ExtendedEntry
+                Label lblMenu = new Label
                 {
                     TextColor = Color.Black,
-                    Placeholder = "Menu"
+                    Text = "Select Menu"
                 };
+
+                Image imgMenu = new Image { IsVisible = false };
+
+                var tapGestureRecognizer = new TapGestureRecognizer();
+
+                tapGestureRecognizer.NumberOfTapsRequired = 1; // single-tap
+                tapGestureRecognizer.Tapped += async (s, e) =>
+                {
+                    var action = await DisplayActionSheet("Choose any one?", "Cancel", null, "Camera", "Gallery");
+
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        try
+                        {
+
+                            if (action == "Camera")
+                            {
+                                if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+                                {
+                                    await DisplayAlert("No Camera", ":( No camera available.", "OK");
+                                    return;
+                                }
+
+                                var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+                                {
+                                    Directory = "Sample",
+                                    Name = "user.jpg"// "test.jpg"
+                                });
+
+                                if (file == null)
+                                    return;
+
+                                imgMenu.Source = file.Path;
+                            }
+                            else if (action == "Gallery")
+                            {
+                                if (!CrossMedia.Current.IsPickPhotoSupported)
+                                {
+                                    await DisplayAlert("Photos Not Supported", ":( Permission not granted to photos.", "OK");
+                                    return;
+                                }
+                                var file = await CrossMedia.Current.PickPhotoAsync();
+
+                                if (file == null)
+                                    return;
+
+                                imgMenu.Source = file.Path;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
+                    });
+                };
+                lblMenu.GestureRecognizers.Add(tapGestureRecognizer);
 
                 StackLayout slMenu = new StackLayout
                 {
-                    Children = { txtMenu },
+                    Children = { lblMenu },
                     HorizontalOptions = LayoutOptions.FillAndExpand,
                     Padding = new Thickness(0, 10, 0, 10)
                 };
 
                 Label lblLocation = new Label
                 {
-                    Text = "Location",
+                    Text = "Use my location?",
                     TextColor = Color.Black
                 };
 
-                Switch swcLocation = new Switch();
+                Switch swcLocation = new Switch { IsToggled = true };
 
                 swcLocation.Toggled += (sender, e) =>
                     {
@@ -233,10 +292,12 @@ namespace FoodTrucks.Pages
                 Label lblActivate = new Label
                 {
                     Text = "Activate",
-                    TextColor = Color.Black
+                    TextColor = Color.Black,
+                    HorizontalOptions = LayoutOptions.StartAndExpand
                 };
 
-                Switch swcActivate = new Switch();
+                Switch swcActivate = new Switch { IsToggled = true, HorizontalOptions = LayoutOptions.EndAndExpand };
+
                 swcActivate.Toggled += (sender, e) =>
                 {
                     _SelectedActivate = e.Value;
@@ -249,7 +310,6 @@ namespace FoodTrucks.Pages
                     HorizontalOptions = LayoutOptions.FillAndExpand,
                     Padding = new Thickness(0, 10, 0, 10)
                 };
-
 
                 Button btnSubmit = new Button
                 {
@@ -272,10 +332,20 @@ namespace FoodTrucks.Pages
                                truckInfo.BarId = _SelectedBarID;
                                truckInfo.FoodTypeId = _SelectedFoodTypeID;
                                truckInfo.IsActive = Convert.ToByte(_SelectedActivate);
-                               truckInfo.Menu = txtMenu.Text;
+                               truckInfo.Menu = lblMenu.Text;
                                truckInfo.TruckName = txtTruckName.Text;
                                truckInfo.Link = txtWebsite.Text;
                                truckInfo.Description = txtDescrition.Text;
+
+                               if (_SelectedLocation)
+                               {
+                                   truckInfo.Lattitude = FoodTruckContext.Position.Latitude;
+                                   truckInfo.Longitude = FoodTruckContext.Position.Longitude;
+                               }
+                               else
+                               {
+                                   //text box value and find location cordinations
+                               }
 
                                //service call for save information
                                int newID = await _TruckInfoProvider.Add(truckInfo);

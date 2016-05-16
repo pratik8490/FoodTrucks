@@ -12,8 +12,8 @@ namespace FoodTrucks.Provider.Models
         public string TruckName { get; set; }
         public string Description { get; set; }
         public int? FoodTypeId { get; set; }
-        public string Lattitude { get; set; }
-        public string Longitude { get; set; }
+        public double Lattitude { get; set; }
+        public double Longitude { get; set; }
         public byte? IsActive { get; set; }
         public string Link { get; set; }
         public string Menu { get; set; }

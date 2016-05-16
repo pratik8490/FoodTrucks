@@ -18,7 +18,7 @@ namespace FoodTrucks
         {
             // The root page of your application 
             //MainPage = new MainPage();
-            MainPage = LoginPage();
+            MainPage = HomePage();
         }
         #endregion
 
@@ -28,7 +28,7 @@ namespace FoodTrucks
         {
             if (!IsFromLogout)
             {
-                navPage = new NavigationPage(new AddTruckInfo());
+                navPage = new NavigationPage(new MainPage());
                 navPage.BarBackgroundColor = LayoutHelper.BarBackGroundColor;
                 navPage.BarTextColor = LayoutHelper.BarBackTextColor;
 

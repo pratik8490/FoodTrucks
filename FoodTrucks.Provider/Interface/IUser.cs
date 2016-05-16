@@ -10,7 +10,7 @@ namespace FoodTrucks.Provider.Interface
     public interface IUser
     {
         Task<int> SignUpUser(UserModel userModel);
-        Task<bool> CheckDeviceLoggedIn(string deviceID);
+        Task<UserModel> CheckDeviceLoggedIn(string deviceID);
         Task<bool> LogInUser(string email, int pin);
     }
 }

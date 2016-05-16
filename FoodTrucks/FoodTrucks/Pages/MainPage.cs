@@ -3,6 +3,7 @@ using FoodTrucks.Helper;
 using FoodTrucks.Interface;
 using FoodTrucks.Provider;
 using FoodTrucks.Provider.Interface;
+using FoodTrucks.Provider.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,8 +23,50 @@ namespace FoodTrucks.Pages
         /// </summary>
         public MainPage()
         {
+            IsLoading = true;
             NavigationPage.SetHasNavigationBar(this, false);
-            MainPageLayout();
+            Device.BeginInvokeOnMainThread(async () =>
+                   {
+                       if (!FoodTruckContext.AlreadyEnable)
+                       {
+                           bool IsYesNo = false;
+
+                           IsYesNo = await DisplayAlert(string.Empty, "Please enable location service on your device.", "OK", "Cancel");
+                           if (IsYesNo)
+                           {
+                               _Loader.IsShowLoading = false;
+                               FoodTruckContext.AlreadyEnable = true;
+
+                               FoodTruckContext.Position = await DependencyService.Get<ICurrentLocation>().SetCurrentLocation();
+                           }
+                           else
+                           {
+                               _Loader.IsShowLoading = false;
+                               return;
+                           }
+                       }
+                       else
+                       {
+                           FoodTruckContext.Position = await DependencyService.Get<ICurrentLocation>().SetCurrentLocation();
+
+                           UserModel user = await _UserProvider.CheckDeviceLoggedIn(GetDeviceID());
+                           if (user != null)
+                           {
+                               if (Convert.ToBoolean(user.IsUser))
+                               {
+                                   FoodTruckContext.UserName = user.Email;
+                                   FoodTruckContext.IsLoggedIn = true;
+
+                                   Navigation.PushAsync(App.MapPage());
+                               }
+                               else
+                               {
+                                   Navigation.PushAsync(App.LoginPage());
+                               }
+                           }
+                       }
+                       MainPageLayout();
+                   });
         }
         #endregion
 
@@ -55,7 +98,6 @@ namespace FoodTrucks.Pages
         {
             try
             {
-
                 Image imgMiddle = new Image
                 {
                     Source = ImageSource.FromFile(Constants.ImagePath.MainPageMiddle)
@@ -82,48 +124,40 @@ namespace FoodTrucks.Pages
                             btnGetStart.IsVisible = false;
                             _Loader.IsShowLoading = true;
 
-                            if (!FoodTruckContext.AlreadyEnable)
-                            {
-                                bool IsYesNo = false;
+                            Navigation.PushAsync(App.SignUpPage());
 
-                                IsYesNo = await DisplayAlert(string.Empty, "Please enable location service on your device.", "OK", "Cancel");
-                                if (IsYesNo)
-                                {
-                                    btnGetStart.IsVisible = true;
-                                    _Loader.IsShowLoading = false;
-                                    FoodTruckContext.AlreadyEnable = true;
+                            //if (!FoodTruckContext.AlreadyEnable)
+                            //{
+                            //    bool IsYesNo = false;
 
-                                    FoodTruckContext.Position = await DependencyService.Get<ICurrentLocation>().SetCurrentLocation();
-                                }
-                                else
-                                {
-                                    btnGetStart.IsVisible = true;
-                                    _Loader.IsShowLoading = false;
-                                    return;
-                                }
-                            }
-                            else
-                            {
+                            //    IsYesNo = await DisplayAlert(string.Empty, "Please enable location service on your device.", "OK", "Cancel");
+                            //    if (IsYesNo)
+                            //    {
+                            //        btnGetStart.IsVisible = true;
+                            //        _Loader.IsShowLoading = false;
+                            //        FoodTruckContext.AlreadyEnable = true;
 
-                                //if (FoodTruckContext.Position != null)
-                                //{
-                                FoodTruckContext.Position = await DependencyService.Get<ICurrentLocation>().SetCurrentLocation();
+                            //        FoodTruckContext.Position = await DependencyService.Get<ICurrentLocation>().SetCurrentLocation();
+                            //    }
+                            //    else
+                            //    {
+                            //        btnGetStart.IsVisible = true;
+                            //        _Loader.IsShowLoading = false;
+                            //        return;
+                            //    }
+                            //}
+                            //else
+                            //{
+                            //    FoodTruckContext.Position = await DependencyService.Get<ICurrentLocation>().SetCurrentLocation();
 
-                                bool isValid = await _UserProvider.CheckDeviceLoggedIn(GetDeviceID());
-                                if (isValid)
-                                {
-                                    Navigation.PushAsync(App.MapPage());
-                                }
-                                else
-                                    Navigation.PushAsync(App.SignUpPage());
-                                //}
-                                //else
-                                //{
-                                //    FoodTruckContext.AlreadyEnable = false;
-                                //    btnGetStart.IsVisible = true;
-                                //    _Loader.IsShowLoading = false;
-                                //}
-                            }
+                            //    bool isValid = await _UserProvider.CheckDeviceLoggedIn(GetDeviceID());
+                            //    if (isValid)
+                            //    {
+                            //        Navigation.PushAsync(App.MapPage());
+                            //    }
+                            //    else
+                            //        Navigation.PushAsync(App.SignUpPage());
+                            //}
 
                             btnGetStart.IsVisible = true;
                             _Loader.IsShowLoading = false;

@@ -69,13 +69,6 @@ namespace FoodTrucks
                 Command = new Command(Filter)
             });
 
-            lstToolbarItem.Add(new ToolbarItem
-            {
-                Text = "Logout",
-                Order = ToolbarItemOrder.Secondary,
-                Command = new Command(Logout)
-            });
-
             foreach (ToolbarItem item in lstToolbarItem)
             {
                 this.ToolbarItems.Add(item);

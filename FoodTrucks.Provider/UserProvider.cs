@@ -97,15 +97,14 @@ namespace FoodTrucks.Provider
             return res.Task;
         }
 
-        public Task<bool> CheckDeviceLoggedIn(string deviceID)
+        public Task<UserModel> CheckDeviceLoggedIn(string deviceID)
         {
-            var LoggedIn = new TaskCompletionSource<bool>();
+            var LoggedIn = new TaskCompletionSource<UserModel>();
 
             Device.BeginInvokeOnMainThread(async () =>
             {
                 try
                 {
-
                     HttpClient client = new HttpClient();
                     client.BaseAddress = new Uri(_SiteUrl);
 
@@ -116,20 +115,19 @@ namespace FoodTrucks.Provider
                     if (response.IsSuccessStatusCode)
                     {
                         var content = await response.Content.ReadAsStringAsync();
-                        LoggedIn.TrySetResult(JsonConvert.DeserializeObject<bool>(content));
+                        LoggedIn.TrySetResult(JsonConvert.DeserializeObject<UserModel>(content));
                     }
                     else
                     {
-                        LoggedIn.SetResult(false);
+                        LoggedIn.SetResult(new UserModel());
                     }
 
                 }
                 catch (Exception ex)
                 {
-                    LoggedIn.SetResult(false);
+                    LoggedIn.SetResult(new UserModel());
                 }
             });
-
             return LoggedIn.Task;
         }
     }
