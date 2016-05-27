@@ -11,6 +11,6 @@ namespace FoodTrucks.Provider.Interface
     {
         Task<int> SignUpUser(UserModel userModel);
         Task<UserModel> CheckDeviceLoggedIn(string deviceID);
-        Task<bool> LogInUser(string email, int pin);
+        Task<UserModel> LogInUser(string email, int pin);
     }
 }

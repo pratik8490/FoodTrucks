@@ -2,6 +2,7 @@
 using MenuItem = FoodTrucks.Models.MenuModel;
 using Xamarin.Forms;
 using System.Collections.Generic;
+using FoodTrucks.Context;
 
 namespace FoodTrucks.Pages.Master
 {
@@ -42,17 +43,20 @@ namespace FoodTrucks.Pages.Master
                 //TargetType = typeof(ContractsPage)
             });
 
-            this.Add(new MenuItem()
+            if (FoodTruckContext.IsProvider)
             {
-                Title = "Edit Profile",
-                //IconSource = "leads.png",
-                //TargetType = typeof(LeadsPage)
-            });
+                this.Add(new MenuItem()
+                {
+                    Title = "Edit Profile",
+                    //IconSource = "leads.png",
+                    //TargetType = typeof(LeadsPage)
+                });
+            }
 
             this.Add(new MenuItem()
             {
                 Title = "Logout",
-                IconSource = "opportunities.png",
+                IconSource = "LogOut.png",
                 //TargetType = typeof(OpportunitiesPage)
             });
         }

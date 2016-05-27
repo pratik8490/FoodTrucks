@@ -5,6 +5,7 @@ using FoodTrucks.Helper;
 using FoodTrucks.Interface;
 using FoodTrucks.Provider;
 using FoodTrucks.Provider.Interface;
+using FoodTrucks.Provider.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -135,22 +136,24 @@ namespace FoodTrucks.Pages
                     {
                         try
                         {
-                            var loader = UserDialogs.Instance.Loading(string.Empty, null, null, true);
-                            btnLogin.IsVisible = false;
-
-                            //Login call
-                            bool loggedIn = await _UserProvider.LogInUser(txtUserName.Text, Convert.ToInt32(txtPassword.Text));
-
-                            if (loggedIn)
+                            using (UserDialogs.Instance.Loading("Loading..."))
                             {
-                                FoodTruckContext.UserName = txtUserName.Text;
-                                FoodTruckContext.IsLoggedIn = true;
+                                btnLogin.IsVisible = false;
 
-                                UserDialogs.Instance.ShowSuccess("Success");
-                                //redirect to page
-                                Navigation.PushModalAsync(App.MapPage());
+                                //Login call
+                                UserModel model = await _UserProvider.LogInUser(txtUserName.Text, Convert.ToInt32(txtPassword.Text));
+
+                                if (model != null)
+                                {
+                                    FoodTruckContext.UserName = txtUserName.Text;
+                                    FoodTruckContext.UserID = model.Id;
+                                    FoodTruckContext.IsLoggedIn = true;
+                                    FoodTruckContext.IsProvider = true;
+                                    UserDialogs.Instance.ShowSuccess("Success");
+                                    //redirect to page
+                                    Navigation.PushAsync(App.MapPage());
+                                }
                             }
-                            loader.Hide();
                         }
                         catch (Exception ex)
                         {

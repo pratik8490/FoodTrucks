@@ -29,6 +29,7 @@ namespace FoodTrucks.Helper
             public static string DropDownArrow = "down_arrow.png";
             public static string DownArrow = "down_arrow.png";
             public static string RightArrow = "aerrow.png";
+            public static string LeftMenuIcon = "line_menu.png";
         }
     }
 }

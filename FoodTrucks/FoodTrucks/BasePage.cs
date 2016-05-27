@@ -1,4 +1,5 @@
-﻿using FoodTrucks.Helper;
+﻿using FoodTrucks.Context;
+using FoodTrucks.Helper;
 using Plugin.DeviceInfo;
 using System;
 using System.Collections.Generic;
@@ -46,7 +47,10 @@ namespace FoodTrucks
             LoadingIndicator.IsRunning = IsLoading;
             LoadingIndicator.IsVisible = IsLoading;
 
-            BindToolbar();
+            if (FoodTruckContext.IsLoggedIn)
+            {
+                BindToolbar();
+            }
         }
         protected override void OnDisappearing()
         {
@@ -60,6 +64,10 @@ namespace FoodTrucks
         {
 
             List<ToolbarItem> lstToolbarItem = new List<ToolbarItem>();
+
+            ExtendedToolbarItem menuToolbarItem = new ExtendedToolbarItem("Menu", Constants.ImagePath.LeftMenuIcon, ToolbarItemOrder.Primary, CategoryMenu);
+
+            lstToolbarItem.Add(menuToolbarItem);
 
             lstToolbarItem.Add(new ToolbarItem
             {
@@ -78,6 +86,14 @@ namespace FoodTrucks
         public void Filter()
         {
 
+        }
+        public void CategoryMenu()
+        {
+            string ViewName = (ParentView.ParentView).GetType().Name;
+            if ((ParentView.ParentView).GetType().Name != "NavigationPage")//(ViewName == "SearchListMaster" || ViewName == "MarketingCategoryMaster" || ViewName == "ModelSectionPartListMaster" || ViewName == "ShipOptionSelectMaster")
+                ((MasterDetailPage)(ParentView).ParentView).IsPresented = !((MasterDetailPage)(ParentView).ParentView).IsPresented;
+            else
+                ((MasterDetailPage)ParentView).IsPresented = !((MasterDetailPage)ParentView).IsPresented;
         }
 
         private async void Logout()

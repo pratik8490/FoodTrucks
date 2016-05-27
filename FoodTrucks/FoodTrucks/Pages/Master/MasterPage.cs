@@ -1,6 +1,9 @@
-﻿using System;
+﻿using FoodTrucks.Context;
+using FoodTrucks.Helper;
+using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using MenuItem = FoodTrucks.Models.MenuModel;
 
 namespace FoodTrucks.Pages
 {
@@ -14,7 +17,7 @@ namespace FoodTrucks.Pages
         /// </summary>
         public MasterPage(ContentPage DetailPage)
         {
-            menuPage = new MenuPage();
+            menuPage = new MenuPage { Icon = Constants.ImagePath.SlideOut };
 
             menuPage.Menu.ItemSelected += (sender, e) => NavigateTo(e.SelectedItem as MenuItem);
             Master = menuPage;
@@ -33,12 +36,27 @@ namespace FoodTrucks.Pages
             if (menu == null)
                 return;
 
-            Page displayPage = (Page)Activator.CreateInstance(menu.TargetType);
+            if (menu.Title == "Edit Profile")
+            {
+                Navigation.PushAsync(App.EditTruckListPage());
+            }
+            else if (menu.Title == "Home")
+            {
+                Navigation.PushAsync(App.HomePage(true));
+            }
+            else
+            {
+                //API call for remove deviceID
+                FoodTruckContext.Clear();
+                Navigation.PushModalAsync(App.LoginPage());
+            }
 
-            Detail = new NavigationPage(displayPage);
+            //Page displayPage = (Page)Activator.CreateInstance(menu.TargetType);
 
-            menuPage.Menu.SelectedItem = null;
-            IsPresented = false;
+            //Detail = new NavigationPage(displayPage);
+
+            //menuPage.Menu.SelectedItem = null;
+            //IsPresented = false;
         }
     }
 }

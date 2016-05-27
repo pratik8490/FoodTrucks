@@ -106,7 +106,7 @@ namespace FoodTrucks.Pages
 
             Label lblProvider = new Label { Text = "Is Provider?", TextColor = Color.Black };
 
-            Switch swcProvider = new Switch { };
+            Switch swcProvider = new Switch { IsToggled = true };
 
             swcProvider.Toggled += (s, e) =>
                 {
@@ -268,6 +268,10 @@ namespace FoodTrucks.Pages
                                     VerticalOptions = LayoutOptions.CenterAndExpand,
                                 },
                                 spEntry.LineSeperatorView,
+                                new StackLayout {
+                                    Padding = new Thickness(20, Device.OnPlatform(40,20,0), 20, 0),
+                                    Children = {slProvider},
+                                },
                                 new StackLayout {
                                     Padding = new Thickness(20, Device.OnPlatform(40,20,0), 20, 0),
                                     Children = {slGrid1},

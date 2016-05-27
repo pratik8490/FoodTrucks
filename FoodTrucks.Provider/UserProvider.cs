@@ -60,9 +60,9 @@ namespace FoodTrucks.Provider
             return res.Task;
         }
 
-        public Task<bool> LogInUser(string email, int pin)
+        public Task<UserModel> LogInUser(string email, int pin)
         {
-            var res = new TaskCompletionSource<bool>();
+            var res = new TaskCompletionSource<UserModel>();
 
             Device.BeginInvokeOnMainThread(async () =>
             {
@@ -81,16 +81,16 @@ namespace FoodTrucks.Provider
                     if (response.IsSuccessStatusCode)
                     {
                         var readContent = await response.Content.ReadAsStringAsync();
-                        res.SetResult(JsonConvert.DeserializeObject<bool>(readContent));
+                        res.SetResult(JsonConvert.DeserializeObject<UserModel>(readContent));
                     }
                     else
                     {
-                        res.SetResult(false);
+                        res.SetResult(new UserModel());
                     }
                 }
                 catch (Exception ex)
                 {
-                    res.SetResult(false);
+                    res.SetResult(new UserModel());
                 }
             });
 

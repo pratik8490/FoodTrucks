@@ -91,6 +91,14 @@
     <Reference Include="GooglePlayServicesLib">
       <HintPath>..\..\packages\Xamarin.GooglePlayServices.22.0.0.2\lib\MonoAndroid41\GooglePlayServicesLib.dll</HintPath>
     </Reference>
+    <Reference Include="Media.Plugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Xam.Plugin.Media.1.0.0\lib\MonoAndroid10\Media.Plugin.dll</HintPath>
+    </Reference>
+    <Reference Include="Media.Plugin.Abstractions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Xam.Plugin.Media.1.0.0\lib\MonoAndroid10\Media.Plugin.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />
     <Reference Include="Plugin.DeviceInfo">
@@ -169,6 +177,8 @@
     <AndroidResource Include="Resources\Drawable\foodtruck.png" />
     <AndroidResource Include="Resources\Drawable\filter.png" />
     <AndroidResource Include="Resources\Drawable\down_arrow.png" />
+    <AndroidResource Include="Resources\Drawable\LogOut.png" />
+    <AndroidResource Include="Resources\Drawable\line_menu.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FoodTrucks\FoodTrucks.csproj">

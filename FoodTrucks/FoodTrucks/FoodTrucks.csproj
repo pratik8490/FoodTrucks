@@ -42,6 +42,7 @@
     <Compile Include="CustomControls\CustomMap.cs" />
     <Compile Include="CustomControls\CustomPin.cs" />
     <Compile Include="CustomControls\ExtendedEntry.cs" />
+    <Compile Include="CustomControls\ExtendedToolbarItem.cs" />
     <Compile Include="Helper\Constants.cs" />
     <Compile Include="Helper\DistanceCalculator.cs" />
     <Compile Include="Helper\LayoutHelper.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Models\MenuModel.cs" />
     <Compile Include="Models\Position.cs" />
     <Compile Include="Pages\AddTruckInfo.cs" />
+    <Compile Include="Pages\EditTruckInfo.cs" />
     <Compile Include="Pages\LoginPage.cs" />
     <Compile Include="Pages\MainPage.cs" />
     <Compile Include="Pages\MapPage.cs" />

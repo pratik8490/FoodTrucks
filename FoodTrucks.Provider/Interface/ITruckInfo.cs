@@ -11,5 +11,7 @@ namespace FoodTrucks.Provider.Interface
     {
         Task<List<TruckInfoModel>> GetTruckList();
         Task<int> Add(TruckInfoModel truckInfoModel);
+        void UploadBitmapAsync(byte[] bitmapData, int id);
+        Task<TruckInfoModel> GetTruckDetail(int userID);
     }
 }
