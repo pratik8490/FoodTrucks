@@ -117,8 +117,10 @@ namespace FoodTrucks.Provider
 
                 HttpContent stringContent = new StringContent(id.ToString());
 
-                MultipartFormDataContent multipartContent = new MultipartFormDataContent();
-                //MemoryStream byteArrayContent1 = new MemoryStream(bitmapData);
+                //string result = System.Text.Encoding.UTF8.GetString(bitmapData, 0, 0);
+
+               MultipartFormDataContent multipartContent = new MultipartFormDataContent();
+               //MemoryStream byteArrayContent1 = new MemoryStream(bitmapData);
                 //byteArrayContent1.Headers.Add("Content-Type", "application/octet-stream");
 
                 //multipartContent.Add(stringContent, "Id");

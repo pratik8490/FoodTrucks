@@ -16,10 +16,11 @@ namespace FoodTrucks.Provider.Models
         public double Longitude { get; set; }
         public byte? IsActive { get; set; }
         public string Link { get; set; }
-        public byte[] Menu { get; set; }
+        public string Menu { get; set; }
         public int? BarId { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? ModifedAt { get; set; }
         public int? UserID { get; set; }
+        public byte[] MenuImage { get; set; }
     }
 }
