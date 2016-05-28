@@ -139,7 +139,7 @@ namespace FoodTrucks.Pages
                                         FoodTruckContext.UserID = user.Id;
                                         FoodTruckContext.IsLoggedIn = true;
 
-                                        Navigation.PushAsync(App.MapPage());
+                                        Navigation.PushAsync(App.TruckDetailsPage(1));
                                     }
                                     else
                                     {

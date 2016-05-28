@@ -24,7 +24,7 @@ namespace FoodTrucks.Pages
 
         public TruckDetails(int truckId)
         {
-            Title = "Edit TruckInfo";
+            Title = "Truck Details";
             IsLoading = true;
             Device.BeginInvokeOnMainThread(async () =>
             {
@@ -73,7 +73,7 @@ namespace FoodTrucks.Pages
             Label lblFoodTypeText = new Label { Text = "Food Type", FontSize = 22, TextColor = Color.Black };
 
             Label lblFoodType = new Label { FontSize = 22, TextColor = Color.Black };
-            //lblTruckName.Text = _FoodTypeList   ;
+            lblFoodType.Text = _FoodTypeList.Find(x => x.Id == _TruckInfo.FoodTypeId).Type.ToString();
 
             StackLayout slFoodType = new StackLayout { Children = { lblFoodTypeText, lblFoodType }, Orientation = StackOrientation.Horizontal };
 
@@ -86,6 +86,7 @@ namespace FoodTrucks.Pages
             Label lblBarText = new Label { Text = "In Front Of:", FontSize = 22, TextColor = Color.Black };
 
             Label lblBar = new Label { FontSize = 22, TextColor = Color.Black };
+            lblBar.Text = _BarList.Find(x => x.Id == _TruckInfo.BarId).Name.ToString();
 
             StackLayout slBar = new StackLayout { Children = { lblBarText, lblBar }, Orientation = StackOrientation.Horizontal };
 
@@ -99,7 +100,7 @@ namespace FoodTrucks.Pages
             Label lblMenuText = new Label { Text = "Menu", FontSize = 22, TextColor = Color.Black };
 
             Image imgMenu = new Image();
-            //if (!string.IsNullOrEmpty(_TruckInfo.Menu))
+            if (!string.IsNullOrEmpty(_TruckInfo.Menu))
                 imgMenu.Source = FileImageSource.FromUri(new Uri("http://foodlifttrucks.com/" + _TruckInfo.Menu));
 
             StackLayout slMenu = new StackLayout { Children = { lblMenuText, imgMenu }, Orientation = StackOrientation.Horizontal };
