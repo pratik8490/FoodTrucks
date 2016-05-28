@@ -222,7 +222,9 @@ namespace FoodTrucks.Pages
                     Text = "Select Menu"
                 };
 
-                Image imgMenu = new Image { IsVisible = false };
+                Image imgMenu = new Image { WidthRequest = 30 };
+                if (!string.IsNullOrEmpty(_TruckInfo.Menu))
+                    imgMenu.Source = FileImageSource.FromUri(new Uri("http://foodlifttrucks.com/" + _TruckInfo.Menu));
 
                 var tapGestureRecognizer = new TapGestureRecognizer();
                 tapGestureRecognizer.NumberOfTapsRequired = 1; // single-tap
@@ -376,7 +378,7 @@ namespace FoodTrucks.Pages
                                truckInfo.BarId = _SelectedBarID;
                                truckInfo.FoodTypeId = _SelectedFoodTypeID;
                                truckInfo.IsActive = Convert.ToByte(_SelectedActivate);
-                               truckInfo.Menu = _UploadImage;
+                               ///truckInfo.Menu = _UploadImage;
                                truckInfo.TruckName = txtTruckName.Text;
                                truckInfo.Link = txtWebsite.Text;
                                truckInfo.Description = txtDescrition.Text;

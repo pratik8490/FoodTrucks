@@ -353,11 +353,15 @@ namespace FoodTrucks.Pages
 
                                    truckInfo.BarId = _SelectedBarID;
                                    truckInfo.FoodTypeId = _SelectedFoodTypeID;
-                                   truckInfo.IsActive = Convert.ToByte(_SelectedActivate);
-                                   //truckInfo.Menu = _UploadImage;
+                                   if (swcActivate.IsToggled)
+                                       truckInfo.IsActive = 1;
+                                   else
+                                       truckInfo.IsActive = 0;
+                                   //truckInfo.Menu = "testingsave";
                                    truckInfo.TruckName = txtTruckName.Text;
                                    truckInfo.Link = txtWebsite.Text;
                                    truckInfo.Description = txtDescrition.Text;
+                                   truckInfo.MenuImage = _UploadImage;
                                    truckInfo.UserID = 4;
 
                                    if (_SelectedLocation)
@@ -375,11 +379,12 @@ namespace FoodTrucks.Pages
 
                                    if (newID != 0)
                                    {
-                                       _TruckInfoProvider.UploadBitmapAsync(_UploadImage, newID);
-                                       UserDialogs.Instance.ShowSuccess("Successfully saved truckinfo.");
+                                       Navigation.PushAsync(App.TruckListPage());
+                                       //_TruckInfoProvider.UploadBitmapAsync(_UploadImage, newID);
+                                       //UserDialogs.Instance.ShowSuccess("Successfully saved truckinfo.");
                                    }
-                                   else
-                                       UserDialogs.Instance.ShowError("Some error ocurred.");
+                                   //else
+                                   //    UserDialogs.Instance.ShowError("Some error ocurred.");
 
                                    btnSubmit.IsVisible = true;
                                }
