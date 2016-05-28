@@ -76,7 +76,6 @@ namespace FoodTrucks.Droid.CustomRenderer
                         //response.SetResult(obj);
                         //var intent = new Intent(Android.Provider.Settings.ActionLocationSourceSettings);
                         //StartActivity(intent);
-                        FoodTruckContext.AlreadyEnable = true;
                         Intent gpsSettingIntent = new Intent(Android.Provider.Settings.ActionLocationSourceSettings);
                         Forms.Context.StartActivity(gpsSettingIntent);
                     }

@@ -45,7 +45,7 @@ namespace FoodTrucks.Pages
                        //Call for food type and Bar
                        _FoodTypeList = await _FoodTypeProvider.GetFoodType();
                        _BarList = await _BarProvider.GetBar();
-                       _TruckInfo = await _TruckInfoProvider.GetTruckDetail(FoodTruckContext.UserID);
+                       _TruckInfo = await _TruckInfoProvider.GetTruckDetailByUserID(FoodTruckContext.UserID);
 
                        EditTruckInfoLayout();
                    }

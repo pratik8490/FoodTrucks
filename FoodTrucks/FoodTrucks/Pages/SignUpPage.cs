@@ -64,7 +64,7 @@ namespace FoodTrucks.Pages
                 HorizontalOptions = LayoutOptions.StartAndExpand
             };
 
-            Switch swcNotifications = new Switch();
+            Switch swcNotifications = new Switch { WidthRequest = 100 };
 
             Seperator spNotifications = new Seperator();
 
@@ -81,7 +81,7 @@ namespace FoodTrucks.Pages
                 HorizontalOptions = LayoutOptions.StartAndExpand
             };
 
-            Switch swcLocations = new Switch { IsToggled = true };
+            Switch swcLocations = new Switch { IsToggled = true, WidthRequest = 100 };
 
             Seperator spLocations = new Seperator();
 
@@ -106,16 +106,26 @@ namespace FoodTrucks.Pages
 
             Label lblProvider = new Label { Text = "Is Provider?", TextColor = Color.Black };
 
-            Switch swcProvider = new Switch { IsToggled = true };
+            StackLayout slProviderText = new StackLayout
+            {
+                Children = { lblProvider },
+                HorizontalOptions = LayoutOptions.StartAndExpand
+            };
 
-            swcProvider.Toggled += (s, e) =>
-                {
+            Switch swcProvider = new Switch { IsToggled = true, WidthRequest = 100 };
 
-                };
+            Seperator spProvider = new Seperator();
+
+            StackLayout slSwcProvider = new StackLayout
+            {
+                Children = { swcProvider },
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                HorizontalOptions = LayoutOptions.EndAndExpand
+            };
 
             StackLayout slProvider = new StackLayout
             {
-                Children = { lblProvider, swcProvider },
+                Children = { slProviderText, swcProvider },
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 Orientation = StackOrientation.Horizontal
             };
@@ -272,6 +282,7 @@ namespace FoodTrucks.Pages
                                     Padding = new Thickness(20, Device.OnPlatform(40,20,0), 20, 0),
                                     Children = {slProvider},
                                 },
+                                spProvider.LineSeperatorView,
                                 new StackLayout {
                                     Padding = new Thickness(20, Device.OnPlatform(40,20,0), 20, 0),
                                     Children = {slGrid1},
