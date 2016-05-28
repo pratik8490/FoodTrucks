@@ -28,7 +28,7 @@ namespace FoodTrucks
         {
             if (!IsFromLogout)
             {
-                navPage = new NavigationPage(new AddTruckInfo());
+                navPage = new NavigationPage(new TruckDetails(1));
                 navPage.BarBackgroundColor = LayoutHelper.BarBackGroundColor;
                 navPage.BarTextColor = LayoutHelper.BarBackTextColor;
 
@@ -68,6 +68,11 @@ namespace FoodTrucks
         public static Page EditTruckListPage()
         {
             return new MasterPage(new EditTruckInfo());
+        }
+
+        public static Page TruckDetailsPage(int truckId)
+        {
+            return new TruckDetails(truckId);
         }
 
         public static Color BarTextColor()
