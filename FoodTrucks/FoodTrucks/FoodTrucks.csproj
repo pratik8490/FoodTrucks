@@ -63,6 +63,7 @@
     <Compile Include="Pages\Master\MenuPage.cs" />
     <Compile Include="Pages\SignUpPage.cs" />
     <Compile Include="Cell\TruckCell.cs" />
+    <Compile Include="Pages\TruckDetails.cs" />
     <Compile Include="Pages\TrucksList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
