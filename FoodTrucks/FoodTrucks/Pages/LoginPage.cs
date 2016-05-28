@@ -116,7 +116,7 @@ namespace FoodTrucks.Pages
 
                 if (string.IsNullOrEmpty(txtUserName.Text))
                 {
-                    UserDialogs.Instance.ShowError("Email address required", 1);
+                    UserDialogs.Instance.ShowError("Email address required");
                 }
                 else if (!Regex.IsMatch(txtUserName.Text.ToString(), Constants.RegxValidation.EmailValidationPattern, RegexOptions.IgnoreCase))
                 {
@@ -126,7 +126,7 @@ namespace FoodTrucks.Pages
 
                 else if (string.IsNullOrEmpty(txtPassword.Text))
                 {
-                    UserDialogs.Instance.ShowError("Password is required", 1);
+                    UserDialogs.Instance.ShowError("Password is required");
                     //DisplayAlert(Messages.Error, "Password is required.", "Ok");
                 }
 
@@ -148,7 +148,7 @@ namespace FoodTrucks.Pages
                                     FoodTruckContext.UserName = txtUserName.Text;
                                     FoodTruckContext.UserID = model.Id;
                                     FoodTruckContext.IsLoggedIn = true;
-                                    FoodTruckContext.IsProvider = true;
+                                    FoodTruckContext.IsProvider = Convert.ToBoolean(model.IsUser);
                                     UserDialogs.Instance.ShowSuccess("Success");
                                     //redirect to page
                                     Navigation.PushAsync(App.MapPage());

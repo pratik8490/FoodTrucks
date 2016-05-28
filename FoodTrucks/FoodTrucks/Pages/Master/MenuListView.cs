@@ -15,7 +15,7 @@ namespace FoodTrucks.Pages.Master
             ItemsSource = data;
             VerticalOptions = LayoutOptions.FillAndExpand;
             BackgroundColor = Color.Transparent;
-            SeparatorVisibility = SeparatorVisibility.None;
+            SeparatorColor = Color.Gray;
 
             var cell = new DataTemplate(typeof(MenuCell));
             cell.SetBinding(MenuCell.TextProperty, "Title");
@@ -29,7 +29,7 @@ namespace FoodTrucks.Pages.Master
         public MenuCell()
             : base()
         {
-            this.TextColor = Color.FromHex("AAAAAA");
+            this.TextColor = Color.Black;
         }
     }
     public class MenuListData : List<MenuItem>

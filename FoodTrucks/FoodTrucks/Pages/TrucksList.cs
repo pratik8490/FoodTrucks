@@ -6,6 +6,7 @@ using FoodTruck;
 using FoodTrucks.Provider.Models;
 using FoodTrucks.Provider;
 using FoodTrucks.Provider.Interface;
+using System.Collections.ObjectModel;
 
 namespace FoodTrucks
 {
@@ -21,6 +22,7 @@ namespace FoodTrucks
             Device.BeginInvokeOnMainThread(async () =>
             {
                 _TruckInfoList = await _TruckInfoProvider.GetTruckList();
+                Items = new ObservableCollection<TruckInfoModel>(_TruckInfoList);
                 TrucksListLayout();
             });
         }
@@ -68,14 +70,22 @@ namespace FoodTrucks
             Seperator spTitle = new Seperator();
 
             //List of Escrow
-            ListView trucksListView = new ListView { RowHeight = 55, SeparatorColor = Color.FromHex("#eeeeee") };
-            trucksListView.ItemsSource = _TruckInfoList;
+            ListView trucksListView = new ListView { RowHeight = 80, SeparatorColor = Color.FromHex("#eeeeee"), VerticalOptions = LayoutOptions.FillAndExpand };
+            trucksListView.ItemsSource = Items;
             trucksListView.ItemTemplate = new DataTemplate(() => new TruckCell());
+
+            StackLayout slTruckListView = new StackLayout
+            {
+                Children = { trucksListView },
+                VerticalOptions = LayoutOptions.FillAndExpand
+            };
 
             trucksListView.ItemTapped += (sender, e) =>
                         {
                             // don't do anything if we just de-selected the row
                             if (e.Item == null) return;
+                            TruckInfoModel model = (TruckInfoModel)e.Item;
+                            Navigation.PushAsync(App.TruckDetailPage(model.Id));
                             // do something with e.SelectedItem
                             ((ListView)sender).SelectedItem = null; // de-select the row after ripple effect
                         };
@@ -86,6 +96,7 @@ namespace FoodTrucks
             {
 
                 Children = { 
+                    slTruckListView
                         //new StackLayout{
                         //    Padding = new Thickness(20, Device.OnPlatform(40,20,0), 20, 0),
                         //    Children = { slHeader },
@@ -96,13 +107,14 @@ namespace FoodTrucks
                         //    Children = {spHeader.LineSeperatorView},
                         //    //VerticalOptions = LayoutOptions.StartAndExpand
                         //},
-                        new StackLayout {
-                            Padding = new Thickness(20, 0, 20, 0),
-                            Children = { trucksListView},
-                        }
+                        //new StackLayout {
+                        //    Padding = new Thickness(5),
+                        //    Children = { slTruckListView},
+                        //},
                     },
-                Padding = new Thickness(20, Device.OnPlatform(40, 20, 0), 20, 20),
-                Orientation = StackOrientation.Vertical,
+                //Padding = new Thickness(20, Device.OnPlatform(40, 20, 0), 20, 20),
+                //Orientation = StackOrientation.Vertical,
+                VerticalOptions = LayoutOptions.FillAndExpand,
                 BackgroundColor = LayoutHelper.PageBackgroundColor
             };
 
@@ -111,6 +123,20 @@ namespace FoodTrucks
                 Content = slTruckListPage,
             };
         }
+        #region Custom Property
+
+        private ObservableCollection<TruckInfoModel> _items = new ObservableCollection<TruckInfoModel>();
+        public ObservableCollection<TruckInfoModel> Items
+        {
+            get { return _items; }
+            set
+            {
+                _items = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
     }
 }
 

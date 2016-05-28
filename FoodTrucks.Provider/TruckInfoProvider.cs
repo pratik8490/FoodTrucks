@@ -97,6 +97,42 @@ namespace FoodTrucks.Provider
             return newId.Task;
         }
 
+        public Task<bool> Update(TruckInfoModel truckInfoModel)
+        {
+            var updated = new TaskCompletionSource<bool>();
+
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                try
+                {
+                    HttpClient client = new HttpClient();
+                    client.BaseAddress = new Uri(_SiteUrl);
+
+                    var requestUri = "api/TruckInfo";
+
+                    var json = JsonConvert.SerializeObject(truckInfoModel);
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    HttpResponseMessage response = await client.PutAsync(requestUri, content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var readContent = await response.Content.ReadAsStringAsync();
+                        updated.SetResult(JsonConvert.DeserializeObject<bool>(readContent));
+                    }
+                    else
+                    {
+                        updated.SetResult(true);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    updated.SetResult(false);
+                }
+            });
+            return updated.Task;
+        }
+
         public void UploadBitmapAsync(byte[] bitmapData, int id)
         {
             //var fileContent = new ByteArrayContent(bitmapData);
@@ -119,8 +155,8 @@ namespace FoodTrucks.Provider
 
                 //string result = System.Text.Encoding.UTF8.GetString(bitmapData, 0, 0);
 
-               MultipartFormDataContent multipartContent = new MultipartFormDataContent();
-               //MemoryStream byteArrayContent1 = new MemoryStream(bitmapData);
+                MultipartFormDataContent multipartContent = new MultipartFormDataContent();
+                //MemoryStream byteArrayContent1 = new MemoryStream(bitmapData);
                 //byteArrayContent1.Headers.Add("Content-Type", "application/octet-stream");
 
                 //multipartContent.Add(stringContent, "Id");

@@ -306,7 +306,7 @@ namespace FoodTrucks.Pages
                     TextColor = Color.Black
                 };
 
-                Switch swcLocation = new Switch { IsToggled = true };
+                Switch swcLocation = new Switch { IsToggled = true, WidthRequest = 100 };
 
                 //if (!string.IsNullOrEmpty(_TruckInfo.Longitude.ToString()) && !string.IsNullOrEmpty(_TruckInfo.Longitude.ToString()))
                 //{
@@ -318,9 +318,16 @@ namespace FoodTrucks.Pages
                         _SelectedLocation = e.Value;
                     };
 
+                StackLayout slSwcLocation = new StackLayout
+                {
+                    Children = { swcLocation },
+                    VerticalOptions = LayoutOptions.CenterAndExpand,
+                    HorizontalOptions = LayoutOptions.EndAndExpand
+                };
+
                 StackLayout slLocation = new StackLayout
                 {
-                    Children = { lblLocation, swcLocation },
+                    Children = { lblLocation, slSwcLocation },
                     Orientation = StackOrientation.Horizontal,
                     HorizontalOptions = LayoutOptions.FillAndExpand,
                     Padding = new Thickness(0, 10, 0, 10)
@@ -334,11 +341,18 @@ namespace FoodTrucks.Pages
                     HorizontalOptions = LayoutOptions.StartAndExpand
                 };
 
-                Switch swcActivate = new Switch { IsToggled = true, HorizontalOptions = LayoutOptions.EndAndExpand };
+                Switch swcActivate = new Switch { IsToggled = true, HorizontalOptions = LayoutOptions.EndAndExpand, WidthRequest = 100 };
 
                 swcActivate.Toggled += (sender, e) =>
                 {
                     _SelectedActivate = e.Value;
+                };
+
+                StackLayout slSwcActivate = new StackLayout
+                {
+                    Children = { swcActivate },
+                    VerticalOptions = LayoutOptions.CenterAndExpand,
+                    HorizontalOptions = LayoutOptions.EndAndExpand
                 };
 
                 if (Convert.ToBoolean(_TruckInfo.IsActive))
@@ -348,7 +362,7 @@ namespace FoodTrucks.Pages
 
                 StackLayout slActivate = new StackLayout
                 {
-                    Children = { lblActivate, swcActivate },
+                    Children = { lblActivate, slSwcActivate },
                     Orientation = StackOrientation.Horizontal,
                     HorizontalOptions = LayoutOptions.FillAndExpand,
                     Padding = new Thickness(0, 10, 0, 10)
@@ -394,18 +408,18 @@ namespace FoodTrucks.Pages
                                }
 
                                //service call for save information
-                               int newID = await _TruckInfoProvider.Add(truckInfo);
+                               bool updated = await _TruckInfoProvider.Update(truckInfo);
 
-                               if (newID != 0)
+                               if (updated)
                                {
-                                   _TruckInfoProvider.UploadBitmapAsync(_UploadImage, newID);
                                    Navigation.PushAsync(App.TruckListPage());
                                    //UserDialogs.Instance.ShowSuccess("Successfully saved truckinfo.");
                                }
-                               else
-                                   UserDialogs.Instance.ShowError("Some error ocurred.");
+                               //else
+                               //    UserDialogs.Instance.ShowError("Some error ocurred.");
 
                                //UserDialogs.Instance.HideLoading();
+                               btnSubmit.IsVisible = true;
                            }
                        }
                        catch (Exception ex)

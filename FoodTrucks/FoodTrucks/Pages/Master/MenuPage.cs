@@ -1,4 +1,5 @@
-﻿using FoodTrucks.Helper;
+﻿using FoodTrucks.Context;
+using FoodTrucks.Helper;
 using FoodTrucks.Pages.Master;
 using System;
 using System.Collections.Generic;
@@ -50,7 +51,7 @@ namespace FoodTrucks.Pages
                     Content = new Label
                     {
                         TextColor = Color.FromHex("AAAAAA"),
-                        Text = "MENU",
+                        Text = "Hello, " + FoodTruckContext.UserName,
                     }
                 };
 

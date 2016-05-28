@@ -42,7 +42,7 @@ namespace FoodTrucks.Pages
             }
             else if (menu.Title == "Home")
             {
-                Navigation.PushAsync(App.HomePage(true));
+                Navigation.PushModalAsync(App.HomePage());
             }
             else
             {

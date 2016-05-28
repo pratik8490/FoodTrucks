@@ -12,19 +12,18 @@ namespace FoodTrucks
         {
             model = (TruckInfoModel)BindingContext;
             base.OnBindingContextChanged();
-            StackLayout stack = CreateMyEscrowLayout();
+            StackLayout stack = CreateLayout();
 
             View = stack;
         }
 
-        public StackLayout CreateMyEscrowLayout()
+        public StackLayout CreateLayout()
         {
 
-            Image imgTruckLogo = new Image { Source = "foodtruck.png" };
+            Image imgTruckLogo = new Image { Source = "foodtruck.png", WidthRequest = 50 };
 
             StackLayout slTruckLogo = new StackLayout
             {
-                HorizontalOptions = LayoutOptions.Start,
                 Children = { imgTruckLogo }
             };
 
@@ -47,7 +46,8 @@ namespace FoodTrucks
             StackLayout slDetailArrow = new StackLayout
             {
                 Children = { imgTruckArrow },
-                HorizontalOptions = LayoutOptions.EndAndExpand
+                HorizontalOptions = LayoutOptions.EndAndExpand,
+                VerticalOptions = LayoutOptions.CenterAndExpand
             };
 
             StackLayout slFinalLayout = new StackLayout { Children = { slTruckLogo, slLabelTitleInfrontOf, slDetailArrow }, Padding = new Thickness(5), Orientation = StackOrientation.Horizontal, HorizontalOptions = LayoutOptions.FillAndExpand };

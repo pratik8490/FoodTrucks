@@ -14,7 +14,7 @@ using Xamarin.Forms.Maps;
 namespace FoodTrucks.Pages
 {
     public class TruckDetails : BasePage
-    {          
+    {
         private List<FoodTypeModel> _FoodTypeList = new List<FoodTypeModel>();
         private List<BarModel> _BarList = new List<BarModel>();
         private ITruckInfo _TruckInfoProvider = new TruckInfoProvider();
@@ -33,7 +33,7 @@ namespace FoodTrucks.Pages
                     //Call for food type and Bar
                     _FoodTypeList = await _FoodTypeProvider.GetFoodType();
                     _BarList = await _BarProvider.GetBar();
-                    _TruckInfo = await _TruckInfoProvider.GetTruckDetailByTruckID(1);
+                    _TruckInfo = await _TruckInfoProvider.GetTruckDetailByTruckID(truckId);
 
                     TruckDetailsLayout();
                 }
@@ -42,7 +42,6 @@ namespace FoodTrucks.Pages
 
                 }
             });
-
         }
 
         public void TruckDetailsLayout()
@@ -54,50 +53,57 @@ namespace FoodTrucks.Pages
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
 
-            map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(23, 73), Distance.FromMiles(3))); // Santa Cruz golf course
+            map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(_TruckInfo.Lattitude, _TruckInfo.Longitude), Distance.FromMiles(3))); // Santa Cruz golf course
 
-            Label lblTruckNameText = new Label { Text = "Truck Name :     ", FontSize = 22, TextColor = Color.Black };
+            Pin pin = new Pin();
+            pin.Type = PinType.Place;
+            pin.Label = _TruckInfo.TruckName;
+            pin.Position = new Position(Convert.ToDouble(_TruckInfo.Lattitude), Convert.ToDouble(_TruckInfo.Longitude));
 
-            Label lblTruckName = new Label { FontSize = 22, TextColor = Color.Black };
+            map.Pins.Add(pin);
+
+            Label lblTruckNameText = new Label { Text = "Truck Name :     ", FontSize = 20, TextColor = Color.Black };
+
+            Label lblTruckName = new Label { FontSize = 20, TextColor = Color.Black };
             lblTruckName.Text = _TruckInfo.TruckName;
 
             StackLayout slTruckName = new StackLayout { Children = { lblTruckNameText, lblTruckName }, Orientation = StackOrientation.Horizontal };
 
-            Label lblTruckDescText = new Label { Text = "Truck Description :   ", FontSize = 22, TextColor = Color.Black };
+            Label lblTruckDescText = new Label { Text = "Truck Description :   ", FontSize = 20, TextColor = Color.Black };
 
-            Label lblTruckDesc = new Label { FontSize = 22, TextColor = Color.Black };
+            Label lblTruckDesc = new Label { FontSize = 20, TextColor = Color.Black };
             lblTruckDesc.Text = _TruckInfo.Description;
 
             StackLayout slTruckDesc = new StackLayout { Children = { lblTruckDescText, lblTruckDesc }, Orientation = StackOrientation.Horizontal };
 
-            Label lblFoodTypeText = new Label { Text = "Food Type :     ", FontSize = 22, TextColor = Color.Black };
+            Label lblFoodTypeText = new Label { Text = "Food Type :     ", FontSize = 20, TextColor = Color.Black };
 
-            Label lblFoodType = new Label { FontSize = 22, TextColor = Color.Black };
+            Label lblFoodType = new Label { FontSize = 20, TextColor = Color.Black };
             lblFoodType.Text = _FoodTypeList.Find(x => x.Id == _TruckInfo.FoodTypeId).Type.ToString();
 
             StackLayout slFoodType = new StackLayout { Children = { lblFoodTypeText, lblFoodType }, Orientation = StackOrientation.Horizontal };
 
-            //Label lblActiveText = new Label { Text = "Active", FontSize = 22, TextColor = Color.Black };
+            //Label lblActiveText = new Label { Text = "Active", FontSize = 20, TextColor = Color.Black };
 
             //Switch schActive = new Switch { HorizontalOptions = LayoutOptions.EndAndExpand };
 
             //StackLayout slActive = new StackLayout { Children = { lblActiveText, schActive }, Orientation = StackOrientation.Horizontal };
 
-            Label lblBarText = new Label { Text = "In Front Of :     ", FontSize = 22, TextColor = Color.Black };
+            Label lblBarText = new Label { Text = "In Front Of :     ", FontSize = 20, TextColor = Color.Black };
 
-            Label lblBar = new Label { FontSize = 22, TextColor = Color.Black };
+            Label lblBar = new Label { FontSize = 20, TextColor = Color.Black };
             lblBar.Text = _BarList.Find(x => x.Id == _TruckInfo.BarId).Name.ToString();
 
             StackLayout slBar = new StackLayout { Children = { lblBarText, lblBar }, Orientation = StackOrientation.Horizontal };
 
-            Label lblLinkText = new Label { Text = "Link :  ", FontSize = 22, TextColor = Color.Black };
+            Label lblLinkText = new Label { Text = "Link :  ", FontSize = 20, TextColor = Color.Black };
 
-            Label lblLink = new Label { FontSize = 22, TextColor = Color.Black };
+            Label lblLink = new Label { FontSize = 20, TextColor = Color.Black };
             lblLink.Text = _TruckInfo.Link;
 
             StackLayout slLink = new StackLayout { Children = { lblLinkText, lblLink }, Orientation = StackOrientation.Horizontal };
 
-            Label lblMenuText = new Label { Text = "Menu :     ", FontSize = 22, TextColor = Color.Black };
+            Label lblMenuText = new Label { Text = "Menu :     ", FontSize = 20, TextColor = Color.Black };
 
             Image imgMenu = new Image { WidthRequest = 60, HeightRequest = 60 };
             if (!string.IsNullOrEmpty(_TruckInfo.Menu))

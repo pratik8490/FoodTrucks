@@ -122,7 +122,7 @@ namespace FoodTrucks.Pages
                             UserModel user = await _UserProvider.CheckDeviceLoggedIn(GetDeviceID());
                             if (user.Id != 0)
                             {
-                                if (Convert.ToBoolean(user.IsUser))
+                                if (!Convert.ToBoolean(user.IsUser))
                                 {
                                     FoodTruckContext.UserName = user.Email;
                                     FoodTruckContext.UserID = user.Id;

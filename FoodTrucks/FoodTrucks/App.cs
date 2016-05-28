@@ -17,7 +17,6 @@ namespace FoodTrucks
         public App()
         {
             // The root page of your application 
-            //MainPage = new MainPage();
             MainPage = HomePage();
         }
         #endregion
@@ -45,11 +44,6 @@ namespace FoodTrucks
             return new LoginPage();
         }
 
-        public static Page AddTuckPage()
-        {
-            return new AddTruckInfo();
-        }
-
         public static Page SignUpPage()
         {
             return new SignUpPage();
@@ -60,15 +54,26 @@ namespace FoodTrucks
             return new MasterPage(new MapPage());
         }
 
+        #region Truck Pages
         public static Page TruckListPage()
         {
             return new MasterPage(new TrucksList());
+        }
+        public static Page TruckDetailPage(int truckID)
+        {
+            return new MasterPage(new TruckDetails(truckID));
+        }
+        public static Page AddTuckPage()
+        {
+            return new AddTruckInfo();
         }
 
         public static Page EditTruckListPage()
         {
             return new MasterPage(new EditTruckInfo());
         }
+
+        #endregion
 
         public static Color BarTextColor()
         {

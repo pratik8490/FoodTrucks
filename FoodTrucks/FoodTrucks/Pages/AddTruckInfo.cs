@@ -376,7 +376,7 @@ namespace FoodTrucks.Pages
                                    truckInfo.Link = txtWebsite.Text;
                                    truckInfo.Description = txtDescrition.Text;
                                    truckInfo.MenuImage = _UploadImage;
-                                   truckInfo.UserID = 4;
+                                   truckInfo.UserID = FoodTruckContext.UserID;
 
                                    if (_SelectedLocation)
                                    {
@@ -393,13 +393,13 @@ namespace FoodTrucks.Pages
 
                                    if (newID != 0)
                                    {
+                                       FoodTruckContext.IsLoggedIn = true;
                                        Navigation.PushAsync(App.TruckListPage());
                                        //_TruckInfoProvider.UploadBitmapAsync(_UploadImage, newID);
                                        //UserDialogs.Instance.ShowSuccess("Successfully saved truckinfo.");
                                    }
                                    //else
                                    //    UserDialogs.Instance.ShowError("Some error ocurred.");
-
                                    btnSubmit.IsVisible = true;
                                }
                                catch (Exception ex)

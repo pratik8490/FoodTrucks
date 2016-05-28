@@ -1,4 +1,6 @@
-﻿using FoodTruck;
+﻿using Acr.UserDialogs;
+using FoodTruck;
+using FoodTrucks.Context;
 using FoodTrucks.Helper;
 using FoodTrucks.Provider;
 using FoodTrucks.Provider.Interface;
@@ -49,7 +51,7 @@ namespace FoodTrucks.Pages
 
             ExtendedEntry txtEmail = new ExtendedEntry { Keyboard = Keyboard.Email, Placeholder = "Email", TextColor = Color.Black };
 
-            ExtendedEntry txtPin = new ExtendedEntry { Keyboard = Keyboard.Numeric, Placeholder = "Pin", TextColor = Color.Black };
+            ExtendedEntry txtPin = new ExtendedEntry { Keyboard = Keyboard.Numeric, Placeholder = "Pin", TextColor = Color.Black, IsPassword = true };
 
             Label lblNotifications = new Label
             {
@@ -205,51 +207,56 @@ namespace FoodTrucks.Pages
                     try
                     {
                         btnSignUp.IsVisible = false;
-                        _Loader.IsShowLoading = true;
-
                         if (string.IsNullOrEmpty(txtEmail.Text))
                         {
-                            DisplayAlert("Error", "Please enter email address.", "OK");
+                            UserDialogs.Instance.ShowError("Please enter email address.");
                             return;
                         }
                         if (string.IsNullOrEmpty(txtPin.Text))
                         {
-                            DisplayAlert("Error", "Please enter pin", "OK");
+                            UserDialogs.Instance.ShowError("Please enter pin.");
                             return;
                         }
-
                         if (Regex.IsMatch(txtEmail.Text.ToString(), Constants.RegxValidation.EmailValidationPattern, RegexOptions.IgnoreCase))
                         {
-                            UserModel objUserModel = new UserModel();
-                            objUserModel.DeviceID = GetDeviceID();
-                            objUserModel.Email = txtEmail.Text;
-                            objUserModel.Pin = Convert.ToInt32(txtPin.Text);
-                            objUserModel.FirstName = string.Empty;
-                            objUserModel.LastName = string.Empty;
-                            objUserModel.IsNotified = Convert.ToByte(swcNotifications.IsToggled);
-                            objUserModel.IsUser = Convert.ToByte(swcProvider.IsToggled);
-
-                            int UserId = await _UserProvider.SignUpUser(objUserModel);
-
-                            if (UserId != 0)
+                            using (UserDialogs.Instance.Loading("Loading..."))
                             {
-                                if (Convert.ToBoolean(objUserModel.IsUser))
+                                UserModel objUserModel = new UserModel();
+                                objUserModel.DeviceID = GetDeviceID();
+                                objUserModel.Email = txtEmail.Text;
+                                objUserModel.Pin = Convert.ToInt32(txtPin.Text);
+                                objUserModel.FirstName = string.Empty;
+                                objUserModel.LastName = string.Empty;
+                                objUserModel.IsNotified = Convert.ToByte(swcNotifications.IsToggled);
+                                objUserModel.IsUser = Convert.ToByte(swcProvider.IsToggled);
+
+                                int UserId = await _UserProvider.SignUpUser(objUserModel);
+
+                                if (UserId != 0)
                                 {
-                                    Navigation.PushAsync(App.AddTuckPage());
+                                    FoodTruckContext.UserID = UserId;
+                                    FoodTruckContext.UserName = txtEmail.Text;
+
+                                    if (Convert.ToBoolean(objUserModel.IsUser))
+                                    {
+                                        FoodTruckContext.IsProvider = true;
+                                        Navigation.PushAsync(App.AddTuckPage());
+                                    }
+                                    else
+                                    {
+                                        FoodTruckContext.IsLoggedIn = true;
+                                        Navigation.PushAsync(App.MapPage());
+                                    }
                                 }
                                 else
                                 {
-                                    Navigation.PushAsync(App.MapPage());
+                                    UserDialogs.Instance.ShowError("Some error ocurred.");
                                 }
-                            }
-                            else
-                            {
-                                DisplayAlert("Error", "Please enter correct username and password", "OK");
                             }
                         }
                         else
                         {
-                            DisplayAlert("Error", "Please enter correct format email address", "OK");
+                            UserDialogs.Instance.ShowError("Please enter correct format email address.");
                         }
                     }
                     catch (Exception ex)
