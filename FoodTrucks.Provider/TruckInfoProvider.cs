@@ -142,7 +142,7 @@ namespace FoodTrucks.Provider
             });
         }
 
-        public Task<TruckInfoModel> GetTruckDetail(int UserID)
+        public Task<TruckInfoModel> GetTruckDetailByUserID(int UserID)
         {
             var TruckList = new TaskCompletionSource<TruckInfoModel>();
 
@@ -155,6 +155,42 @@ namespace FoodTrucks.Provider
                     client.BaseAddress = new Uri(_SiteUrl);
 
                     var requestUri = "api/TruckInfo?UserID=" + UserID;
+
+                    var response = await client.GetAsync(requestUri);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var content = await response.Content.ReadAsStringAsync();
+                        TruckList.TrySetResult(JsonConvert.DeserializeObject<TruckInfoModel>(content));
+                    }
+                    else
+                    {
+                        TruckList.SetResult(new TruckInfoModel());
+                    }
+
+                }
+                catch (Exception ex)
+                {
+
+                }
+            });
+
+            return TruckList.Task;
+        }
+
+        public Task<TruckInfoModel> GetTruckDetailByTruckID(int TruckID)
+        {
+            var TruckList = new TaskCompletionSource<TruckInfoModel>();
+
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                try
+                {
+
+                    HttpClient client = new HttpClient();
+                    client.BaseAddress = new Uri(_SiteUrl);
+
+                    var requestUri = "api/TruckInfo?Id=" + TruckID;
 
                     var response = await client.GetAsync(requestUri);
 
