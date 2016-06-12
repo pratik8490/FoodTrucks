@@ -60,7 +60,7 @@ namespace FoodTrucks.Provider
             return res.Task;
         }
 
-        public Task<UserModel> LogInUser(string email, int pin)
+        public Task<UserModel> LogInUser(string email, string pin)
         {
             var res = new TaskCompletionSource<UserModel>();
 

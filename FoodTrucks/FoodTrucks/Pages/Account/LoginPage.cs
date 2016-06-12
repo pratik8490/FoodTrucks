@@ -50,10 +50,22 @@ namespace FoodTrucks.Pages
             {
                 bool isNetworkAvailable = DependencyService.Get<INetworkOperation>().IsInternetConnectionAvailable();
 
-                if (!isNetworkAvailable)
+                Device.BeginInvokeOnMainThread(async () =>
                 {
-                    DisplayAlert("Connection", "Please check your internet connection.", Messages.Ok);
-                }
+                    if (FoodTruckContext.Position == null)
+                    {
+                        FoodTruckContext.Position = await DependencyService.Get<ICurrentLocation>().SetCurrentLocation();
+                        if (FoodTruckContext.Position != null)
+                        {
+                            FoodTruckContext.AlreadyEnable = true;
+                        }
+                    }
+
+                    if (!isNetworkAvailable)
+                    {
+                        await DisplayAlert("Connection", "Please check your internet connection.", "OK");
+                    }
+                });
             }
             catch (Exception ex)
             {
@@ -91,8 +103,7 @@ namespace FoodTrucks.Pages
             txtPassword.Text = string.Empty;
             txtPassword.BackgroundColor = Color.Gray;
             txtPassword.TextColor = Color.Black;
-            txtPassword.Keyboard = Keyboard.Numeric;
-            txtPassword.Placeholder = "Pin";
+            txtPassword.Placeholder = "Password";
 
             var imageLogo = new Image { Source = Constants.ImagePath.MainPageMiddle };
             var cvTxtUserName = new ContentView
@@ -138,29 +149,28 @@ namespace FoodTrucks.Pages
                         {
                             using (UserDialogs.Instance.Loading("Loading..."))
                             {
-                                btnLogin.IsVisible = false;
-
                                 //Login call
-                                UserModel model = await _UserProvider.LogInUser(txtUserName.Text, Convert.ToInt32(txtPassword.Text));
+                                UserModel model = await _UserProvider.LogInUser(txtUserName.Text, txtPassword.Text);
 
-                                if (model != null)
+                                if (model.Id != 0)
                                 {
-                                    FoodTruckContext.UserName = txtUserName.Text;
+                                    FoodTruckContext.UserName = model.Email;
                                     FoodTruckContext.UserID = model.Id;
                                     FoodTruckContext.IsLoggedIn = true;
                                     FoodTruckContext.IsProvider = Convert.ToBoolean(model.IsUser);
-                                    UserDialogs.Instance.ShowSuccess("Success");
+                                    //UserDialogs.Instance.ShowSuccess("Success");
                                     //redirect to page
                                     Navigation.PushAsync(App.MapPage());
+                                }
+                                else
+                                {
+                                    ///
                                 }
                             }
                         }
                         catch (Exception ex)
                         {
-                            btnLogin.IsVisible = true;
                         }
-
-                        btnLogin.IsVisible = true;
                         //_loadingIndicator.IsShowLoading = false;
                     });
                 }
@@ -171,6 +181,37 @@ namespace FoodTrucks.Pages
                 Padding = new Thickness(10, 5, 10, 10),
                 Content = btnLogin
             };
+
+            Button btnRegister = new Button();
+            btnRegister.Text = "Register";
+            btnRegister.TextColor = Color.White;
+            btnRegister.BackgroundColor = LayoutHelper.ButtonColor;
+
+            btnRegister.Clicked += async (sender, e) =>
+            {
+                bool isProvider = await UserDialogs.Instance.ConfirmAsync(Messages.CustomMessage.ChooseProviderUser, "Register Option", Messages.User, Messages.Provider);
+
+                using (UserDialogs.Instance.Loading("Loading..."))
+                {
+                    FoodTruckContext.Position = await DependencyService.Get<ICurrentLocation>().SetCurrentLocation();
+
+                    if (isProvider)
+                    {
+                        //redirect provider register page
+                        Navigation.PushAsync(App.ProviderRegisterPage());
+                    }
+                    else
+                    {
+                        Navigation.PushAsync(App.UserRegisterPage());
+                    }
+                }
+            };
+
+            var cvBtnRegister = new ContentView
+             {
+                 Padding = new Thickness(10, 5, 10, 10),
+                 Content = btnRegister
+             };
 
             Label lblForgot = new Label
             {
@@ -210,7 +251,12 @@ namespace FoodTrucks.Pages
                 {
                     lblCopyrights,
                 },
+            };
 
+            StackLayout slRegiter = new StackLayout
+            {
+                Children = { cvBtnRegister },
+                HorizontalOptions = LayoutOptions.CenterAndExpand
             };
 
             _loadingIndicator = new LoadingIndicator();
@@ -222,6 +268,7 @@ namespace FoodTrucks.Pages
                     cvTxtUserName,
                     cvTxtPassword ,
                     cvBtnLogin,
+                    slRegiter,
                     cvLblForgetPassword,
                     _loadingIndicator,
                     barLower,

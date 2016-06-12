@@ -16,12 +16,12 @@ using Xamarin.Forms;
 
 namespace FoodTrucks.Pages
 {
-    public class SignUpPage : BasePage
+    public class UserRegisterPage : BasePage
     {
         private IUser _UserProvider = new UserProvider();
         private LoadingIndicator _Loader = new LoadingIndicator();
 
-        public SignUpPage()
+        public UserRegisterPage()
         {
             Title = "Sign up";
 
@@ -51,7 +51,7 @@ namespace FoodTrucks.Pages
 
             ExtendedEntry txtEmail = new ExtendedEntry { Keyboard = Keyboard.Email, Placeholder = "Email", TextColor = Color.Black };
 
-            ExtendedEntry txtPin = new ExtendedEntry { Keyboard = Keyboard.Numeric, Placeholder = "Pin", TextColor = Color.Black, IsPassword = true };
+            ExtendedEntry txtPassword = new ExtendedEntry { Placeholder = "Password", TextColor = Color.Black, IsPassword = true };
 
             Label lblNotifications = new Label
             {
@@ -129,7 +129,8 @@ namespace FoodTrucks.Pages
             {
                 Children = { slProviderText, swcProvider },
                 HorizontalOptions = LayoutOptions.FillAndExpand,
-                Orientation = StackOrientation.Horizontal
+                Orientation = StackOrientation.Horizontal,
+                IsVisible = false
             };
 
             StackLayout slGrid1 = new StackLayout
@@ -146,48 +147,9 @@ namespace FoodTrucks.Pages
                 VerticalOptions = LayoutOptions.CenterAndExpand
             };
 
-            //StackLayout slEmailPin = new StackLayout { Children = { txtEmail, txtPin }, Padding = new Thickness(20, 0, 20, 30) };
-
-            ////Entry txtEmail = new Entry { Placeholder = "Email", TextColor = Color.Black };
-
-            ////Entry txtPin = new Entry { Placeholder = "Pin", TextColor = Color.Black };
-
-            //Seperator spPin = new Seperator();
-
-            //Label lblNotified = new Label { Text = "Get notified by food trucks in your area?", TextColor = Color.Black };
-
-            //StackLayout sllblNotified = new StackLayout { Children = { lblNotified } };
-
-            //Switch schNotified = new Switch { HorizontalOptions = LayoutOptions.EndAndExpand };
-
-            //Seperator spNotified = new Seperator();
-
-            //StackLayout slNotified = new StackLayout { Children = { sllblNotified, schNotified }, Orientation = StackOrientation.Horizontal, Padding = new Thickness(0, 0, 0, 0) };
-
-            //Label lblLocation = new Label { Text = "Use my location for more accuracy?", TextColor = Color.Black };
-
-            //StackLayout sllblLocation = new StackLayout { Children = { lblLocation }, HorizontalOptions = LayoutOptions.StartAndExpand };
-
-            //Switch schLocation = new Switch();
-
-            //Seperator spLocation = new Seperator();
-
-            //StackLayout slLocation = new StackLayout { Children = { sllblLocation, schLocation }, Orientation = StackOrientation.Horizontal };
-
-            //Button btnSignUp = new Button { Text = "Sign Up", TextColor = Color.White, BackgroundColor = Color.FromHex("e61a1c") };
-
-            //StackLayout slBtnSignUp = new StackLayout { Children = { btnSignUp }, VerticalOptions = LayoutOptions.EndAndExpand, Padding = new Thickness(25, 0, 25, 25) };
-
-            //btnSignUp.Clicked += (sender, e) =>
-            //{
-            //    Navigation.PushAsync(App.MapPage());
-            //};
-
-            //StackLayout slSignUp = new StackLayout { Children = { slEmailPin, spPin, slNotified, spNotified, slLocation, spLocation, slBtnSignUp }, Orientation = StackOrientation.Vertical };
-
             StackLayout slEntry = new StackLayout
             {
-                Children = { txtEmail, txtPin },
+                Children = { txtEmail, txtPassword },
                 Orientation = StackOrientation.Vertical
             };
 
@@ -212,7 +174,7 @@ namespace FoodTrucks.Pages
                             UserDialogs.Instance.ShowError("Please enter email address.");
                             return;
                         }
-                        if (string.IsNullOrEmpty(txtPin.Text))
+                        if (string.IsNullOrEmpty(txtPassword.Text))
                         {
                             UserDialogs.Instance.ShowError("Please enter pin.");
                             return;
@@ -224,11 +186,12 @@ namespace FoodTrucks.Pages
                                 UserModel objUserModel = new UserModel();
                                 objUserModel.DeviceID = GetDeviceID();
                                 objUserModel.Email = txtEmail.Text;
-                                objUserModel.Pin = Convert.ToInt32(txtPin.Text);
+                                objUserModel.Pin = txtPassword.Text;
                                 objUserModel.FirstName = string.Empty;
                                 objUserModel.LastName = string.Empty;
-                                objUserModel.IsNotified = Convert.ToByte(swcNotifications.IsToggled);
-                                objUserModel.IsUser = Convert.ToByte(swcProvider.IsToggled);
+                                objUserModel.UserLocation = swcLocations.IsToggled;
+                                objUserModel.IsNotified = swcNotifications.IsToggled;
+                                objUserModel.IsUser = false;
 
                                 int UserId = await _UserProvider.SignUpUser(objUserModel);
 
@@ -236,17 +199,9 @@ namespace FoodTrucks.Pages
                                 {
                                     FoodTruckContext.UserID = UserId;
                                     FoodTruckContext.UserName = txtEmail.Text;
-
-                                    if (Convert.ToBoolean(objUserModel.IsUser))
-                                    {
-                                        FoodTruckContext.IsProvider = true;
-                                        Navigation.PushAsync(App.AddTuckPage());
-                                    }
-                                    else
-                                    {
-                                        FoodTruckContext.IsLoggedIn = true;
-                                        Navigation.PushAsync(App.MapPage());
-                                    }
+                                    FoodTruckContext.IsLoggedIn = true;
+                                    FoodTruckContext.IsProvider = false;
+                                    Navigation.PushAsync(App.MapPage());
                                 }
                                 else
                                 {
@@ -284,11 +239,11 @@ namespace FoodTrucks.Pages
                                     Orientation = StackOrientation.Vertical,
                                     VerticalOptions = LayoutOptions.CenterAndExpand,
                                 },
-                                spEntry.LineSeperatorView,
-                                new StackLayout {
-                                    Padding = new Thickness(20, Device.OnPlatform(40,20,0), 20, 0),
-                                    Children = {slProvider},
-                                },
+                                //spEntry.LineSeperatorView,
+                                //new StackLayout {
+                                //    Padding = new Thickness(20, Device.OnPlatform(40,20,0), 20, 0),
+                                //    Children = {slProvider},
+                                //},
                                 spProvider.LineSeperatorView,
                                 new StackLayout {
                                     Padding = new Thickness(20, Device.OnPlatform(40,20,0), 20, 0),

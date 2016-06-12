@@ -35,9 +35,14 @@ namespace FoodTrucks
 
             Label lblInFrontOf = new Label
             {
-                Text = model.Description,
+                //Text = ? "Infront of" + 
                 TextColor = Color.Gray
             };
+
+            if (!string.IsNullOrEmpty(model.InfrontOf))
+            {
+                lblInFrontOf.Text = "Infront of" + model.InfrontOf;
+            }
 
             StackLayout slLabelTitleInfrontOf = new StackLayout { Children = { lblTitle, lblInFrontOf }, Orientation = StackOrientation.Vertical };
 

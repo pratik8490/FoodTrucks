@@ -22,5 +22,7 @@ namespace FoodTrucks.Provider.Models
         public DateTime? ModifedAt { get; set; }
         public int? UserID { get; set; }
         public byte[] MenuImage { get; set; }
+        public string InfrontOf { get; set; }
+        public bool? IsUseLocation { get; set; }
     }
 }

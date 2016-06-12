@@ -40,15 +40,19 @@ namespace FoodTrucks.Pages
             {
                 Navigation.PushAsync(App.EditTruckListPage());
             }
-            else if (menu.Title == "Home")
+            else if (menu.Title == "Map View")
             {
-                Navigation.PushModalAsync(App.HomePage());
+                Navigation.PushAsync(App.MapPage());
             }
+            //else if (menu.Title == "Home")
+            //{
+            //    Navigation.PushAsync(App.MapPage());
+            //}
             else
             {
                 //API call for remove deviceID
                 FoodTruckContext.Clear();
-                Navigation.PushModalAsync(App.LoginPage());
+                Navigation.PushModalAsync(App.LoginPage(true));
             }
 
             //Page displayPage = (Page)Activator.CreateInstance(menu.TargetType);

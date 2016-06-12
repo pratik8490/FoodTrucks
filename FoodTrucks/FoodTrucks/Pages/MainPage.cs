@@ -1,4 +1,5 @@
-﻿using FoodTrucks.Context;
+﻿using Acr.UserDialogs;
+using FoodTrucks.Context;
 using FoodTrucks.Helper;
 using FoodTrucks.Interface;
 using FoodTrucks.Provider;
@@ -76,87 +77,169 @@ namespace FoodTrucks.Pages
                     Padding = new Thickness(5),
                     VerticalOptions = LayoutOptions.CenterAndExpand
                 };
+                #region Newcode
 
-                Button btnGetStart = new Button
+                Button btnLogin = new Button();
+                btnLogin.Text = "Login";
+                btnLogin.WidthRequest = 120;
+                btnLogin.TextColor = Color.White;
+                btnLogin.BackgroundColor = LayoutHelper.ButtonColor;
+
+                var cvBtnLogin = new ContentView
                 {
-                    Text = "LET'S GET STARTED",
-                    TextColor = Color.White,
-                    BackgroundColor = Color.FromHex("f23e3e")
+                    Padding = new Thickness(10, 5, 10, 10),
+                    Content = btnLogin
                 };
 
-                btnGetStart.Clicked += async (sender, e) =>
+                Button btnRegister = new Button();
+                btnRegister.Text = "Register";
+                btnRegister.WidthRequest = 120;
+                btnRegister.TextColor = Color.White;
+                btnRegister.BackgroundColor = LayoutHelper.ButtonColor;
+
+                var cvBtnRegister = new ContentView
+                {
+                    Padding = new Thickness(10, 5, 10, 10),
+                    Content = btnRegister
+                };
+
+                var btnStack = new StackLayout
+                {
+                    Orientation = StackOrientation.Horizontal,
+                    HorizontalOptions = LayoutOptions.Center,
+                    VerticalOptions = LayoutOptions.EndAndExpand,
+                    Children = {
+					                    cvBtnLogin,
+					                    cvBtnRegister,
+				                    }
+                };
+
+                btnLogin.Clicked += async (sender, e) =>
                     {
-                        //Device.BeginInvokeOnMainThread(async () =>
-                        //{
-                        btnGetStart.IsVisible = false;
-                        _Loader.IsShowLoading = true;
-
-                        //Navigation.PushAsync(App.SignUpPage());
-
-                        if (!FoodTruckContext.AlreadyEnable)
+                        using (UserDialogs.Instance.Loading("Loading..."))
                         {
-                            bool IsYesNo = false;
-
-                            IsYesNo = await DisplayAlert(string.Empty, "Please enable location service on your device.", "OK", "Cancel");
-                            if (IsYesNo)
-                            {
-                                btnGetStart.IsVisible = true;
-                                _Loader.IsShowLoading = false;
-                                FoodTruckContext.AlreadyEnable = true;
-
-                                FoodTruckContext.Position = await DependencyService.Get<ICurrentLocation>().SetCurrentLocation();
-                            }
-                            else
-                            {
-                                btnGetStart.IsVisible = true;
-                                _Loader.IsShowLoading = false;
-                                return;
-                            }
-                        }
-                        else
-                        {
-                            if (FoodTruckContext.Position == null)
-                            {
-                                FoodTruckContext.Position = await DependencyService.Get<ICurrentLocation>().SetCurrentLocation();
-                            }
-                            UserModel user = await _UserProvider.CheckDeviceLoggedIn(GetDeviceID());
-                            if (user.Id != 0)
-                            {
-                                if (!Convert.ToBoolean(user.IsUser))
-                                {
-                                    FoodTruckContext.UserName = user.Email;
-                                    FoodTruckContext.UserID = user.Id;
-                                    FoodTruckContext.IsLoggedIn = true;
-
-                                    Navigation.PushAsync(App.MapPage());
-                                }
-                                else
-                                {
-                                    Navigation.PushAsync(App.LoginPage());
-                                }
-                            }
-                            else
-                            {
-                                Navigation.PushAsync(App.SignUpPage());
-                            }
-
-                            btnGetStart.IsVisible = true;
-                            _Loader.IsShowLoading = false;
+                            FoodTruckContext.Position = await DependencyService.Get<ICurrentLocation>().SetCurrentLocation();
+                            Navigation.PushAsync(App.LoginPage());
                         }
                     };
 
-                StackLayout slBtnGetStart = new StackLayout
+                btnRegister.Clicked += async (sender, e) =>
                 {
-                    Children = { btnGetStart },
-                    VerticalOptions = LayoutOptions.EndAndExpand,
+                    bool isProvider = await UserDialogs.Instance.ConfirmAsync(Messages.CustomMessage.ChooseProviderUser, "Register Option", Messages.Yes, Messages.No);
+
+                    using (UserDialogs.Instance.Loading("Loading..."))
+                    {
+
+                        FoodTruckContext.Position = await DependencyService.Get<ICurrentLocation>().SetCurrentLocation();
+
+                        if (isProvider)
+                        {
+                            //redirect provider register page
+                            Navigation.PushAsync(App.ProviderRegisterPage());
+                        }
+                        else
+                        {
+                            Navigation.PushAsync(App.UserRegisterPage());
+                        }
+                    }
                 };
+                #endregion
+
+                #region Oldcode
+                //Button btnGetStart = new Button
+                //{
+                //    Text = "LET'S GET STARTED",
+                //    TextColor = Color.White,
+                //    BackgroundColor = Color.FromHex("f23e3e")
+                //};
+
+                //btnGetStart.Clicked += async (sender, e) =>
+                //    {
+                //        //Device.BeginInvokeOnMainThread(async () =>
+                //        //{
+                //        btnGetStart.IsVisible = false;
+                //        _Loader.IsShowLoading = true;
+
+                //        //Navigation.PushAsync(App.SignUpPage());
+
+                //        if (!FoodTruckContext.AlreadyEnable)
+                //        {
+                //            bool IsYesNo = false;
+
+                //            IsYesNo = await DisplayAlert(string.Empty, "Please enable location service on your device.", "OK", "Cancel");
+                //            if (IsYesNo)
+                //            {
+                //                btnGetStart.IsVisible = true;
+                //                _Loader.IsShowLoading = false;
+                //                FoodTruckContext.AlreadyEnable = true;
+
+                //                FoodTruckContext.Position = await DependencyService.Get<ICurrentLocation>().SetCurrentLocation();
+                //            }
+                //            else
+                //            {
+                //                btnGetStart.IsVisible = true;
+                //                _Loader.IsShowLoading = false;
+                //                return;
+                //            }
+                //        }
+                //        else
+                //        {
+                //            if (FoodTruckContext.Position == null)
+                //            {
+                //                FoodTruckContext.Position = await DependencyService.Get<ICurrentLocation>().SetCurrentLocation();
+                //            }
+                //            UserModel user = await _UserProvider.CheckDeviceLoggedIn(GetDeviceID());
+                //            if (user.Id != 0)
+                //            {
+                //                FoodTruckContext.UserName = user.Email;
+                //                FoodTruckContext.UserID = user.Id;
+                //                FoodTruckContext.IsLoggedIn = true;
+                //                if (user.IsUser == 0)
+                //                {
+                //                    FoodTruckContext.IsProvider = false;
+                //                }
+                //                else
+                //                {
+                //                    FoodTruckContext.IsProvider = true;
+                //                }
+
+                //                Navigation.PushAsync(App.MapPage());
+                //                //if (!Convert.ToBoolean(user.IsUser))
+                //                //{
+                //                //    FoodTruckContext.UserName = user.Email;
+                //                //    FoodTruckContext.UserID = user.Id;
+                //                //    FoodTruckContext.IsLoggedIn = true;
+
+                //                //    Navigation.PushAsync(App.MapPage());
+                //                //}
+                //                //else
+                //                //{
+                //                //    Navigation.PushAsync(App.LoginPage());
+                //                //}
+                //            }
+                //            else
+                //            {
+                //                Navigation.PushAsync(App.SignUpPage());
+                //            }
+
+                //            btnGetStart.IsVisible = true;
+                //            _Loader.IsShowLoading = false;
+                //        }
+                //    };
+
+                //StackLayout slBtnGetStart = new StackLayout
+                //{
+                //    Children = { btnGetStart },
+                //    VerticalOptions = LayoutOptions.EndAndExpand,
+                //};
+                #endregion
 
                 StackLayout slMainPage = new StackLayout
                 {
                     Children = { 
                         new StackLayout{
                             Padding = new Thickness(20, Device.OnPlatform(40,20,0), 20, 20),
-						    Children = {slImgMiddle, slBtnGetStart},
+						    Children = {slImgMiddle, btnStack},
                             VerticalOptions = LayoutOptions.FillAndExpand,
                             Orientation= StackOrientation.Vertical
                         },

@@ -11,5 +11,6 @@ namespace FoodTrucks.Models
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public string Message { get; set; }
+        public string Address { get; set; }
     }
 }

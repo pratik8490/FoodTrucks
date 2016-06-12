@@ -27,7 +27,6 @@ namespace FoodTrucks.Pages
         private int _SelectedFoodTypeID = 0, _SelectedBarID = 0;
         private bool _SelectedActivate = false, _SelectedLocation = false;
         private byte[] _UploadImage = null;
-        private Stream ms;
 
         #region Constructor
         /// <summary>
@@ -72,6 +71,18 @@ namespace FoodTrucks.Pages
                     Children = { txtTruckName },
                     HorizontalOptions = LayoutOptions.FillAndExpand
                 };
+
+                ExtendedEntry txtInfrotOf = new ExtendedEntry();
+                txtInfrotOf.TextColor = Color.Black;
+                txtInfrotOf.Placeholder = "In frontOf";
+
+                StackLayout slInfronOf = new StackLayout
+                {
+                    Children = { txtInfrotOf },
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    Padding = new Thickness(0, 10, 0, 10)
+                };
+
 
                 ExtendedEntry txtDescrition = new ExtendedEntry();
                 txtDescrition.TextColor = Color.Black;
@@ -358,9 +369,6 @@ namespace FoodTrucks.Pages
                        {
                            using (UserDialogs.Instance.Loading("Loading..."))
                            {
-
-                               btnSubmit.IsVisible = false;
-
                                try
                                {
                                    TruckInfoModel truckInfo = new TruckInfoModel();
@@ -376,6 +384,7 @@ namespace FoodTrucks.Pages
                                    truckInfo.Link = txtWebsite.Text;
                                    truckInfo.Description = txtDescrition.Text;
                                    truckInfo.MenuImage = _UploadImage;
+                                   truckInfo.InfrontOf = txtInfrotOf.Text;
                                    truckInfo.UserID = FoodTruckContext.UserID;
 
                                    if (_SelectedLocation)
@@ -393,19 +402,16 @@ namespace FoodTrucks.Pages
 
                                    if (newID != 0)
                                    {
-                                       FoodTruckContext.IsLoggedIn = true;
                                        Navigation.PushAsync(App.TruckListPage());
                                        //_TruckInfoProvider.UploadBitmapAsync(_UploadImage, newID);
                                        //UserDialogs.Instance.ShowSuccess("Successfully saved truckinfo.");
                                    }
                                    //else
                                    //    UserDialogs.Instance.ShowError("Some error ocurred.");
-                                   btnSubmit.IsVisible = true;
                                }
                                catch (Exception ex)
                                {
-                                   btnSubmit.IsVisible = true;
-                                   UserDialogs.Instance.ShowError(ex.Message.ToString(), 1);
+                                   UserDialogs.Instance.ShowError(ex.Message.ToString());
                                }
                            }
                        });
@@ -420,7 +426,7 @@ namespace FoodTrucks.Pages
 
                 StackLayout slFinalLayout = new StackLayout
                 {
-                    Children = { slTruckName, slDescription, slWebsite, slMenu, slFoodTypeLayout, slBarLayout, slActivate, slLocation, slBtnSubmit },
+                    Children = { slTruckName, slDescription, slInfronOf, slWebsite, slMenu, slFoodTypeLayout, slBarLayout, slActivate, slLocation, slBtnSubmit },
                     Orientation = StackOrientation.Vertical,
                     Padding = new Thickness(10, Device.OnPlatform(40, 10, 0), 10, 10),
                     BackgroundColor = LayoutHelper.PageBackgroundColor

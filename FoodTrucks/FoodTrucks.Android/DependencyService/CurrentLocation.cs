@@ -38,6 +38,8 @@ namespace FoodTrucks.Droid.CustomRenderer
                 Device.BeginInvokeOnMainThread(async () =>
                 {
 
+                    Geocoder coder = new Geocoder(this);
+
                     locator = new Xamarin.Geolocation.Geolocator(context) { DesiredAccuracy = 50 };
                     if (locator.IsListening != true)
                         locator.StartListening(minTime: 1000, minDistance: 0);
@@ -59,8 +61,15 @@ namespace FoodTrucks.Droid.CustomRenderer
                             obj.Longitude = position.Longitude;
                             obj.Message = string.Empty;
 
-                            response.SetResult(obj);
+                            var address = await coder.GetFromLocationAsync(position.Latitude, position.Longitude, 1);
 
+                            foreach (var location in address)
+                            {
+                                obj.Address = location.GetAddressLine(0) + " " + location.GetAddressLine(1) + " " + location.GetAddressLine(2) + " " + location.GetAddressLine(3);
+                            }
+
+                            response.SetResult(obj);
+                            FoodTruckContext.AlreadyEnable = true;
                             //System.Diagnostics.Debug.WriteLine("[GetPosition] Lat. : {0} / Long. : {1}", result.Latitude.ToString("N4"), result.Longitude.ToString("N4"));
                         }
                         catch (Exception e)
@@ -86,6 +95,45 @@ namespace FoodTrucks.Droid.CustomRenderer
             }
 
             return response.Task;
+        }
+
+        public Task<Position> GetLocation(string locationAddress)
+        {
+            var result = new TaskCompletionSource<Position>();
+
+            Device.BeginInvokeOnMainThread(async () =>
+                {
+
+                    Geocoder coder = new Geocoder(this);
+                    double geolongitude = 0;
+                    double geolatitude = 0;
+
+                    var address = await coder.GetFromLocationNameAsync(locationAddress, 1);
+                    if (address == null)
+                    {
+                        result.TrySetResult(new Position());
+                    }
+                    else
+                    {
+                        foreach (var location in address)
+                        {
+                            geolongitude = location.Latitude;
+                            geolatitude = location.Longitude;
+                        }
+
+                        Position postion = new Position();
+                        postion.Latitude = geolatitude;
+                        postion.Longitude = geolongitude;
+                        postion.Address = locationAddress;
+
+                        result.TrySetResult(postion);
+                    }
+                });
+            return result.Task;
+            //var geolongitude = 38.6731610;
+            //var geolatitude =  -77.3328850;
+
+            //var streetViewUri = Android.Net.Uri.Parse("google.streetview:cbll=" + geolongitude + "," + geolatitude + "&cbp=1,60,,0,1.0&mz=20");
         }
     }
 }

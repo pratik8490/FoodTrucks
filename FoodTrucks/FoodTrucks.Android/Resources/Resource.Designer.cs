@@ -1642,7 +1642,10 @@ namespace FoodTrucks.Droid
 			public const int roundedbgdark = 2130837616;
 			
 			// aapt resource value: 0x7f020071
-			public const int slideout = 2130837617;
+			public const int search = 2130837617;
+			
+			// aapt resource value: 0x7f020072
+			public const int slideout = 2130837618;
 			
 			static Drawable()
 			{

@@ -25,28 +25,36 @@ namespace FoodTrucks
 
         public static Page HomePage(bool IsFromLogout = false)
         {
-            if (!IsFromLogout)
+            navPage = new NavigationPage(new LoginPage());
+            navPage.BarBackgroundColor = LayoutHelper.BarBackGroundColor;
+            navPage.BarTextColor = LayoutHelper.BarBackTextColor;
+
+            return navPage;
+        }
+
+        public static Page LoginPage(bool IsLogout = false)
+        {
+            if (IsLogout)
             {
-                navPage = new NavigationPage(new MainPage());
+                navPage = new NavigationPage(new LoginPage());
                 navPage.BarBackgroundColor = LayoutHelper.BarBackGroundColor;
                 navPage.BarTextColor = LayoutHelper.BarBackTextColor;
-
                 return navPage;
             }
             else
             {
-                return new MainPage();
+                return new LoginPage();
             }
         }
 
-        public static Page LoginPage()
+        public static Page UserRegisterPage()
         {
-            return new LoginPage();
+            return new UserRegisterPage();
         }
 
-        public static Page SignUpPage()
+        public static Page ProviderRegisterPage()
         {
-            return new SignUpPage();
+            return new ProviderRegister();
         }
 
         public static Page MapPage()

@@ -36,11 +36,18 @@ namespace FoodTrucks.Pages.Master
     {
         public MenuListData()
         {
+            //this.Add(new MenuItem()
+            //{
+            //    Title = "Home",
+            //    //IconSource = "contacts.png",
+            //    //TargetType = typeof(ContractsPage)
+            //});
+
             this.Add(new MenuItem()
             {
-                Title = "Home",
-                //IconSource = "contacts.png",
-                //TargetType = typeof(ContractsPage)
+                Title = "Map View",
+                //IconSource = "leads.png",
+                //TargetType = typeof(LeadsPage)
             });
 
             if (FoodTruckContext.IsProvider)

@@ -1,4 +1,5 @@
-﻿using FoodTrucks.Context;
+﻿using Acr.UserDialogs;
+using FoodTrucks.Context;
 using FoodTrucks.CustomControls;
 using FoodTrucks.Helper;
 using FoodTrucks.Interface;
@@ -225,32 +226,34 @@ namespace FoodTrucks.Pages
                     {
                         lblReviewsName.Text = string.Empty;
                         lblReviewDesc.Text = string.Empty;
-                        loader.IsShowLoading = true;
 
-                        lblTruckTitle.Text = item.TruckName;
-
-                        //GEt call for food type details
-                        FoodTypeModel foodTypeModel = await _FoodTypeProvider.GetFoodTypeByID(Convert.ToInt32(item.FoodTypeId));
-
-                        //Calculate Distance
-                        DistanceCalculator distanceCal = new DistanceCalculator();
-                        double totalKm = distanceCal.distance(Convert.ToDouble(FoodTruckContext.Position.Latitude), Convert.ToDouble(FoodTruckContext.Position.Longitude), Convert.ToDouble(item.Lattitude), Convert.ToDouble(item.Longitude), Convert.ToChar("K"));
-
-                        lblTruckDetail.Text = foodTypeModel.Type + "\n" + "GPS coordinates, " + totalKm.ToString("0.00") + " KM away" + "\n" + "In front of";
-
-                        //Get call for review details
-                        ReviewDetailModel reviewDetail = await _ReviewProvider.GetByTruckId(item.Id);
-
-                        if ((!string.IsNullOrEmpty(reviewDetail.FirstName) || !string.IsNullOrEmpty(reviewDetail.LastName)) && !string.IsNullOrEmpty(reviewDetail.Description))
+                        using (UserDialogs.Instance.Loading("Loading..."))
                         {
-                            lblReviewsName.Text = reviewDetail.FirstName + " " + reviewDetail.LastName;
-                            lblReviewDesc.Text = reviewDetail.Description;
+
+                            lblTruckTitle.Text = item.TruckName;
+
+                            //GEt call for food type details
+                            FoodTypeModel foodTypeModel = await _FoodTypeProvider.GetFoodTypeByID(Convert.ToInt32(item.FoodTypeId));
+
+                            //Calculate Distance
+                            DistanceCalculator distanceCal = new DistanceCalculator();
+                            double totalKm = distanceCal.distance(Convert.ToDouble(FoodTruckContext.Position.Latitude), Convert.ToDouble(FoodTruckContext.Position.Longitude), Convert.ToDouble(item.Lattitude), Convert.ToDouble(item.Longitude), Convert.ToChar("K"));
+
+                            lblTruckDetail.Text = foodTypeModel.Type + "\n" + "GPS coordinates, " + totalKm.ToString("0.00") + " KM away" + "\n" + "In front of";
+
+                            //Get call for review details
+                            ReviewDetailModel reviewDetail = await _ReviewProvider.GetByTruckId(item.Id);
+
+                            if ((!string.IsNullOrEmpty(reviewDetail.FirstName) || !string.IsNullOrEmpty(reviewDetail.LastName)) && !string.IsNullOrEmpty(reviewDetail.Description))
+                            {
+                                lblReviewsName.Text = reviewDetail.FirstName + " " + reviewDetail.LastName;
+                                lblReviewDesc.Text = reviewDetail.Description;
+                            }
+                            else
+                            {
+                                lblReviewsName.Text = "There is no review for this truck.";
+                            }
                         }
-                        else
-                        {
-                            lblReviewsName.Text = "There is no review for this truck.";
-                        }
-                        loader.IsShowLoading = false;
                         slTruck.IsVisible = true;
                         //});
                     };

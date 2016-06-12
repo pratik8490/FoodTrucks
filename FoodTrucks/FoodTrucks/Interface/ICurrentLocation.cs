@@ -10,5 +10,6 @@ namespace FoodTrucks.Interface
     public interface ICurrentLocation
     {
         Task<Position> SetCurrentLocation();
+        Task<Position> GetLocation(string address);
     }
 }

@@ -179,6 +179,7 @@
     <AndroidResource Include="Resources\Drawable\down_arrow.png" />
     <AndroidResource Include="Resources\Drawable\LogOut.png" />
     <AndroidResource Include="Resources\Drawable\line_menu.png" />
+    <AndroidResource Include="Resources\Drawable\search.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FoodTrucks\FoodTrucks.csproj">

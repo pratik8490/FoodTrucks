@@ -107,7 +107,8 @@ namespace FoodTrucks.Pages
 
             Image imgMenu = new Image { WidthRequest = 60, HeightRequest = 60 };
             if (!string.IsNullOrEmpty(_TruckInfo.Menu))
-                imgMenu.Source = FileImageSource.FromUri(new Uri("http://foodlifttrucks.com/" + _TruckInfo.Menu));
+                imgMenu.Source = ImageSource.FromUri(new Uri("http://foodlifttrucks.com/" + _TruckInfo.Menu));
+
 
             StackLayout slMenu = new StackLayout { Children = { lblMenuText, imgMenu }, Orientation = StackOrientation.Horizontal };
 
