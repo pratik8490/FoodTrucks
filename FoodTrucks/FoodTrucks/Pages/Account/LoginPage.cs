@@ -189,20 +189,23 @@ namespace FoodTrucks.Pages
 
             btnRegister.Clicked += async (sender, e) =>
             {
-                bool isProvider = await UserDialogs.Instance.ConfirmAsync(Messages.CustomMessage.ChooseProviderUser, "Register Option", Messages.User, Messages.Provider);
+                bool isUserProvider = await UserDialogs.Instance.ConfirmAsync(Messages.CustomMessage.ChooseProviderUser, "Register Option", Messages.User, Messages.Provider);
 
                 using (UserDialogs.Instance.Loading("Loading..."))
                 {
-                    FoodTruckContext.Position = await DependencyService.Get<ICurrentLocation>().SetCurrentLocation();
-
-                    if (isProvider)
+                    //Get location
+                    if (FoodTruckContext.Position == null)
+                    {
+                        FoodTruckContext.Position = await DependencyService.Get<ICurrentLocation>().SetCurrentLocation();
+                    }
+                    if (isUserProvider)
                     {
                         //redirect provider register page
-                        Navigation.PushAsync(App.ProviderRegisterPage());
+                        Navigation.PushAsync(App.UserRegisterPage());
                     }
                     else
                     {
-                        Navigation.PushAsync(App.UserRegisterPage());
+                        Navigation.PushAsync(App.ProviderRegisterPage());
                     }
                 }
             };
