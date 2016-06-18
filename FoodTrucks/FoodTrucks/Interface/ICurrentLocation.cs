@@ -11,5 +11,7 @@ namespace FoodTrucks.Interface
     {
         Task<Position> SetCurrentLocation();
         Task<Position> GetLocation(string address);
+        Task<Position> GetAddress(double lat, double Long);
+        void EnableGPSActivity();
     }
 }

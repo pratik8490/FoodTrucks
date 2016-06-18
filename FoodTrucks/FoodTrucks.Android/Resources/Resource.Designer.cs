@@ -143,6 +143,48 @@ namespace FoodTrucks.Droid
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextSize = global::FoodTrucks.Droid.Resource.Styleable.ProgressWheel_ahTextSize;
 			global::Xamarin.Forms.Platform.Resource.String.ApplicationName = global::FoodTrucks.Droid.Resource.String.ApplicationName;
 			global::Xamarin.Forms.Platform.Resource.String.Hello = global::FoodTrucks.Droid.Resource.String.Hello;
+			global::XLabs.Forms.Resource.Color.calendar_active_month_bg = global::FoodTrucks.Droid.Resource.Color.calendar_active_month_bg;
+			global::XLabs.Forms.Resource.Color.calendar_bg = global::FoodTrucks.Droid.Resource.Color.calendar_bg;
+			global::XLabs.Forms.Resource.Color.calendar_divider = global::FoodTrucks.Droid.Resource.Color.calendar_divider;
+			global::XLabs.Forms.Resource.Color.calendar_highlighted_day_bg = global::FoodTrucks.Droid.Resource.Color.calendar_highlighted_day_bg;
+			global::XLabs.Forms.Resource.Color.calendar_inactive_month_bg = global::FoodTrucks.Droid.Resource.Color.calendar_inactive_month_bg;
+			global::XLabs.Forms.Resource.Color.calendar_selected_day_bg = global::FoodTrucks.Droid.Resource.Color.calendar_selected_day_bg;
+			global::XLabs.Forms.Resource.Color.calendar_selected_range_bg = global::FoodTrucks.Droid.Resource.Color.calendar_selected_range_bg;
+			global::XLabs.Forms.Resource.Color.calendar_text_active = global::FoodTrucks.Droid.Resource.Color.calendar_text_active;
+			global::XLabs.Forms.Resource.Color.calendar_text_inactive = global::FoodTrucks.Droid.Resource.Color.calendar_text_inactive;
+			global::XLabs.Forms.Resource.Color.calendar_text_selected = global::FoodTrucks.Droid.Resource.Color.calendar_text_selected;
+			global::XLabs.Forms.Resource.Color.calendar_text_selector = global::FoodTrucks.Droid.Resource.Color.calendar_text_selector;
+			global::XLabs.Forms.Resource.Color.calendar_text_unselectable = global::FoodTrucks.Droid.Resource.Color.calendar_text_unselectable;
+			global::XLabs.Forms.Resource.Dimension.calendar_day_headers_paddingbottom = global::FoodTrucks.Droid.Resource.Dimension.calendar_day_headers_paddingbottom;
+			global::XLabs.Forms.Resource.Dimension.calendar_month_title_bottommargin = global::FoodTrucks.Droid.Resource.Dimension.calendar_month_title_bottommargin;
+			global::XLabs.Forms.Resource.Dimension.calendar_month_topmargin = global::FoodTrucks.Droid.Resource.Dimension.calendar_month_topmargin;
+			global::XLabs.Forms.Resource.Dimension.calendar_text_medium = global::FoodTrucks.Droid.Resource.Dimension.calendar_text_medium;
+			global::XLabs.Forms.Resource.Dimension.calendar_text_small = global::FoodTrucks.Droid.Resource.Dimension.calendar_text_small;
+			global::XLabs.Forms.Resource.Drawable.ad16 = global::FoodTrucks.Droid.Resource.Drawable.ad16;
+			global::XLabs.Forms.Resource.Drawable.calendar_bg_selector = global::FoodTrucks.Droid.Resource.Drawable.calendar_bg_selector;
+			global::XLabs.Forms.Resource.Id.calendar_grid = global::FoodTrucks.Droid.Resource.Id.calendar_grid;
+			global::XLabs.Forms.Resource.Id.calendar_view = global::FoodTrucks.Droid.Resource.Id.calendar_view;
+			global::XLabs.Forms.Resource.Id.left_arrow = global::FoodTrucks.Droid.Resource.Id.left_arrow;
+			global::XLabs.Forms.Resource.Id.right_arrow = global::FoodTrucks.Droid.Resource.Id.right_arrow;
+			global::XLabs.Forms.Resource.Id.title = global::FoodTrucks.Droid.Resource.Id.title;
+			global::XLabs.Forms.Resource.Layout.calendar_pager_layout = global::FoodTrucks.Droid.Resource.Layout.calendar_pager_layout;
+			global::XLabs.Forms.Resource.Layout.calendar_picker = global::FoodTrucks.Droid.Resource.Layout.calendar_picker;
+			global::XLabs.Forms.Resource.Layout.dialog = global::FoodTrucks.Droid.Resource.Layout.dialog;
+			global::XLabs.Forms.Resource.Layout.month = global::FoodTrucks.Droid.Resource.Layout.month;
+			global::XLabs.Forms.Resource.Layout.week = global::FoodTrucks.Droid.Resource.Layout.week;
+			global::XLabs.Forms.Resource.String.ApplicationName = global::FoodTrucks.Droid.Resource.String.ApplicationName;
+			global::XLabs.Forms.Resource.String.Hello = global::FoodTrucks.Droid.Resource.String.Hello;
+			global::XLabs.Forms.Resource.String.day_name_format = global::FoodTrucks.Droid.Resource.String.day_name_format;
+			global::XLabs.Forms.Resource.String.full_date_format = global::FoodTrucks.Droid.Resource.String.full_date_format;
+			global::XLabs.Forms.Resource.String.invalid_date = global::FoodTrucks.Droid.Resource.String.invalid_date;
+			global::XLabs.Forms.Resource.String.library_name = global::FoodTrucks.Droid.Resource.String.library_name;
+			global::XLabs.Forms.Resource.String.month_name_format = global::FoodTrucks.Droid.Resource.String.month_name_format;
+			global::XLabs.Forms.Resource.Style.CalendarCell = global::FoodTrucks.Droid.Resource.Style.CalendarCell;
+			global::XLabs.Forms.Resource.Style.CalendarCell_CalendarDate = global::FoodTrucks.Droid.Resource.Style.CalendarCell_CalendarDate;
+			global::XLabs.Forms.Resource.Style.CalendarCell_DayHeader = global::FoodTrucks.Droid.Resource.Style.CalendarCell_DayHeader;
+			global::XLabs.Forms.Resource.Style.CalendarTitle = global::FoodTrucks.Droid.Resource.Style.CalendarTitle;
+			global::XLabs.Platform.Resource.String.ApplicationName = global::FoodTrucks.Droid.Resource.String.ApplicationName;
+			global::XLabs.Platform.Resource.String.Hello = global::FoodTrucks.Droid.Resource.String.Hello;
 		}
 		
 		public partial class Animation
@@ -892,29 +934,29 @@ namespace FoodTrucks.Droid
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f090048
-			public const int abc_background_cache_hint_selector_material_dark = 2131296328;
+			// aapt resource value: 0x7f090053
+			public const int abc_background_cache_hint_selector_material_dark = 2131296339;
 			
-			// aapt resource value: 0x7f090049
-			public const int abc_background_cache_hint_selector_material_light = 2131296329;
+			// aapt resource value: 0x7f090054
+			public const int abc_background_cache_hint_selector_material_light = 2131296340;
 			
 			// aapt resource value: 0x7f090000
 			public const int abc_input_method_navigation_guard = 2131296256;
 			
-			// aapt resource value: 0x7f09004a
-			public const int abc_primary_text_disable_only_material_dark = 2131296330;
+			// aapt resource value: 0x7f090055
+			public const int abc_primary_text_disable_only_material_dark = 2131296341;
 			
-			// aapt resource value: 0x7f09004b
-			public const int abc_primary_text_disable_only_material_light = 2131296331;
+			// aapt resource value: 0x7f090056
+			public const int abc_primary_text_disable_only_material_light = 2131296342;
 			
-			// aapt resource value: 0x7f09004c
-			public const int abc_primary_text_material_dark = 2131296332;
+			// aapt resource value: 0x7f090057
+			public const int abc_primary_text_material_dark = 2131296343;
 			
-			// aapt resource value: 0x7f09004d
-			public const int abc_primary_text_material_light = 2131296333;
+			// aapt resource value: 0x7f090058
+			public const int abc_primary_text_material_light = 2131296344;
 			
-			// aapt resource value: 0x7f09004e
-			public const int abc_search_url_text = 2131296334;
+			// aapt resource value: 0x7f090059
+			public const int abc_search_url_text = 2131296345;
 			
 			// aapt resource value: 0x7f090001
 			public const int abc_search_url_text_normal = 2131296257;
@@ -925,11 +967,11 @@ namespace FoodTrucks.Droid
 			// aapt resource value: 0x7f090003
 			public const int abc_search_url_text_selected = 2131296259;
 			
-			// aapt resource value: 0x7f09004f
-			public const int abc_secondary_text_material_dark = 2131296335;
+			// aapt resource value: 0x7f09005a
+			public const int abc_secondary_text_material_dark = 2131296346;
 			
-			// aapt resource value: 0x7f090050
-			public const int abc_secondary_text_material_light = 2131296336;
+			// aapt resource value: 0x7f09005b
+			public const int abc_secondary_text_material_light = 2131296347;
 			
 			// aapt resource value: 0x7f090004
 			public const int accent_material_dark = 2131296260;
@@ -973,6 +1015,42 @@ namespace FoodTrucks.Droid
 			// aapt resource value: 0x7f090011
 			public const int button_material_light = 2131296273;
 			
+			// aapt resource value: 0x7f090048
+			public const int calendar_active_month_bg = 2131296328;
+			
+			// aapt resource value: 0x7f090049
+			public const int calendar_bg = 2131296329;
+			
+			// aapt resource value: 0x7f09004a
+			public const int calendar_divider = 2131296330;
+			
+			// aapt resource value: 0x7f09004d
+			public const int calendar_highlighted_day_bg = 2131296333;
+			
+			// aapt resource value: 0x7f09004b
+			public const int calendar_inactive_month_bg = 2131296331;
+			
+			// aapt resource value: 0x7f09004c
+			public const int calendar_selected_day_bg = 2131296332;
+			
+			// aapt resource value: 0x7f09004e
+			public const int calendar_selected_range_bg = 2131296334;
+			
+			// aapt resource value: 0x7f090050
+			public const int calendar_text_active = 2131296336;
+			
+			// aapt resource value: 0x7f09004f
+			public const int calendar_text_inactive = 2131296335;
+			
+			// aapt resource value: 0x7f090051
+			public const int calendar_text_selected = 2131296337;
+			
+			// aapt resource value: 0x7f09005c
+			public const int calendar_text_selector = 2131296348;
+			
+			// aapt resource value: 0x7f090052
+			public const int calendar_text_unselectable = 2131296338;
+			
 			// aapt resource value: 0x7f09003a
 			public const int common_action_bar_splitter = 2131296314;
 			
@@ -1003,11 +1081,11 @@ namespace FoodTrucks.Droid
 			// aapt resource value: 0x7f090036
 			public const int common_signin_btn_light_text_pressed = 2131296310;
 			
-			// aapt resource value: 0x7f090051
-			public const int common_signin_btn_text_dark = 2131296337;
+			// aapt resource value: 0x7f09005d
+			public const int common_signin_btn_text_dark = 2131296349;
 			
-			// aapt resource value: 0x7f090052
-			public const int common_signin_btn_text_light = 2131296338;
+			// aapt resource value: 0x7f09005e
+			public const int common_signin_btn_text_light = 2131296350;
 			
 			// aapt resource value: 0x7f090012
 			public const int dim_foreground_disabled_material_dark = 2131296274;
@@ -1141,11 +1219,11 @@ namespace FoodTrucks.Droid
 			// aapt resource value: 0x7f090047
 			public const int wallet_link_text_light = 2131296327;
 			
-			// aapt resource value: 0x7f090053
-			public const int wallet_primary_text_holo_light = 2131296339;
+			// aapt resource value: 0x7f09005f
+			public const int wallet_primary_text_holo_light = 2131296351;
 			
-			// aapt resource value: 0x7f090054
-			public const int wallet_secondary_text_holo_dark = 2131296340;
+			// aapt resource value: 0x7f090060
+			public const int wallet_secondary_text_holo_dark = 2131296352;
 			
 			static Color()
 			{
@@ -1270,6 +1348,21 @@ namespace FoodTrucks.Droid
 			
 			// aapt resource value: 0x7f0b0024
 			public const int abc_text_size_title_material_toolbar = 2131427364;
+			
+			// aapt resource value: 0x7f0b002b
+			public const int calendar_day_headers_paddingbottom = 2131427371;
+			
+			// aapt resource value: 0x7f0b002d
+			public const int calendar_month_title_bottommargin = 2131427373;
+			
+			// aapt resource value: 0x7f0b002c
+			public const int calendar_month_topmargin = 2131427372;
+			
+			// aapt resource value: 0x7f0b002e
+			public const int calendar_text_medium = 2131427374;
+			
+			// aapt resource value: 0x7f0b002f
+			public const int calendar_text_small = 2131427375;
 			
 			// aapt resource value: 0x7f0b0025
 			public const int dialog_fixed_height_major = 2131427365;
@@ -1456,196 +1549,220 @@ namespace FoodTrucks.Droid
 			public const int abc_textfield_search_material = 2130837554;
 			
 			// aapt resource value: 0x7f020033
-			public const int aerrow = 2130837555;
+			public const int ad16 = 2130837555;
 			
 			// aapt resource value: 0x7f020034
-			public const int appIcon = 2130837556;
+			public const int aerrow = 2130837556;
 			
 			// aapt resource value: 0x7f020035
-			public const int common_full_open_on_phone = 2130837557;
+			public const int appIcon = 2130837557;
 			
 			// aapt resource value: 0x7f020036
-			public const int common_ic_googleplayservices = 2130837558;
+			public const int calendar_bg_selector = 2130837558;
 			
 			// aapt resource value: 0x7f020037
-			public const int common_signin_btn_icon_dark = 2130837559;
+			public const int call_icon = 2130837559;
 			
 			// aapt resource value: 0x7f020038
-			public const int common_signin_btn_icon_disabled_dark = 2130837560;
+			public const int common_full_open_on_phone = 2130837560;
 			
 			// aapt resource value: 0x7f020039
-			public const int common_signin_btn_icon_disabled_focus_dark = 2130837561;
+			public const int common_ic_googleplayservices = 2130837561;
 			
 			// aapt resource value: 0x7f02003a
-			public const int common_signin_btn_icon_disabled_focus_light = 2130837562;
+			public const int common_signin_btn_icon_dark = 2130837562;
 			
 			// aapt resource value: 0x7f02003b
-			public const int common_signin_btn_icon_disabled_light = 2130837563;
+			public const int common_signin_btn_icon_disabled_dark = 2130837563;
 			
 			// aapt resource value: 0x7f02003c
-			public const int common_signin_btn_icon_focus_dark = 2130837564;
+			public const int common_signin_btn_icon_disabled_focus_dark = 2130837564;
 			
 			// aapt resource value: 0x7f02003d
-			public const int common_signin_btn_icon_focus_light = 2130837565;
+			public const int common_signin_btn_icon_disabled_focus_light = 2130837565;
 			
 			// aapt resource value: 0x7f02003e
-			public const int common_signin_btn_icon_light = 2130837566;
+			public const int common_signin_btn_icon_disabled_light = 2130837566;
 			
 			// aapt resource value: 0x7f02003f
-			public const int common_signin_btn_icon_normal_dark = 2130837567;
+			public const int common_signin_btn_icon_focus_dark = 2130837567;
 			
 			// aapt resource value: 0x7f020040
-			public const int common_signin_btn_icon_normal_light = 2130837568;
+			public const int common_signin_btn_icon_focus_light = 2130837568;
 			
 			// aapt resource value: 0x7f020041
-			public const int common_signin_btn_icon_pressed_dark = 2130837569;
+			public const int common_signin_btn_icon_light = 2130837569;
 			
 			// aapt resource value: 0x7f020042
-			public const int common_signin_btn_icon_pressed_light = 2130837570;
+			public const int common_signin_btn_icon_normal_dark = 2130837570;
 			
 			// aapt resource value: 0x7f020043
-			public const int common_signin_btn_text_dark = 2130837571;
+			public const int common_signin_btn_icon_normal_light = 2130837571;
 			
 			// aapt resource value: 0x7f020044
-			public const int common_signin_btn_text_disabled_dark = 2130837572;
+			public const int common_signin_btn_icon_pressed_dark = 2130837572;
 			
 			// aapt resource value: 0x7f020045
-			public const int common_signin_btn_text_disabled_focus_dark = 2130837573;
+			public const int common_signin_btn_icon_pressed_light = 2130837573;
 			
 			// aapt resource value: 0x7f020046
-			public const int common_signin_btn_text_disabled_focus_light = 2130837574;
+			public const int common_signin_btn_text_dark = 2130837574;
 			
 			// aapt resource value: 0x7f020047
-			public const int common_signin_btn_text_disabled_light = 2130837575;
+			public const int common_signin_btn_text_disabled_dark = 2130837575;
 			
 			// aapt resource value: 0x7f020048
-			public const int common_signin_btn_text_focus_dark = 2130837576;
+			public const int common_signin_btn_text_disabled_focus_dark = 2130837576;
 			
 			// aapt resource value: 0x7f020049
-			public const int common_signin_btn_text_focus_light = 2130837577;
+			public const int common_signin_btn_text_disabled_focus_light = 2130837577;
 			
 			// aapt resource value: 0x7f02004a
-			public const int common_signin_btn_text_light = 2130837578;
+			public const int common_signin_btn_text_disabled_light = 2130837578;
 			
 			// aapt resource value: 0x7f02004b
-			public const int common_signin_btn_text_normal_dark = 2130837579;
+			public const int common_signin_btn_text_focus_dark = 2130837579;
 			
 			// aapt resource value: 0x7f02004c
-			public const int common_signin_btn_text_normal_light = 2130837580;
+			public const int common_signin_btn_text_focus_light = 2130837580;
 			
 			// aapt resource value: 0x7f02004d
-			public const int common_signin_btn_text_pressed_dark = 2130837581;
+			public const int common_signin_btn_text_light = 2130837581;
 			
 			// aapt resource value: 0x7f02004e
-			public const int common_signin_btn_text_pressed_light = 2130837582;
+			public const int common_signin_btn_text_normal_dark = 2130837582;
 			
 			// aapt resource value: 0x7f02004f
-			public const int CurrentLocation = 2130837583;
+			public const int common_signin_btn_text_normal_light = 2130837583;
 			
 			// aapt resource value: 0x7f020050
-			public const int down_arrow = 2130837584;
+			public const int common_signin_btn_text_pressed_dark = 2130837584;
 			
 			// aapt resource value: 0x7f020051
-			public const int filter = 2130837585;
+			public const int common_signin_btn_text_pressed_light = 2130837585;
 			
 			// aapt resource value: 0x7f020052
-			public const int foodtruck = 2130837586;
+			public const int CurrentLocation = 2130837586;
 			
 			// aapt resource value: 0x7f020053
-			public const int ic_errorstatus = 2130837587;
+			public const int down_arrow = 2130837587;
 			
 			// aapt resource value: 0x7f020054
-			public const int ic_plusone_medium_off_client = 2130837588;
+			public const int filter = 2130837588;
 			
 			// aapt resource value: 0x7f020055
-			public const int ic_plusone_small_off_client = 2130837589;
+			public const int foodtruck = 2130837589;
 			
 			// aapt resource value: 0x7f020056
-			public const int ic_plusone_standard_off_client = 2130837590;
+			public const int ic_errorstatus = 2130837590;
 			
 			// aapt resource value: 0x7f020057
-			public const int ic_plusone_tall_off_client = 2130837591;
+			public const int ic_plusone_medium_off_client = 2130837591;
 			
 			// aapt resource value: 0x7f020058
-			public const int ic_successstatus = 2130837592;
+			public const int ic_plusone_small_off_client = 2130837592;
 			
 			// aapt resource value: 0x7f020059
-			public const int line_menu = 2130837593;
+			public const int ic_plusone_standard_off_client = 2130837593;
 			
 			// aapt resource value: 0x7f02005a
-			public const int LogOut = 2130837594;
+			public const int ic_plusone_tall_off_client = 2130837594;
 			
 			// aapt resource value: 0x7f02005b
-			public const int mainpagemiddle = 2130837595;
+			public const int ic_successstatus = 2130837595;
 			
 			// aapt resource value: 0x7f02005c
-			public const int mr_ic_audio_vol = 2130837596;
+			public const int Icon = 2130837596;
 			
 			// aapt resource value: 0x7f02005d
-			public const int mr_ic_media_route_connecting_holo_dark = 2130837597;
+			public const int line_menu = 2130837597;
 			
 			// aapt resource value: 0x7f02005e
-			public const int mr_ic_media_route_connecting_holo_light = 2130837598;
+			public const int Login_CreateAccount0 = 2130837598;
 			
 			// aapt resource value: 0x7f02005f
-			public const int mr_ic_media_route_disabled_holo_dark = 2130837599;
+			public const int Login_Login0 = 2130837599;
 			
 			// aapt resource value: 0x7f020060
-			public const int mr_ic_media_route_disabled_holo_light = 2130837600;
+			public const int LogOut = 2130837600;
 			
 			// aapt resource value: 0x7f020061
-			public const int mr_ic_media_route_holo_dark = 2130837601;
+			public const int mainpagemiddle = 2130837601;
 			
 			// aapt resource value: 0x7f020062
-			public const int mr_ic_media_route_holo_light = 2130837602;
+			public const int mr_ic_audio_vol = 2130837602;
 			
 			// aapt resource value: 0x7f020063
-			public const int mr_ic_media_route_off_holo_dark = 2130837603;
+			public const int mr_ic_media_route_connecting_holo_dark = 2130837603;
 			
 			// aapt resource value: 0x7f020064
-			public const int mr_ic_media_route_off_holo_light = 2130837604;
+			public const int mr_ic_media_route_connecting_holo_light = 2130837604;
 			
 			// aapt resource value: 0x7f020065
-			public const int mr_ic_media_route_on_0_holo_dark = 2130837605;
+			public const int mr_ic_media_route_disabled_holo_dark = 2130837605;
 			
 			// aapt resource value: 0x7f020066
-			public const int mr_ic_media_route_on_0_holo_light = 2130837606;
+			public const int mr_ic_media_route_disabled_holo_light = 2130837606;
 			
 			// aapt resource value: 0x7f020067
-			public const int mr_ic_media_route_on_1_holo_dark = 2130837607;
+			public const int mr_ic_media_route_holo_dark = 2130837607;
 			
 			// aapt resource value: 0x7f020068
-			public const int mr_ic_media_route_on_1_holo_light = 2130837608;
+			public const int mr_ic_media_route_holo_light = 2130837608;
 			
 			// aapt resource value: 0x7f020069
-			public const int mr_ic_media_route_on_2_holo_dark = 2130837609;
+			public const int mr_ic_media_route_off_holo_dark = 2130837609;
 			
 			// aapt resource value: 0x7f02006a
-			public const int mr_ic_media_route_on_2_holo_light = 2130837610;
+			public const int mr_ic_media_route_off_holo_light = 2130837610;
 			
 			// aapt resource value: 0x7f02006b
-			public const int mr_ic_media_route_on_holo_dark = 2130837611;
+			public const int mr_ic_media_route_on_0_holo_dark = 2130837611;
 			
 			// aapt resource value: 0x7f02006c
-			public const int mr_ic_media_route_on_holo_light = 2130837612;
+			public const int mr_ic_media_route_on_0_holo_light = 2130837612;
 			
 			// aapt resource value: 0x7f02006d
-			public const int powered_by_google_dark = 2130837613;
+			public const int mr_ic_media_route_on_1_holo_dark = 2130837613;
 			
 			// aapt resource value: 0x7f02006e
-			public const int powered_by_google_light = 2130837614;
+			public const int mr_ic_media_route_on_1_holo_light = 2130837614;
 			
 			// aapt resource value: 0x7f02006f
-			public const int roundedbg = 2130837615;
+			public const int mr_ic_media_route_on_2_holo_dark = 2130837615;
 			
 			// aapt resource value: 0x7f020070
-			public const int roundedbgdark = 2130837616;
+			public const int mr_ic_media_route_on_2_holo_light = 2130837616;
 			
 			// aapt resource value: 0x7f020071
-			public const int search = 2130837617;
+			public const int mr_ic_media_route_on_holo_dark = 2130837617;
 			
 			// aapt resource value: 0x7f020072
-			public const int slideout = 2130837618;
+			public const int mr_ic_media_route_on_holo_light = 2130837618;
+			
+			// aapt resource value: 0x7f020073
+			public const int navigate_icon = 2130837619;
+			
+			// aapt resource value: 0x7f020074
+			public const int powered_by_google_dark = 2130837620;
+			
+			// aapt resource value: 0x7f020075
+			public const int powered_by_google_light = 2130837621;
+			
+			// aapt resource value: 0x7f020076
+			public const int roundedbg = 2130837622;
+			
+			// aapt resource value: 0x7f020077
+			public const int roundedbgdark = 2130837623;
+			
+			// aapt resource value: 0x7f020078
+			public const int search = 2130837624;
+			
+			// aapt resource value: 0x7f020079
+			public const int share_icon = 2130837625;
+			
+			// aapt resource value: 0x7f02007a
+			public const int slideout = 2130837626;
 			
 			static Drawable()
 			{
@@ -1726,6 +1843,12 @@ namespace FoodTrucks.Droid
 			// aapt resource value: 0x7f0a002b
 			public const int buy_with_google = 2131361835;
 			
+			// aapt resource value: 0x7f0a005a
+			public const int calendar_grid = 2131361882;
+			
+			// aapt resource value: 0x7f0a0053
+			public const int calendar_view = 2131361875;
+			
 			// aapt resource value: 0x7f0a003d
 			public const int checkbox = 2131361853;
 			
@@ -1792,38 +1915,41 @@ namespace FoodTrucks.Droid
 			// aapt resource value: 0x7f0a0037
 			public const int image = 2131361847;
 			
+			// aapt resource value: 0x7f0a0055
+			public const int left_arrow = 2131361877;
+			
 			// aapt resource value: 0x7f0a0001
 			public const int listMode = 2131361793;
 			
 			// aapt resource value: 0x7f0a0039
 			public const int list_item = 2131361849;
 			
-			// aapt resource value: 0x7f0a0055
-			public const int loadingImage = 2131361877;
-			
-			// aapt resource value: 0x7f0a0053
-			public const int loadingProgressBar = 2131361875;
+			// aapt resource value: 0x7f0a0058
+			public const int loadingImage = 2131361880;
 			
 			// aapt resource value: 0x7f0a0056
-			public const int loadingProgressWheel = 2131361878;
+			public const int loadingProgressBar = 2131361878;
+			
+			// aapt resource value: 0x7f0a0059
+			public const int loadingProgressWheel = 2131361881;
 			
 			// aapt resource value: 0x7f0a002a
 			public const int match_parent = 2131361834;
 			
-			// aapt resource value: 0x7f0a005a
-			public const int media_route_control_frame = 2131361882;
+			// aapt resource value: 0x7f0a005e
+			public const int media_route_control_frame = 2131361886;
+			
+			// aapt resource value: 0x7f0a005f
+			public const int media_route_disconnect_button = 2131361887;
 			
 			// aapt resource value: 0x7f0a005b
-			public const int media_route_disconnect_button = 2131361883;
+			public const int media_route_list = 2131361883;
 			
-			// aapt resource value: 0x7f0a0057
-			public const int media_route_list = 2131361879;
+			// aapt resource value: 0x7f0a005c
+			public const int media_route_volume_layout = 2131361884;
 			
-			// aapt resource value: 0x7f0a0058
-			public const int media_route_volume_layout = 2131361880;
-			
-			// aapt resource value: 0x7f0a0059
-			public const int media_route_volume_slider = 2131361881;
+			// aapt resource value: 0x7f0a005d
+			public const int media_route_volume_slider = 2131361885;
 			
 			// aapt resource value: 0x7f0a000b
 			public const int middle = 2131361803;
@@ -1851,6 +1977,9 @@ namespace FoodTrucks.Droid
 			
 			// aapt resource value: 0x7f0a003f
 			public const int radio = 2131361855;
+			
+			// aapt resource value: 0x7f0a0054
+			public const int right_arrow = 2131361876;
 			
 			// aapt resource value: 0x7f0a0026
 			public const int sandbox = 2131361830;
@@ -1918,8 +2047,8 @@ namespace FoodTrucks.Droid
 			// aapt resource value: 0x7f0a0021
 			public const int terrain = 2131361825;
 			
-			// aapt resource value: 0x7f0a0054
-			public const int textViewStatus = 2131361876;
+			// aapt resource value: 0x7f0a0057
+			public const int textViewStatus = 2131361879;
 			
 			// aapt resource value: 0x7f0a003b
 			public const int title = 2131361851;
@@ -2038,25 +2167,40 @@ namespace FoodTrucks.Droid
 			public const int abc_simple_dropdown_hint = 2130903062;
 			
 			// aapt resource value: 0x7f030017
-			public const int loading = 2130903063;
+			public const int calendar_pager_layout = 2130903063;
 			
 			// aapt resource value: 0x7f030018
-			public const int loadingimage = 2130903064;
+			public const int calendar_picker = 2130903064;
 			
 			// aapt resource value: 0x7f030019
-			public const int loadingprogress = 2130903065;
+			public const int dialog = 2130903065;
 			
 			// aapt resource value: 0x7f03001a
-			public const int mr_media_route_chooser_dialog = 2130903066;
+			public const int loading = 2130903066;
 			
 			// aapt resource value: 0x7f03001b
-			public const int mr_media_route_controller_dialog = 2130903067;
+			public const int loadingimage = 2130903067;
 			
 			// aapt resource value: 0x7f03001c
-			public const int mr_media_route_list_item = 2130903068;
+			public const int loadingprogress = 2130903068;
 			
 			// aapt resource value: 0x7f03001d
-			public const int support_simple_spinner_dropdown_item = 2130903069;
+			public const int month = 2130903069;
+			
+			// aapt resource value: 0x7f03001e
+			public const int mr_media_route_chooser_dialog = 2130903070;
+			
+			// aapt resource value: 0x7f03001f
+			public const int mr_media_route_controller_dialog = 2130903071;
+			
+			// aapt resource value: 0x7f030020
+			public const int mr_media_route_list_item = 2130903072;
+			
+			// aapt resource value: 0x7f030021
+			public const int support_simple_spinner_dropdown_item = 2130903073;
+			
+			// aapt resource value: 0x7f030022
+			public const int week = 2130903074;
 			
 			static Layout()
 			{
@@ -2234,11 +2378,23 @@ namespace FoodTrucks.Droid
 			// aapt resource value: 0x7f06001a
 			public const int create_calendar_title = 2131099674;
 			
+			// aapt resource value: 0x7f06003c
+			public const int day_name_format = 2131099708;
+			
 			// aapt resource value: 0x7f060019
 			public const int decline = 2131099673;
 			
+			// aapt resource value: 0x7f06003f
+			public const int full_date_format = 2131099711;
+			
+			// aapt resource value: 0x7f06003d
+			public const int invalid_date = 2131099709;
+			
 			// aapt resource value: 0x7f06003b
 			public const int library_name = 2131099707;
+			
+			// aapt resource value: 0x7f06003e
+			public const int month_name_format = 2131099710;
 			
 			// aapt resource value: 0x7f060000
 			public const int mr_media_route_button_content_description = 2131099648;
@@ -2606,6 +2762,18 @@ namespace FoodTrucks.Droid
 			
 			// aapt resource value: 0x7f070064
 			public const int Base_Widget_AppCompat_Toolbar_Button_Navigation = 2131165284;
+			
+			// aapt resource value: 0x7f0700f5
+			public const int CalendarCell = 2131165429;
+			
+			// aapt resource value: 0x7f0700f7
+			public const int CalendarCell_CalendarDate = 2131165431;
+			
+			// aapt resource value: 0x7f0700f6
+			public const int CalendarCell_DayHeader = 2131165430;
+			
+			// aapt resource value: 0x7f0700f4
+			public const int CalendarTitle = 2131165428;
 			
 			// aapt resource value: 0x7f070065
 			public const int Platform_AppCompat = 2131165285;

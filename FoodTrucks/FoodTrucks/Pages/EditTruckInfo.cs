@@ -8,6 +8,7 @@ using FoodTrucks.Provider.Interface;
 using FoodTrucks.Provider.Models;
 using Media.Plugin;
 using Media.Plugin.Abstractions;
+using Plugin.Geolocator;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -274,7 +275,7 @@ namespace FoodTrucks.Pages
 
                 StackLayout slMenuLayout = new StackLayout
                 {
-                    Children = {frmMenu, imgMenu },
+                    Children = { frmMenu, imgMenu },
                     Orientation = StackOrientation.Horizontal,
                     Padding = new Thickness(0, 10, 0, 10)
                 };
@@ -413,6 +414,14 @@ namespace FoodTrucks.Pages
                 if (Convert.ToBoolean(_TruckInfo.IsUseLocation))
                 {
                     slAddress.IsVisible = true;
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        Models.Position position = await DependencyService.Get<ICurrentLocation>().GetAddress(_TruckInfo.Lattitude, _TruckInfo.Longitude);
+                        txtEnterAddress.Text = position.Address;
+                    });
+                }
+                else
+                {
                     txtEnterAddress.Text = FoodTruckContext.Position.Address;
                 }
 

@@ -6,6 +6,7 @@ using FoodTrucks.Interface;
 using FoodTrucks.Provider;
 using FoodTrucks.Provider.Interface;
 using FoodTrucks.Provider.Models;
+using Plugin.Geolocator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,6 +45,7 @@ namespace FoodTrucks.Pages
         #endregion
 
         #region Overrride methods
+
         protected override void OnAppearing()
         {
             try
@@ -52,14 +54,27 @@ namespace FoodTrucks.Pages
 
                 Device.BeginInvokeOnMainThread(async () =>
                 {
-                    if (FoodTruckContext.Position == null)
+                    FoodTruckContext.Position = await DependencyService.Get<ICurrentLocation>().SetCurrentLocation();
+
+                    ////FoodTruckContext.Position.Latitude = position.Latitude;
+                    ////FoodTruckContext.Position.Latitude = position.Longitude;
+
+                    //FoodTruckContext.Position = await DependencyService.Get<ICurrentLocation>().GetAddress(position.Latitude, position.Longitude);
+                    if (FoodTruckContext.Position != null)
                     {
-                        FoodTruckContext.Position = await DependencyService.Get<ICurrentLocation>().SetCurrentLocation();
-                        if (FoodTruckContext.Position != null)
-                        {
-                            FoodTruckContext.AlreadyEnable = true;
-                        }
+                        FoodTruckContext.AlreadyEnable = true;
                     }
+                    //}
+                    //else
+                    //{
+                    //    bool IsYesNo = await DisplayAlert(string.Empty, "Please enable location service on your device.", "OK", "Cancel");
+
+                    //    if (IsYesNo)
+                    //    {
+                    //        DependencyService.Get<ICurrentLocation>().EnableGPSActivity();
+                    //        Location.GetPosition();
+                    //    }
+                    //}
 
                     if (!isNetworkAvailable)
                     {
@@ -122,60 +137,6 @@ namespace FoodTrucks.Pages
             btnLogin.TextColor = Color.White;
             btnLogin.BackgroundColor = LayoutHelper.ButtonColor;
 
-            btnLogin.Clicked += (sender, e) =>
-            {
-
-                if (string.IsNullOrEmpty(txtUserName.Text))
-                {
-                    UserDialogs.Instance.ShowError("Email address required");
-                }
-                else if (!Regex.IsMatch(txtUserName.Text.ToString(), Constants.RegxValidation.EmailValidationPattern, RegexOptions.IgnoreCase))
-                {
-                    //DisplayAlert(Messages.Error, "Username is required.", "Ok");
-                    UserDialogs.Instance.ShowError("Please enter correct format email address");
-                }
-
-                else if (string.IsNullOrEmpty(txtPassword.Text))
-                {
-                    UserDialogs.Instance.ShowError("Password is required");
-                    //DisplayAlert(Messages.Error, "Password is required.", "Ok");
-                }
-
-                else if (!string.IsNullOrEmpty(txtUserName.Text) && !string.IsNullOrEmpty(txtPassword.Text))
-                {
-                    Device.BeginInvokeOnMainThread(async () =>
-                    {
-                        try
-                        {
-                            using (UserDialogs.Instance.Loading("Loading..."))
-                            {
-                                //Login call
-                                UserModel model = await _UserProvider.LogInUser(txtUserName.Text, txtPassword.Text);
-
-                                if (model.Id != 0)
-                                {
-                                    FoodTruckContext.UserName = model.Email;
-                                    FoodTruckContext.UserID = model.Id;
-                                    FoodTruckContext.IsLoggedIn = true;
-                                    FoodTruckContext.IsProvider = Convert.ToBoolean(model.IsUser);
-                                    //UserDialogs.Instance.ShowSuccess("Success");
-                                    //redirect to page
-                                    Navigation.PushAsync(App.MapPage());
-                                }
-                                else
-                                {
-                                    ///
-                                }
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                        }
-                        //_loadingIndicator.IsShowLoading = false;
-                    });
-                }
-            };
-
             var cvBtnLogin = new ContentView
             {
                 Padding = new Thickness(10, 5, 10, 10),
@@ -186,29 +147,6 @@ namespace FoodTrucks.Pages
             btnRegister.Text = "Register";
             btnRegister.TextColor = Color.White;
             btnRegister.BackgroundColor = LayoutHelper.ButtonColor;
-
-            btnRegister.Clicked += async (sender, e) =>
-            {
-                bool isUserProvider = await UserDialogs.Instance.ConfirmAsync(Messages.CustomMessage.ChooseProviderUser, "Register Option", Messages.User, Messages.Provider);
-
-                using (UserDialogs.Instance.Loading("Loading..."))
-                {
-                    //Get location
-                    if (FoodTruckContext.Position == null)
-                    {
-                        FoodTruckContext.Position = await DependencyService.Get<ICurrentLocation>().SetCurrentLocation();
-                    }
-                    if (isUserProvider)
-                    {
-                        //redirect provider register page
-                        Navigation.PushAsync(App.UserRegisterPage());
-                    }
-                    else
-                    {
-                        Navigation.PushAsync(App.ProviderRegisterPage());
-                    }
-                }
-            };
 
             var cvBtnRegister = new ContentView
              {
@@ -256,6 +194,82 @@ namespace FoodTrucks.Pages
                 },
             };
 
+            var btnLOGIN = Global.GetButton("Login_Login", FoodTrucks.Helper.Global.sz.Normal);
+            var btnCREATE_ACCOUNT = Global.GetButton("Login_CreateAccount", FoodTrucks.Helper.Global.sz.Normal);
+
+            btnCREATE_ACCOUNT.Clicked += async (sender, e) =>
+            {
+                bool isUserProvider = await UserDialogs.Instance.ConfirmAsync(Messages.CustomMessage.ChooseProviderUser, "Register Option", Messages.User, Messages.Provider);
+
+                using (UserDialogs.Instance.Loading("Loading..."))
+                {
+                    //Get location
+                    if (isUserProvider)
+                    {
+                        //redirect provider register page
+                        Navigation.PushAsync(App.UserRegisterPage());
+                    }
+                    else
+                    {
+                        Navigation.PushAsync(App.ProviderRegisterPage());
+                    }
+                }
+            };
+
+            btnLOGIN.Clicked += (sender, e) =>
+            {
+
+                if (string.IsNullOrEmpty(txtUserName.Text))
+                {
+                    UserDialogs.Instance.ShowError("Email address required");
+                }
+                else if (!Regex.IsMatch(txtUserName.Text.ToString(), Constants.RegxValidation.EmailValidationPattern, RegexOptions.IgnoreCase))
+                {
+                    //DisplayAlert(Messages.Error, "Username is required.", "Ok");
+                    UserDialogs.Instance.ShowError("Please enter correct format email address");
+                }
+
+                else if (string.IsNullOrEmpty(txtPassword.Text))
+                {
+                    UserDialogs.Instance.ShowError("Password is required");
+                    //DisplayAlert(Messages.Error, "Password is required.", "Ok");
+                }
+
+                else if (!string.IsNullOrEmpty(txtUserName.Text) && !string.IsNullOrEmpty(txtPassword.Text))
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        try
+                        {
+                            using (UserDialogs.Instance.Loading("Loading..."))
+                            {
+                                //Login call
+                                UserModel model = await _UserProvider.LogInUser(txtUserName.Text, txtPassword.Text);
+
+                                if (model.Id != 0)
+                                {
+                                    FoodTruckContext.UserName = model.Email;
+                                    FoodTruckContext.UserID = model.Id;
+                                    FoodTruckContext.IsLoggedIn = true;
+                                    FoodTruckContext.IsProvider = Convert.ToBoolean(model.IsUser);
+                                    //UserDialogs.Instance.ShowSuccess("Success");
+                                    //redirect to page
+                                    Navigation.PushAsync(App.MapPage());
+                                }
+                                else
+                                {
+                                    //
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                        }
+                        //_loadingIndicator.IsShowLoading = false;
+                    });
+                }
+            };
+
             StackLayout slRegiter = new StackLayout
             {
                 Children = { cvBtnRegister },
@@ -270,12 +284,18 @@ namespace FoodTrucks.Pages
                     imageLogo,
                     cvTxtUserName,
                     cvTxtPassword ,
-                    cvBtnLogin,
-                    slRegiter,
+                        new StackLayout{
+                        Padding = Global.Pad,
+						VerticalOptions = LayoutOptions.EndAndExpand,
+                        Spacing = Global.Pad,
+                        Children = {
+                            btnLOGIN,
+                            btnCREATE_ACCOUNT,
+                        }
+                    },
                     cvLblForgetPassword,
                     _loadingIndicator,
                     barLower,
-                    
                 },
                 BackgroundColor = LayoutHelper.PageBackgroundColor,
             };

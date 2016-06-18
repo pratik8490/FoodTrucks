@@ -55,6 +55,8 @@ namespace FoodTrucks.Droid.CustomRenderer
                             if (!locator.IsListening)
                                 locator.StartListening(1000, 1000);
 
+                            locator.DesiredAccuracy = 50;
+
                             Xamarin.Geolocation.Position position = await locator.GetPositionAsync(10000);
 
                             obj.Latitude = position.Latitude;
@@ -95,6 +97,38 @@ namespace FoodTrucks.Droid.CustomRenderer
             }
 
             return response.Task;
+        }
+        public void EnableGPSActivity()
+        {
+            Intent gpsSettingIntent = new Intent(Android.Provider.Settings.ActionLocationSourceSettings);
+            Forms.Context.StartActivity(gpsSettingIntent);
+        }
+        public Task<Position> GetAddress(double lat, double Long)
+        {
+            var result = new TaskCompletionSource<Position>();
+
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                Geocoder coder = new Geocoder(this);
+                var address = await coder.GetFromLocationAsync(lat, Long, 1);
+                if (address == null)
+                {
+                    result.TrySetResult(new Position());
+                }
+                else
+                {
+                    Position obj = new Position();
+                    obj.Latitude = lat;
+                    obj.Longitude = Long;
+                    foreach (var location in address)
+                    {
+                        obj.Address = location.GetAddressLine(0) + " " + location.GetAddressLine(1) + " " + location.GetAddressLine(2) + " " + location.GetAddressLine(3);
+                    }
+
+                    result.TrySetResult(obj);
+                }
+            });
+            return result.Task;
         }
 
         public Task<Position> GetLocation(string locationAddress)

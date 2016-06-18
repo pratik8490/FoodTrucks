@@ -3,6 +3,7 @@ using FoodTrucks.Context;
 using FoodTrucks.CustomControls;
 using FoodTrucks.Helper;
 using FoodTrucks.Interface;
+using FoodTrucks.Models;
 using FoodTrucks.Provider;
 using FoodTrucks.Provider.Interface;
 using FoodTrucks.Provider.Models;
@@ -194,9 +195,11 @@ namespace FoodTrucks.Pages
                     WidthRequest = 150
                 };
 
-                btnNavigateTo.Clicked += (sender, e) =>
+                btnNavigateTo.Clicked += async (sender, e) =>
                     {
-                        Navigation.PushAsync(App.TruckListPage());
+                        NavigationModel model = new NavigationModel();
+                        await DependencyService.Get<IPhoneService>().LaunchNavigationAsync(model);
+                        //Navigation.PushAsync(App.TruckListPage());
                     };
 
                 StackLayout slNavigateTo = new StackLayout

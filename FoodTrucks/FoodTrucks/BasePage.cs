@@ -85,12 +85,15 @@ namespace FoodTrucks
 
         public void Filter()
         {
-
+            if (((ContentPage)((MasterDetailPage)(ParentView)).Detail).GetType().Name == "MapPage")
+                Navigation.PushAsync(App.TruckListPage());
+            else
+                Navigation.PushAsync(App.MapPage());
         }
         public void CategoryMenu()
         {
             string ViewName = (ParentView.ParentView).GetType().Name;
-            if ((ParentView.ParentView).GetType().Name != "NavigationPage")//(ViewName == "SearchListMaster" || ViewName == "MarketingCategoryMaster" || ViewName == "ModelSectionPartListMaster" || ViewName == "ShipOptionSelectMaster")
+            if ((ParentView.ParentView).GetType().Name != "NavigationPage")
                 ((MasterDetailPage)(ParentView).ParentView).IsPresented = !((MasterDetailPage)(ParentView).ParentView).IsPresented;
             else
                 ((MasterDetailPage)ParentView).IsPresented = !((MasterDetailPage)ParentView).IsPresented;

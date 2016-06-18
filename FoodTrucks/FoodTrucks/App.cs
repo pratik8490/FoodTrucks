@@ -2,9 +2,12 @@
 using FoodTrucks.Pages;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Xamarin.Forms;
+using XLabs.Ioc;
+using XLabs.Platform.Mvvm;
 
 namespace FoodTrucks
 {
@@ -17,10 +20,30 @@ namespace FoodTrucks
         public App()
         {
             // The root page of your application 
+            Init();
             MainPage = HomePage();
         }
         #endregion
+        /// <summary>
+        /// Initializes the application.
+        /// </summary>
+        public static void Init()
+        {
 
+            var app = Resolver.Resolve<IXFormsApp>();
+            if (app == null)
+            {
+                return;
+            }
+
+            app.Closing += (o, e) => Debug.WriteLine("Application Closing");
+            app.Error += (o, e) => Debug.WriteLine("Application Error");
+            app.Initialize += (o, e) => Debug.WriteLine("Application Initialized");
+            app.Resumed += (o, e) => Debug.WriteLine("Application Resumed");
+            app.Rotation += (o, e) => Debug.WriteLine("Application Rotated");
+            app.Startup += (o, e) => Debug.WriteLine("Application Startup");
+            app.Suspended += (o, e) => Debug.WriteLine("Application Suspended");
+        }
         static NavigationPage navPage;
 
         public static Page HomePage(bool IsFromLogout = false)
@@ -59,6 +82,7 @@ namespace FoodTrucks
 
         public static Page MapPage()
         {
+            //return new MapPage();
             return new MasterPage(new MapPage());
         }
 

@@ -14,11 +14,15 @@ using Acr.UserDialogs;
 using Android.Locations;
 using System.Collections.Generic;
 using Android.Util;
+using XLabs.Ioc;
+using XLabs.Forms;
+using System.IO;
+using XLabs.Platform.Device;
 
 namespace FoodTrucks.Droid
 {
     [Activity(Label = "FoodTrucks", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : FormsApplicationActivity
+    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
     {
         Location _currentLocation;
         LocationManager _locationManager;
@@ -31,11 +35,31 @@ namespace FoodTrucks.Droid
             Forms.Init(this, bundle);
             FormsMaps.Init(this, bundle);
             UserDialogs.Init(() => (Activity)Forms.Context);
+
+            if (!Resolver.IsSet)
+            {
+                this.SetIoc();
+            }
+
             //Xamarin.Forms.Forms.SetTitleBarVisibility(Xamarin.Forms.AndroidTitleBarVisibility.Never);
             this.ActionBar.SetIcon(Android.Resource.Color.Transparent);
             LoadApplication(new App());
-            InitializeLocationManager();
-            
+            //InitializeLocationManager();
+
+        }
+
+        /// <summary>
+        /// Sets the IoC.
+        /// </summary>
+        private void SetIoc()
+        {
+            var resolverContainer = new SimpleContainer();
+
+            resolverContainer.Register<IDevice>(t => AndroidDevice.CurrentDevice)
+                .Register<IDisplay>(t => t.Resolve<IDevice>().Display)
+                .Register<IDependencyContainer>(resolverContainer);
+
+            Resolver.SetResolver(resolverContainer.GetResolver());
         }
 
         void InitializeLocationManager()
@@ -43,7 +67,7 @@ namespace FoodTrucks.Droid
             _locationManager = (LocationManager)GetSystemService(LocationService);
             Criteria criteriaForLocationService = new Criteria
             {
-                Accuracy = Accuracy.High
+                Accuracy = Accuracy.Fine
             };
             IList<string> acceptableLocationProviders = _locationManager.GetProviders(criteriaForLocationService, true);
 
